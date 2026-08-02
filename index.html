@@ -149,7 +149,7 @@
 <div class="bg-surface-container-lowest rounded-xl p-md shadow-md border border-on-surface/5 flex items-center justify-between gap-md overflow-hidden relative flex-wrap">
 <div class="absolute -left-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl"></div>
 <div class="flex flex-col gap-xs z-10">
-<span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider">Current Ball</span>
+<span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider">Ficha cantada</span>
 <div class="flex items-center" id="current-ball">
 <div class="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-[0_4px_0px_0px_#004395] ring-4 ring-primary/10 animate-pulse-soft animate-pop-in" id="ball-animation-target">
 <span class="font-display-bingo leading-none font-extrabold tracking-tight text-[28px]">G-42</span>
@@ -157,7 +157,7 @@
 </div>
 </div>
 <div class="flex flex-col items-end gap-xs z-10 flex-1 min-w-0">
-<span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider">Last Called</span>
+<span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider">Últimas fichas</span>
 <div class="flex gap-sm overflow-x-auto no-scrollbar w-full" id="history-list"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-bold text-[13px] text-on-surface-variant border border-on-surface/5 transition-all">21</div><div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-bold text-[13px] text-on-surface-variant border border-on-surface/5">B-9</div><div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-bold text-[13px] text-on-surface-variant border border-on-surface/5">O-72</div></div>
 </div>
 </div>
@@ -194,7 +194,7 @@
 <button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">18</button>
 <div class="aspect-square rounded-lg bg-secondary-container flex flex-col items-center justify-center text-on-secondary-container transition-all">
 <span class="material-symbols-outlined text-md">star</span>
-<span class="font-label-bold text-[10px] uppercase">Free</span>
+<span class="font-label-bold text-[10px] uppercase">Libre</span>
 </div>
 <button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">58</button>
 <button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">63</button>
@@ -213,7 +213,7 @@
 </div>
 </div>
 <!-- Right Side: Vertical Bingo Button -->
-<button class="relative group w-10 bg-secondary-container rounded-xl flex flex-col items-center justify-center gap-xs shadow-[0_4px_0px_0px_#795900] active:translate-y-1 active:shadow-[0_2px_0px_0px_#795900] transition-all overflow-hidden flex-shrink-0" id="bingo-btn">
+<button class="relative group w-10 bg-secondary-container rounded-xl flex flex-col items-center justify-center gap-xs shadow-[0_4px_0px_0px_#795900] active:translate-y-1 active:shadow-[0_2px_0px_0px_#795900] transition-all overflow-hidden flex-shrink-0" id="btn-bingo">
 <div class="absolute inset-0 pointer-events-none">
 <div class="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] animate-[shimmer_2s_infinite]"></div>
 </div>
@@ -222,123 +222,6 @@
 </button></div>
 </div>
 
-<!-- The Bingo Carton 2* -->
-<div class="px-safe-margin w-full mb-md">
-<div class="bg-white rounded-xl shadow-xl border border-on-surface/5 p-xs flex gap-sm items-stretch"><!-- Left Side: Header + Grid -->
-<div class="flex flex-col flex-1 min-w-0">
-<!-- Column Headers -->
-<div class="grid grid-cols-5 gap-grid-gap mb-xs text-center">
-<div class="font-headline-md text-headline-md text-primary p-xs">B</div>
-<div class="font-headline-md text-headline-md text-primary p-xs">I</div>
-<div class="font-headline-md text-headline-md text-primary p-xs">N</div>
-<div class="font-headline-md text-headline-md text-primary p-xs">G</div>
-<div class="font-headline-md text-headline-md text-primary p-xs">O</div>
-</div>
-<!-- 5x5 Grid -->
-<div class="grid grid-cols-5 gap-grid-gap w-full" id="bingo-grid">
-<!-- Row 1 -->
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95 hover:bg-surface-container-high" onclick="toggleDaub(this)">7</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">22</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">34</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">51</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">68</button>
-<!-- Row 2 -->
-<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">12</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">25</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">40</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">55</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">71</button>
-<!-- Row 3 -->
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">2</button>
-<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">18</button>
-<div class="aspect-square rounded-lg bg-secondary-container flex flex-col items-center justify-center text-on-secondary-container transition-all">
-<span class="material-symbols-outlined text-md">star</span>
-<span class="font-label-bold text-[10px] uppercase">Free</span>
-</div>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">58</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">63</button>
-<!-- Row 4 -->
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">15</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">28</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">42</button>
-<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">50</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">66</button>
-<!-- Row 5 -->
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">5</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">29</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">31</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">47</button>
-<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">75</button>
-</div>
-</div>
-<!-- Right Side: Vertical Bingo Button -->
-<button class="relative group w-10 bg-secondary-container rounded-xl flex flex-col items-center justify-center gap-xs shadow-[0_4px_0px_0px_#795900] active:translate-y-1 active:shadow-[0_2px_0px_0px_#795900] transition-all overflow-hidden flex-shrink-0" id="bingo-btn">
-<div class="absolute inset-0 pointer-events-none">
-<div class="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] animate-[shimmer_2s_infinite]"></div>
-</div>
-<span class="material-symbols-outlined text-on-secondary-container group-hover:animate-bounce relative z-10 text-[20px]">celebration</span>
-<span class="font-headline-md text-[14px] text-on-secondary-container uppercase italic relative z-10 [writing-mode:vertical-lr] rotate-180">Bingo!</span>
-</button></div>
-</div>
-
-<!-- The Bingo Carton 3* -->
-<div class="px-safe-margin w-full mb-md">
-<div class="bg-white rounded-xl shadow-xl border border-on-surface/5 p-xs flex gap-sm items-stretch"><!-- Left Side: Header + Grid -->
-<div class="flex flex-col flex-1 min-w-0">
-<!-- Column Headers -->
-<div class="grid grid-cols-5 gap-grid-gap mb-xs text-center">
-<div class="font-headline-md text-headline-md text-primary p-xs">B</div>
-<div class="font-headline-md text-headline-md text-primary p-xs">I</div>
-<div class="font-headline-md text-headline-md text-primary p-xs">N</div>
-<div class="font-headline-md text-headline-md text-primary p-xs">G</div>
-<div class="font-headline-md text-headline-md text-primary p-xs">O</div>
-</div>
-<!-- 5x5 Grid -->
-<div class="grid grid-cols-5 gap-grid-gap w-full" id="bingo-grid">
-<!-- Row 1 -->
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95 hover:bg-surface-container-high" onclick="toggleDaub(this)">7</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">22</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">34</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">51</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">68</button>
-<!-- Row 2 -->
-<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">12</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">25</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">40</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">55</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">71</button>
-<!-- Row 3 -->
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">2</button>
-<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">18</button>
-<div class="aspect-square rounded-lg bg-secondary-container flex flex-col items-center justify-center text-on-secondary-container transition-all">
-<span class="material-symbols-outlined text-md">star</span>
-<span class="font-label-bold text-[10px] uppercase">Free</span>
-</div>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">58</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">63</button>
-<!-- Row 4 -->
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">15</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">28</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">42</button>
-<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">50</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">66</button>
-<!-- Row 5 -->
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">5</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">29</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">31</button>
-<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">47</button>
-<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">75</button>
-</div>
-</div>
-<!-- Right Side: Vertical Bingo Button -->
-<button class="relative group w-10 bg-secondary-container rounded-xl flex flex-col items-center justify-center gap-xs shadow-[0_4px_0px_0px_#795900] active:translate-y-1 active:shadow-[0_2px_0px_0px_#795900] transition-all overflow-hidden flex-shrink-0" id="bingo-btn">
-<div class="absolute inset-0 pointer-events-none">
-<div class="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] animate-[shimmer_2s_infinite]"></div>
-</div>
-<span class="material-symbols-outlined text-on-secondary-container group-hover:animate-bounce relative z-10 text-[20px]">celebration</span>
-<span class="font-headline-md text-[14px] text-on-secondary-container uppercase italic relative z-10 [writing-mode:vertical-lr] rotate-180">Bingo!</span>
-</button></div>
-</div>
 
 
 
@@ -381,61 +264,201 @@
 <div class="w-full bg-surface-container-high h-4 rounded-full overflow-hidden shadow-inner">
 <div class="bg-secondary-container h-full w-4/5 rounded-full transition-all duration-1000 shadow-[0_0_12px_rgba(255,195,41,0.5)]"></div>
 </div>
-<!-- The big Bingo Button -->
-</div>
-</div>
-<!-- Particles Layer for Win (Invisible by default) -->
-<div class="fixed inset-0 pointer-events-none z-50" id="confetti-container"></div>
+
+
+
 <script>
-      function toggleDaub(el) {
-        const isDaubed = el.classList.contains('bg-primary');
-        if (isDaubed) {
-          el.classList.remove('bg-primary', 'text-on-primary', 'shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]');
-          el.classList.add('bg-surface-container', 'text-on-surface');
-        } else {
-          el.classList.remove('bg-surface-container', 'text-on-surface');
-          el.classList.add('bg-primary', 'text-on-primary', 'shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]');
-          
-          // Pop animation
-          el.animate([
-            { transform: 'scale(1)' },
-            { transform: 'scale(1.15)' },
-            { transform: 'scale(1)' }
-          ], {
-            duration: 200,
-            easing: 'ease-out'
-          });
-        }
+  // 1. Variables globales del Bingo
+  let fichasDisponibles = [];
+  let historial = [];
+  let juegoPausadoPorBingo = false;
+  
+  // 🔐 CLAVE DE ADMINISTRADOR
+  const CLAVE_ADMIN = "1234"; 
+
+  // 2. Llenar el bombo e iniciar desde cero borrando la memoria local
+  function inicializarBombo() {
+    fichasDisponibles = [];
+    historial = [];
+    juegoPausadoPorBingo = false;
+    
+    for (let i = 1; i <= 75; i++) {
+      let letra = '';
+      if (i >= 1 && i <= 15) letra = 'B';
+      else if (i >= 16 && i <= 30) letra = 'I';
+      else if (i >= 31 && i <= 45) letra = 'N';
+      else if (i >= 46 && i <= 60) letra = 'G';
+      else if (i >= 61 && i <= 75) letra = 'O';
+      fichasDisponibles.push(`${letra}-${i}`);
+    }
+    
+    // Limpiar base de datos local del navegador
+    localStorage.removeItem('bingo_fichas');
+    localStorage.removeItem('bingo_historial');
+    localStorage.removeItem('bingo_pausado');
+
+    actualizarInterfazVisual("INICIO");
+  }
+
+  // 3. Guardar el estado actual del juego en la memoria del navegador
+  function guardarEnMemoria() {
+    localStorage.setItem('bingo_fichas', JSON.stringify(fichasDisponibles));
+    localStorage.setItem('bingo_historial', JSON.stringify(historial));
+    localStorage.setItem('bingo_pausado', juegoPausadoPorBingo ? "si" : "no");
+  }
+
+  // 4. Cargar la partida guardada al refrescar la página
+  function cargarPartidaGuardada() {
+    const fichasGuardadas = localStorage.getItem('bingo_fichas');
+    const historialGuardado = localStorage.getItem('bingo_historial');
+    const pausadoGuardado = localStorage.getItem('bingo_pausado');
+
+    if (fichasGuardadas && historialGuardado) {
+      fichasDisponibles = JSON.parse(fichasGuardadas);
+      historial = JSON.parse(historialGuardado);
+      juegoPausadoPorBingo = (pausadoGuardado === "si");
+
+      // Si ya había una partida activa, mostrar la última ficha cantada
+      const ultimaFicha = historial.length > 0 ? historial[historial.length - 1] : "INICIO";
+      actualizarInterfazVisual(ultimaFicha);
+      reconstruirHistorialVisual();
+
+      // Si el juego se refrescó estando en pausa por BINGO, restaurar alerta en chat
+      if (juegoPausadoPorBingo) {
+        activarChatBingoVisual();
       }
+    } else {
+      inicializarBombo();
+    }
+  }
 
-      // Mock ball caller animation
-      const currentBallDisplay = document.getElementById('ball-animation-target');
-      const ballTexts = ["B-12", "I-24", "N-33", "G-42", "O-61"];
-      let ballIndex = 0;
+  // 5. Función principal para cantar ficha aleatoria
+  function cantarFicha() {
+    if (juegoPausadoPorBingo) {
+      alert("⚠️ El juego está pausado porque alguien cantó BINGO. El Administrador debe reiniciar.");
+      return;
+    }
 
-      setInterval(() => {
-        // Trigger exit/re-entry pop effect
-        currentBallDisplay.classList.remove('animate-pop-in');
-        void currentBallDisplay.offsetWidth; // Trigger reflow
-        currentBallDisplay.classList.add('animate-pop-in');
-        
-        ballIndex = (ballIndex + 1) % ballTexts.length;
-        currentBallDisplay.querySelector('span').innerText = ballTexts[ballIndex];
-      }, 5000);
+    if (fichasDisponibles.length === 0) {
+      alert("¡Ya salieron las 75 fichas! El juego ha terminado.");
+      return;
+    }
 
-      // Win button excitement
-      const bingoBtn = document.getElementById('bingo-btn');
-      bingoBtn.addEventListener('click', () => {
-        document.body.animate([
-          { transform: 'translateX(0)' },
-          { transform: 'translateX(-5px)' },
-          { transform: 'translateX(5px)' },
-          { transform: 'translateX(0)' }
-        ], { duration: 100, iterations: 3 });
-        
-        bingoBtn.classList.add('ring-4', 'ring-secondary-container/50');
-        setTimeout(() => bingoBtn.classList.remove('ring-4', 'ring-secondary-container/50'), 1000);
-      });
-    </script>
-<script>
-      const historyList 
+    const indiceAleatorio = Math.floor(Math.random() * fichasDisponibles.length);
+    const fichaSeleccionada = fichasDisponibles.splice(indiceAleatorio, 1)[0];
+
+    historial.push(fichaSeleccionada);
+    guardarEnMemoria(); // Salvar jugada de inmediato
+
+    actualizarInterfazVisual(fichaSeleccionada);
+    reconstruirHistorialVisual();
+  }
+
+  // 6. Actualizar textos y burbuja principal
+  function actualizarInterfazVisual(textoBalota) {
+    const contenedorFicha = document.getElementById('ball-animation-target');
+    if (contenedorFicha) {
+      contenedorFicha.classList.remove('animate-pop-in');
+      void contenedorFicha.offsetWidth; 
+      contenedorFicha.classList.add('animate-pop-in');
+      contenedorFicha.querySelector('span').innerText = textoBalota;
+    }
+  }
+
+  // 7. Renderizar el historial de balotas en tu carrusel derecho
+  function reconstruirHistorialVisual() {
+    const listaHistorial = document.getElementById('history-list');
+    if (!listaHistorial) return;
+    
+    listaHistorial.innerHTML = '';
+    
+    // Tomamos las últimas fichas omitiendo la actual (penúltimas salidas)
+    // Mostramos máximo 4 en reversa para respetar tu estilo Tailwind
+    const copiasHistorial = [...historial];
+    if (copiasHistorial.length > 0) copiasHistorial.pop(); // Quitar la activa
+    
+    const ultimasFichas = copiasHistorial.slice(-4).reverse();
+
+    ultimasFichas.forEach(ficha => {
+      const burbuja = document.createElement('div');
+      burbuja.className = "flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-bold text-[13px] text-on-surface-variant border border-on-surface/5";
+      burbuja.innerText = ficha;
+      listaHistorial.appendChild(burbuja);
+    });
+  }
+
+  // 8. Activar el botón de BINGO para los jugadores
+  function cantarBingoJugador() {
+    if (historial.length === 0) {
+      alert("❌ Espera a que el juego empiece.");
+      return;
+    }
+    
+    juegoPausadoPorBingo = true;
+    guardarEnMemoria();
+    alert("🎉 ¡¡¡BINGO!!! 🎉  Esperando revisión por el Administrador.");
+    activarChatBingoVisual();
+  }
+
+  function activarChatBingoVisual() {
+    const textoChat = document.querySelector('.px-safe-margin.pt-base p');
+    if (textoChat) {
+      textoChat.innerHTML = '<strong>¡Alguien gritó BINGO!</strong> 🏆 Esperando revisión...';
+      textoChat.className = "font-label-bold text-[13px] text-primary truncate font-bold animate-pulse";
+    }
+  }
+
+  // 9. Seguridad del Administrador para resetear
+  function reiniciarJuegoAdmin() {
+    const intentoClave = prompt("Introduce el PIN de Administrador para reiniciar todo el juego:");
+    if (intentoClave === CLAVE_ADMIN) {
+      inicializarBombo();
+      
+      const textoChat = document.querySelector('.px-safe-margin.pt-base p');
+      if (textoChat) {
+        textoChat.innerHTML = 'D Aular: "Buena suerte! para todos!"';
+        textoChat.className = "font-label-bold text-[13px] text-on-surface truncate";
+      }
+      alert("¡Bingo reiniciado por el Administrador desde cero!");
+    } else if (intentoClave !== null) {
+      alert("Clave de sistema incorrecta.");
+    }
+  }
+
+  // 10. Encendido inteligente al cargar la web
+  document.addEventListener('DOMContentLoaded', () => {
+    cargarPartidaGuardada(); // Busca si había un juego activo antes de cerrar
+    
+    const botonBalota = document.getElementById('ball-animation-target');
+    if (botonBalota) {
+      botonBalota.style.cursor = 'pointer';
+      botonBalota.addEventListener('click', cantarFicha);
+    }
+    
+    // Conectar botón Bingo
+    const botones = document.querySelectorAll('button, div, span');
+    let botonBingoEncontrado = null;
+    botones.forEach(el => {
+      if (el.textContent.trim().toUpperCase() === 'BINGO') botonBingoEncontrado = el;
+    });
+    
+    const btnBingo = botonBingoEncontrado || document.getElementById('btn-bingo');
+    if (btnBingo) {
+      btnBingo.style.cursor = 'pointer';
+      btnBingo.addEventListener('click', cantarBingoJugador);
+    }
+
+    // Botón de reset admin discreto en el título
+    const contenedorTexto = document.querySelector('.flex.flex-col.gap-xs.z-10');
+    if (contenedorTexto) {
+      const botonReset = document.createElement('button');
+      botonReset.innerText = "🔄 Reiniciar juego";
+      botonReset.className = "text-[11px] text-primary mt-1 text-left underline opacity-50 hover:opacity-100 transition-all block";
+      botonReset.addEventListener('click', reiniciarJuegoAdmin);
+      contenedorTexto.appendChild(botonReset);
+    }
+  });
+</script>
+
+
+
