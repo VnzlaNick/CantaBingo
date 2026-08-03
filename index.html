@@ -456,6 +456,16 @@
       botonReset.className = "text-[11px] text-primary mt-1 text-left underline opacity-50 hover:opacity-100 transition-all block";
       botonReset.addEventListener('click', reiniciarJuegoAdmin);
       contenedorTexto.appendChild(botonReset);
+
+
+        // Asegúrate de que las casillas numéricas de tus cartones tengan la clase CSS "celda-numero"
+document.querySelectorAll('.celda-numero').forEach(celda => {
+    celda.addEventListener('click', () => {
+        // .toggle añade la clase si no existe, o la elimina si ya está puesta
+        celda.classList.toggle('marcado'); 
+    });
+});
+        
     }
   });
 </script>
