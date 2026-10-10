@@ -1,2 +1,2 @@
-# CantaBingo
+# Bingo Fiesta
 Bingo Onlines
