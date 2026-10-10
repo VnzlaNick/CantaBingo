@@ -241,19 +241,33 @@
       if (!game || !session) return;
 
       const { data: gameData, error: gameError } = await supabase
-        .from("bingo_games").select("*").eq("id", game.id).maybeSingle();
+        .from("bingo_games")
+        .select("*")
+        .eq("id", game.id)
+        .maybeSingle();
+
       if (gameError) throw gameError;
       if (!gameData) throw new Error("No se encontró la partida o ya no tienes acceso.");
       game = gameData;
 
       const [playersResult, drawsResult, cardResult] = await Promise.all([
-        supabase.from("bingo_players").select("user_id,display_name,joined_at")
-          .eq("game_id", game.id).order("joined_at", { ascending: true }),
-        supabase.from("bingo_draws").select("sequence_no,figure,drawn_at")
-          .eq("game_id", game.id).order("sequence_no", { ascending: true }),
-        supabase.from("bingo_cards").select("id,player_name,cells,created_at")
-          .eq("game_id", game.id).order("created_at", { ascending: false })
-          .limit(1).maybeSingle()
+        supabase.from("bingo_players")
+          .select("user_id,display_name,joined_at")
+          .eq("game_id", game.id)
+          .order("joined_at", { ascending: true }),
+
+        supabase.from("bingo_draws")
+          .select("sequence_no,figure,drawn_at")
+          .eq("game_id", game.id)
+          .order("sequence_no", { ascending: true }),
+
+        supabase.from("bingo_cards")
+          .select("id,player_name,cells,created_at")
+          .eq("game_id", game.id)
+          .eq("user_id", session.user.id)
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle()
       ]);
 
       if (playersResult.error) throw playersResult.error;
@@ -286,9 +300,14 @@
 
     async function openRoom(gameId) {
       const { data, error } = await supabase
-        .from("bingo_games").select("*").eq("id", gameId).maybeSingle();
+        .from("bingo_games")
+        .select("*")
+        .eq("id", gameId)
+        .maybeSingle();
+
       if (error) throw error;
       if (!data) throw new Error("No se encontró esa sala.");
+
       game = data;
       $("joinPanel").classList.add("hidden");
       $("activeRoom").classList.remove("hidden");
@@ -299,20 +318,25 @@
     $("authForm").addEventListener("submit", async event => {
       event.preventDefault();
       say("authMessage", "Iniciando sesión…");
+
       const { error } = await supabase.auth.signInWithPassword({
         email: $("email").value.trim(),
         password: $("password").value
       });
+
       say("authMessage", error?.message || "");
     });
 
     $("signupBtn").addEventListener("click", async () => {
       say("authMessage", "Creando cuenta…");
+
       const { data, error } = await supabase.auth.signUp({
         email: $("email").value.trim(),
         password: $("password").value
       });
+
       if (error) return say("authMessage", error.message);
+
       say("authMessage", data.session
         ? "Cuenta creada. Ya puedes entrar."
         : "Cuenta creada. Confirma el correo y luego inicia sesión.");
@@ -321,13 +345,18 @@
     $("joinBtn").addEventListener("click", async () => {
       const code = $("joinCodeInput").value.trim();
       const name = $("playerName").value.trim();
-      if (!code || !name) return say("roomMessage", "Escribe el código y tu nombre.");
+
+      if (!code || !name) {
+        return say("roomMessage", "Escribe el código y tu nombre.");
+      }
+
       say("roomMessage", "Buscando la partida…");
 
       const { data, error } = await supabase.rpc("bingo_fiesta_join_game", {
         p_join_code: code,
         p_display_name: name
       });
+
       if (error) return say("roomMessage", error.message);
 
       try {
@@ -341,15 +370,18 @@
 
     $("createCardBtn").addEventListener("click", async () => {
       if (!game) return;
+
       $("createCardBtn").disabled = true;
       const { data, error } = await supabase.rpc("bingo_fiesta_create_card", {
         p_game_id: game.id
       });
+
       if (error) {
         say("roomMessageActive", error.message);
         $("createCardBtn").disabled = false;
         return;
       }
+
       card = rowOf(data);
       say("roomMessageActive", "¡Tu cartón está listo!");
       await refreshRoom();
@@ -369,7 +401,10 @@
 
       if (!session) {
         await closeChannel();
-        game = null; players = []; draws = []; card = null;
+        game = null;
+        players = [];
+        draws = [];
+        card = null;
         $("joinPanel").classList.remove("hidden");
         $("activeRoom").classList.add("hidden");
         return;
@@ -377,9 +412,13 @@
 
       await supabase.realtime.setAuth();
       const savedId = localStorage.getItem("bingo-fiesta-room-id");
+
       if (savedId) {
-        try { await openRoom(savedId); }
-        catch (error) { say("roomMessage", error.message); }
+        try {
+          await openRoom(savedId);
+        } catch (error) {
+          say("roomMessage", error.message);
+        }
       }
     }
 
@@ -387,7 +426,10 @@
       setTimeout(() => applySession(newSession), 0);
     });
 
-    const { data: { session: initialSession } } = await supabase.auth.getSession();
+    const {
+      data: { session: initialSession }
+    } = await supabase.auth.getSession();
+
     await applySession(initialSession);
   </script>
 </body>
