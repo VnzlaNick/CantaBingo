@@ -1,447 +1,464 @@
-<!DOCTYPE html>
-
-<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-error-container": "#93000a", "surface-container-lowest": "#ffffff", "outline": "#767586", "on-surface-variant": "#464554", "surface-dim": "#d8dadc", "on-tertiary": "#ffffff", "surface-container-low": "#f2f4f6", "surface-container-highest": "#e0e3e5", "surface-tint": "#494bd6", "primary": "#4648d4", "on-primary-fixed": "#07006c", "primary-fixed-dim": "#c0c1ff", "tertiary-fixed-dim": "#4edea3", "on-secondary": "#ffffff", "tertiary-fixed": "#6ffbbe", "surface-container-high": "#e6e8ea", "on-background": "#191c1e", "outline-variant": "#c7c4d7", "surface-container": "#eceef0", "error-container": "#ffdad6", "background": "#f7f9fb", "on-primary-fixed-variant": "#2f2ebe", "secondary-container": "#fea619", "on-secondary-fixed-variant": "#653e00", "on-tertiary-fixed-variant": "#005236", "surface": "#f7f9fb", "secondary-fixed": "#ffddb8", "on-secondary-fixed": "#2a1700", "on-secondary-container": "#684000", "on-primary": "#ffffff", "on-tertiary-fixed": "#002113", "on-primary-container": "#fffbff", "tertiary-container": "#00885d", "inverse-primary": "#c0c1ff", "secondary-fixed-dim": "#ffb95f", "on-tertiary-container": "#000703", "tertiary": "#006c49", "primary-fixed": "#e1e0ff", "error": "#ba1a1a", "primary-container": "#6063ee", "secondary": "#855300", "on-surface": "#191c1e", "inverse-surface": "#2d3133", "surface-variant": "#e0e3e5", "surface-bright": "#f7f9fb", "on-error": "#ffffff", "inverse-on-surface": "#eff1f3" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "space-md": "0.75rem", "space-xl": "1.5rem", "gutter-mobile": "0.5rem", "space-sm": "0.5rem", "margin-tablet": "1.5rem", "space-lg": "1rem", "gutter": "0.75rem", "margin": "1rem" }, "fontFamily": { "display-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "display-lg-mobile": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"] }, "fontSize": { "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "700" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }], "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "800" }], "label-lg": ["15px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.material-symbols-outlined{font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 24;}</style><style>
-    body {
-      min-height: max(884px, 100dvh);
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed-variant": "#004395",
+            "surface-bright": "#f7f9fb",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#410004",
+            "surface": "#f7f9fb",
+            "surface-variant": "#e0e3e5",
+            "secondary-container": "#ffc329",
+            "surface-container-low": "#f2f4f6",
+            "on-secondary-fixed-variant": "#5c4300",
+            "surface-container-high": "#e6e8ea",
+            "inverse-primary": "#adc6ff",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#fefcff",
+            "background": "#f7f9fb",
+            "tertiary": "#b61722",
+            "error-container": "#ffdad6",
+            "primary-container": "#2170e4",
+            "on-error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#930013",
+            "tertiary-container": "#da3437",
+            "on-surface": "#191c1e",
+            "on-secondary-container": "#6f5100",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#eff1f3",
+            "secondary-fixed": "#ffdf9f",
+            "inverse-surface": "#2d3133",
+            "outline-variant": "#c2c6d6",
+            "surface-dim": "#d8dadc",
+            "tertiary-fixed": "#ffdad7",
+            "primary": "#0058be",
+            "outline": "#727785",
+            "tertiary-fixed-dim": "#ffb3ad",
+            "on-secondary-fixed": "#261a00",
+            "on-primary-fixed": "#001a42",
+            "on-error": "#ffffff",
+            "surface-tint": "#005ac2",
+            "secondary": "#795900",
+            "on-tertiary": "#ffffff",
+            "on-surface-variant": "#424754",
+            "surface-container": "#eceef0",
+            "secondary-fixed-dim": "#f9bd22",
+            "on-tertiary-container": "#fffbff",
+            "surface-container-highest": "#e0e3e5",
+            "primary-fixed": "#d8e2ff",
+            "on-primary": "#ffffff",
+            "primary-fixed-dim": "#adc6ff",
+            "on-background": "#191c1e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "safe-margin": "20px",
+            "base": "4px",
+            "xs": "8px",
+            "lg": "24px",
+            "md": "16px",
+            "sm": "12px",
+            "xl": "32px",
+            "grid-gap": "6px"
+          },
+          "fontFamily": {
+            "display-bingo": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-bold": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "number-grid": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "display-bingo": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+            "label-bold": ["14px", { "lineHeight": "20px", "fontWeight": "700" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "number-grid": ["22px", { "lineHeight": "22px", "fontWeight": "800" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+          }
+        },
+      },
     }
+  </script>
+<style>
+    @layer base {
+      body { overscroll-behavior: none; }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    body { min-height: max(884px, 100dvh); }
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 0px 0px #004395, 0 0 0px 0px rgba(0, 88, 190, 0); }
+      50% { transform: scale(1.03); box-shadow: 0 6px 4px 0px #004395, 0 0 15px 4px rgba(0, 88, 190, 0.3); }
+    }
+    @keyframes pop-in {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pulse-soft {
+      animation: pulse-soft 3s infinite ease-in-out;
+    }
+    .animate-pop-in {
+      animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
-  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="Bingo Fiesta Logo" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WBfX75FoWpLrcPxd4r3h-uO2mmbBta6WBpr37C7YzdsK1wfgQW3NOzZFjfyvPZqTrjecx0jRo83ZFoPzWFQVvesQGT6AQX379_W9mVtlckkCfBLr9fCcvqmJumpdw9kJMry3QXyq5gH4jG7kqGQe2xemAGalZ4hhXmZjTCANdQF9ixCVU_bUMIvP_lmISm-MpA20YedITn3SdzULxeCAGwFmuCHnxxY5dkYu9ipEPqVd8iUmIb03BeAUk"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary truncate leading-tight">Bingo Fiesta</span><span class="px-space-xs py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider shrink-0">#SALA-884</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Sorteador</span></div></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Estado de sala" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">wifi_tethering</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover shrink-0 ring-2 ring-primary-fixed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnk6X2X5j9Un7KJCKT8FDGCuV81LsNwhusIJkexxxbAp9jv_RYLmsKMj7SKc6KhBk0BLfcjAg73YBD99sXMBJvXQVX9-x0E34p1HpOs1FrMwiAia7v9LJdGfyttFeFEJMX97aletk2OXTRnCWdRrTOirWmdQbM_ITV2O_ByS4cVey8B3xTzLWH5L3NSg5ADWZ3XLD4EvDoZl9XGTBTuANK8gr2iHyL3v03tylkhvdnw-l-6co9T8Hz"/></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin pb-6 gap-space-lg">
-<!-- Status & Match Header Card -->
-<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-md">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="w-3 h-3 rounded-full bg-tertiary animate-ping opacity-75"></span>
-<span class="w-2.5 h-2.5 rounded-full bg-tertiary -ml-3"></span>
-<span class="font-headline-sm text-headline-sm text-on-surface">Partida en Curso</span>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<main class="relative min-h-screen bg-surface flex flex-col">
+<div class="flex flex-col w-full">
+<!-- Chat/Social Notification Header (Consolidated) -->
+<div class="px-safe-margin pt-base">
+<div class="bg-surface-variant/30 rounded-full p-xs flex items-center gap-sm pr-md border border-on-surface/5 w-full">
+<div class="w-8 h-8 rounded-full bg-primary-fixed overflow-hidden ring-2 ring-white flex-shrink-0">
+<img alt="Sarah profile" class="w-full h-full object-cover" src="https://img.wpfc.ml/90d/m9/0zmhl9.jpg"/>
 </div>
-<span class="px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md">Sala #884</span>
+<div class="flex-1 min-w-0">
+<p class="font-label-bold text-[13px] text-on-surface truncate">D Aular: "Buena suerte! para todos!"</p>
 </div>
-<div class="flex items-center justify-between bg-surface-container-low rounded-xl p-space-sm">
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Figuras cantadas</span>
-<span class="font-headline-md text-headline-md text-primary" id="counter-display">14 <span class="font-body-md text-body-md text-on-surface-variant">/ 30</span></span>
-</div>
-<!-- Mode Toggle Switch -->
-<div class="flex items-center gap-1 bg-surface-container-highest p-1 rounded-full">
-<button class="px-space-md py-1 rounded-full bg-surface-container-lowest font-label-md text-label-md text-primary shadow-sm transition-all" id="mode-manual-btn" onclick="toggleMode('manual')">
-          Manual
-        </button>
-<button class="px-space-md py-1 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" id="mode-auto-btn" onclick="toggleMode('auto')">
-          Auto (5s)
-        </button>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">chat_bubble</span>
 </div>
 </div>
-</section>
-<!-- Showcase: Current Ball Extracted -->
-<section class="relative bg-gradient-to-b from-primary-container to-primary rounded-3xl p-space-lg text-center shadow-lg overflow-hidden flex flex-col items-center justify-center min-h-[260px]">
-<!-- Ambient Festive Bubbles -->
-<div class="absolute -top-10 -right-10 w-36 h-36 bg-surface-container-lowest/10 rounded-full blur-2xl pointer-events-none"></div>
-<div class="absolute -bottom-8 -left-8 w-32 h-32 bg-secondary-container/20 rounded-full blur-xl pointer-events-none"></div>
-<div class="flex items-center gap-space-xs px-space-md py-0.5 rounded-full bg-surface-container-lowest/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm uppercase tracking-widest mb-space-sm">
-<span class="material-symbols-outlined text-[14px]">campaign</span>
-<span>¡Recién Cantada!</span>
-</div>
-<!-- Central Figure Emblem -->
-<div class="relative my-space-xs transition-transform duration-300 transform scale-100" id="hero-figure-container">
-<div class="w-32 h-32 rounded-full bg-surface-container-lowest shadow-2xl flex items-center justify-center p-3 mx-auto relative group">
-<div class="w-28 h-28 rounded-full bg-surface-container-low flex items-center justify-center">
-<span class="text-6xl select-none transition-all transform hover:scale-110" id="current-figure-icon">🚀</span>
-</div>
-<div class="absolute -top-1 -right-1 w-9 h-9 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-md font-label-md text-label-md">
-          #14
-        </div>
+<!-- Game Status: Ball Caller Section -->
+<div class="px-safe-margin pt-md pb-lg">
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-md border border-on-surface/5 flex items-center justify-between gap-md overflow-hidden relative flex-wrap">
+<div class="absolute -left-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl"></div>
+<div class="flex flex-col gap-xs z-10">
+<span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider">Ficha cantada</span>
+<div class="flex items-center" id="current-ball">
+<div class="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-[0_4px_0px_0px_#004395] ring-4 ring-primary/10 animate-pulse-soft animate-pop-in" id="ball-animation-target">
+<span class="font-display-bingo leading-none font-extrabold tracking-tight text-[28px]">G-42</span>
 </div>
 </div>
-<div class="mt-space-sm">
-<h2 class="font-headline-lg text-headline-lg text-on-primary drop-shadow-sm" id="current-figure-title">Cohete Espacial</h2>
-<p class="font-label-md text-label-md text-primary-fixed-dim">¡Búscalo en la columna O!</p>
 </div>
-<!-- Audio Shout Button -->
-<button class="mt-space-md inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-surface-container-lowest/25 hover:bg-surface-container-lowest/35 active:scale-95 backdrop-blur-md text-on-primary font-label-lg text-label-lg transition-all shadow-sm" id="voice-shout-btn" onclick="shoutVoice()">
-<span class="material-symbols-outlined text-[20px]">volume_up</span>
-<span>Cantar en voz alta</span>
-</button>
-</section>
-<!-- Big Interactive Ball Extraction Button -->
-<section class="flex flex-col gap-space-xs">
-<button class="w-full min-h-[58px] bg-secondary-container hover:bg-secondary-fixed-dim active:translate-y-1 text-on-secondary-container rounded-2xl p-space-md shadow-md flex items-center justify-center gap-space-sm transition-all" id="draw-next-btn" onclick="drawNextBall()">
-<span class="material-symbols-outlined text-[28px] animate-spin" style="animation-duration: 4s;">casino</span>
-<span class="font-headline-sm text-headline-sm tracking-wide">¡Sacar Siguiente Figura!</span>
-<span class="material-symbols-outlined text-[22px]">auto_awesome</span>
-</button>
-</section>
-<!-- History: Last 4 Figures Drawn -->
-<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-sm">
-<div class="flex items-center justify-between">
-<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
-<span class="material-symbols-outlined text-[16px]">history</span>
-        Últimas 4 Cantadas
-      </span>
-<span class="font-label-sm text-label-sm text-primary font-bold">Historial</span>
-</div>
-<div class="grid grid-cols-4 gap-space-sm pt-space-xs" id="history-container">
-<!-- 1 -->
-<div class="flex flex-col items-center bg-surface-container-low rounded-xl p-space-sm shadow-sm transition-all hover:bg-surface-container">
-<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-2xl shadow-sm mb-1">
-          🦁
-        </div>
-<span class="font-label-sm text-label-sm text-on-surface truncate w-full text-center">León</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">#13</span>
-</div>
-<!-- 2 -->
-<div class="flex flex-col items-center bg-surface-container-low rounded-xl p-space-sm shadow-sm transition-all hover:bg-surface-container">
-<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-2xl shadow-sm mb-1">
-          🍕
-        </div>
-<span class="font-label-sm text-label-sm text-on-surface truncate w-full text-center">Pizza</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">#12</span>
-</div>
-<!-- 3 -->
-<div class="flex flex-col items-center bg-surface-container-low rounded-xl p-space-sm shadow-sm transition-all hover:bg-surface-container">
-<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-2xl shadow-sm mb-1">
-          🎸
-        </div>
-<span class="font-label-sm text-label-sm text-on-surface truncate w-full text-center">Guitarra</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">#11</span>
-</div>
-<!-- 4 -->
-<div class="flex flex-col items-center bg-surface-container-low rounded-xl p-space-sm shadow-sm transition-all hover:bg-surface-container">
-<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-2xl shadow-sm mb-1">
-          🌈
-        </div>
-<span class="font-label-sm text-label-sm text-on-surface truncate w-full text-center">Arcoíris</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">#10</span>
+<div class="flex flex-col items-end gap-xs z-10 flex-1 min-w-0">
+<span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider">Últimas fichas</span>
+<div class="flex gap-sm overflow-x-auto no-scrollbar w-full" id="history-list"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-bold text-[13px] text-on-surface-variant border border-on-surface/5 transition-all">21</div><div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-bold text-[13px] text-on-surface-variant border border-on-surface/5">B-9</div><div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-bold text-[13px] text-on-surface-variant border border-on-surface/5">O-72</div></div>
 </div>
 </div>
-</section>
-<!-- Master Board of 30 Game Figures -->
-<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-md">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-primary text-[20px]">view_comfy</span>
-<h3 class="font-headline-sm text-headline-sm text-on-surface">Tablero Maestro</h3>
 </div>
-<div class="flex items-center gap-space-sm">
-<span class="flex items-center gap-1 font-label-sm text-label-sm text-tertiary">
-<span class="w-2 h-2 rounded-full bg-tertiary"></span> Cantadas (14)
-        </span>
-<span class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
-<span class="w-2 h-2 rounded-full bg-surface-dim"></span> Por salir (16)
-        </span>
+
+<!-- The Bingo Cartón 1* -->
+<div class="px-safe-margin w-full mb-md">
+<div class="bg-white rounded-xl shadow-xl border border-on-surface/5 p-xs flex gap-sm items-stretch"><!-- Left Side: Header + Grid -->
+<div class="flex flex-col flex-1 min-w-0">
+<!-- Column Headers -->
+<div class="grid grid-cols-5 gap-grid-gap mb-xs text-center">
+<div class="font-headline-md text-headline-md text-primary p-xs">B</div>
+<div class="font-headline-md text-headline-md text-primary p-xs">I</div>
+<div class="font-headline-md text-headline-md text-primary p-xs">N</div>
+<div class="font-headline-md text-headline-md text-primary p-xs">G</div>
+<div class="font-headline-md text-headline-md text-primary p-xs">O</div>
 </div>
+<!-- 5x5 Grid -->
+<div class="grid grid-cols-5 gap-grid-gap w-full" id="bingo-grid">
+<!-- Row 1 -->
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95 hover:bg-surface-container-high" onclick="toggleDaub(this)">7</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">22</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">34</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">51</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">68</button>
+<!-- Row 2 -->
+<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">12</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">25</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">40</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">55</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">71</button>
+<!-- Row 3 -->
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">2</button>
+<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">18</button>
+<div class="aspect-square rounded-lg bg-secondary-container flex flex-col items-center justify-center text-on-secondary-container transition-all">
+<span class="material-symbols-outlined text-md">star</span>
+<span class="font-label-bold text-[10px] uppercase">Libre</span>
 </div>
-<!-- 30 Figures Grid (5 cols x 6 rows) -->
-<div class="grid grid-cols-5 gap-space-xs" id="master-grid">
-<!-- 1: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🐶</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Perro</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 2: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🐱</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Gato</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 3: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🦁</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">León</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 4: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🐬</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Delfín</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 5: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🍕</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Pizza</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 6: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🍔</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Burger</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 7: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🍦</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Helado</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 8: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🎸</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Guitarra</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 9: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🎺</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Trompeta</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 10: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🌈</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Arcoíris</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 11: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">⭐</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Estrella</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 12: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">🌙</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Luna</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 13: Cantada -->
-<div class="relative bg-tertiary-fixed text-on-tertiary-fixed rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm">
-<span class="text-xl">☀️</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Sol</span>
-<span class="material-symbols-outlined text-tertiary absolute top-0.5 right-0.5 text-[12px]">check_circle</span>
-</div>
-<!-- 14: Actual / Cantada -->
-<div class="relative bg-secondary-container text-on-secondary-container rounded-xl p-2 flex flex-col items-center justify-center aspect-square shadow-sm ring-2 ring-primary">
-<span class="text-xl animate-bounce">🚀</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center font-bold">Cohete</span>
-<span class="material-symbols-outlined text-on-secondary-container absolute top-0.5 right-0.5 text-[12px]">stars</span>
-</div>
-<!-- 15 to 30: Pendientes (Atenuadas) -->
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🚗</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Auto</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🚲</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Bici</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">⚽</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Balón</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🏀</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Básquet</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🌺</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Flor</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🌴</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Palmera</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🍉</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Sandía</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🍓</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Fresa</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🎈</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Globo</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🎁</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Regalo</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🔔</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Campana</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">👑</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Corona</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">💎</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Diamante</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">💡</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Foco</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">⚓</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Ancla</span>
-</div>
-<div class="bg-surface-container-low text-on-surface-variant opacity-60 rounded-xl p-2 flex flex-col items-center justify-center aspect-square">
-<span class="text-xl">🏆</span>
-<span class="font-label-sm text-[9px] truncate max-w-full text-center">Trofeo</span>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">58</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">63</button>
+<!-- Row 4 -->
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">15</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">28</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">42</button>
+<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">50</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">66</button>
+<!-- Row 5 -->
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">5</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">29</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">31</button>
+<button class="aspect-square rounded-lg bg-surface-container flex items-center justify-center font-number-grid text-number-grid text-on-surface transition-all active:scale-95" onclick="toggleDaub(this)">47</button>
+<button class="aspect-square rounded-lg bg-primary text-on-primary flex items-center justify-center font-number-grid text-number-grid shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] transition-all" onclick="toggleDaub(this)">75</button>
 </div>
 </div>
-</section>
-<!-- Quick Action Check Winner Modal Trigger -->
-<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex items-center justify-between gap-space-sm">
-<div class="flex items-center gap-space-sm min-w-0">
-<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0">
-<span class="material-symbols-outlined text-[24px]">verified</span>
+<!-- Right Side: Vertical Bingo Button -->
+<button class="relative group w-10 bg-secondary-container rounded-xl flex flex-col items-center justify-center gap-xs shadow-[0_4px_0px_0px_#795900] active:translate-y-1 active:shadow-[0_2px_0px_0px_#795900] transition-all overflow-hidden flex-shrink-0" id="btn-bingo">
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] animate-[shimmer_2s_infinite]"></div>
 </div>
-<div class="flex flex-col min-w-0">
-<span class="font-headline-sm text-headline-sm text-on-surface leading-tight truncate">¿Alguien cantó Bingo?</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Comprueba cualquier cartón en segundos</span>
+<span class="material-symbols-outlined text-on-secondary-container group-hover:animate-bounce relative z-10 text-[20px]">celebration</span>
+<span class="font-headline-md text-[14px] text-on-secondary-container uppercase italic relative z-10 [writing-mode:vertical-lr] rotate-180">Bingo!</span>
+</button></div>
+</div>
+
+
+
+
+
+
+
+<!-- Action Bar -->
+<div class="px-safe-margin mb-md">
+<div class="bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-on-surface/5 overflow-hidden flex flex-col max-h-40">
+<!-- Chat Header -->
+<div class="px-sm py-xs border-b border-on-surface/5 flex justify-between items-center bg-surface-container-low">
+<span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider">Live Chat</span>
+<span class="text-[10px] text-primary font-bold">12 Online</span>
+</div>
+<!-- Messages Area -->
+<div class="p-sm flex flex-col gap-xs overflow-y-auto no-scrollbar">
+<div class="flex gap-xs items-start">
+<span class="font-label-bold text-[12px] text-primary flex-shrink-0">Player1:</span>
+<span class="text-[12px] text-on-surface">Good luck everyone! 🍀</span>
+</div>
+<div class="flex gap-xs items-start">
+<span class="font-label-bold text-[12px] text-secondary flex-shrink-0">Player2:</span>
+<span class="text-[12px] text-on-surface">I need one more! So close!</span>
+</div>
+<div class="flex gap-xs items-start">
+<span class="font-label-bold text-[12px] text-on-surface-variant flex-shrink-0">Mike_99:</span>
+<span class="text-[12px] text-on-surface">G-42 was my lucky number!</span>
 </div>
 </div>
-<button class="px-space-md py-space-sm bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-xl shrink-0 transition-colors shadow-sm flex items-center gap-1" onclick="openCheckModal()">
-<span class="material-symbols-outlined text-[18px]">search</span>
-<span>Validar</span>
-</button>
-</section>
-<!-- Winner Validation Modal / Dialog -->
-<div class="hidden fixed inset-0 z-50 bg-on-background/40 backdrop-blur-sm flex items-end sm:items-center justify-center p-margin transition-opacity" id="check-modal">
-<div class="bg-surface-container-lowest rounded-3xl p-space-xl max-w-sm w-full shadow-2xl flex flex-col gap-space-md">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs text-primary">
-<span class="material-symbols-outlined text-[24px]">fact_check</span>
-<h4 class="font-headline-sm text-headline-sm text-on-surface">Validar Cartón</h4>
-</div>
-<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface" onclick="closeCheckModal()">
-<span class="material-symbols-outlined text-[20px]">close</span>
+<!-- Input Area -->
+<div class="p-xs bg-surface-container-lowest border-t border-on-surface/5 flex gap-xs items-center">
+<input class="flex-1 bg-surface-container-low border-none rounded-full px-sm py-1 text-[12px] focus:ring-1 focus:ring-primary outline-none" placeholder="Type a message..." type="text"/>
+<button class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">send</span>
 </button>
 </div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">
-        Ingresa el ID del cartón del jugador para verificar automáticamente si completó Línea o Bingo Fiesta.
-      </p>
-<div class="flex flex-col gap-space-xs">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="card-id-input">Número de Cartón</label>
-<div class="relative">
-<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant font-label-md">#CART-</span>
-<input class="w-full pl-20 pr-4 py-3 rounded-xl bg-surface-container-low text-on-surface font-headline-sm focus:outline-none focus:bg-surface-container-lowest" id="card-id-input" placeholder="204" type="number"/>
 </div>
+</div><div class="px-safe-margin pb-xl flex flex-col gap-md mt-auto">
+<!-- Progress to Win -->
+<div class="w-full bg-surface-container-high h-4 rounded-full overflow-hidden shadow-inner">
+<div class="bg-secondary-container h-full w-4/5 rounded-full transition-all duration-1000 shadow-[0_0_12px_rgba(255,195,41,0.5)]"></div>
 </div>
-<div class="hidden p-space-md rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center gap-space-sm" id="check-result">
-<span class="material-symbols-outlined text-tertiary text-[24px]">celebration</span>
-<div class="flex flex-col min-w-0">
-<span class="font-label-md text-label-md font-bold">¡BINGO VÁLIDO!</span>
-<span class="font-body-sm text-body-sm">Cartón #204 completó las 5 casillas requeridas.</span>
-</div>
-</div>
-<div class="flex gap-space-sm pt-space-xs">
-<button class="flex-1 py-3 rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md" onclick="closeCheckModal()">
-          Cancelar
-        </button>
-<button class="flex-1 py-3 rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-sm hover:bg-primary-container" onclick="verifyCard()">
-          Verificar
-        </button>
-</div>
-</div>
-</div>
-</div>
+
+
+
 <script>
-  let drawnCount = 14;
-  const totalFigures = 30;
-  let autoDrawInterval = null;
+  // 1. Variables globales del Bingo
+  let fichasDisponibles = [];
+  let historial = [];
+  let juegoPausadoPorBingo = false;
+  
+  // 🔐 CLAVE DE ADMINISTRADOR
+  const CLAVE_ADMIN = "1234"; 
 
-  const remainingFigures = [
-    { icon: '🚗', name: 'Auto' },
-    { icon: '🚲', name: 'Bici' },
-    { icon: '⚽', name: 'Balón' },
-    { icon: '🏀', name: 'Básquet' },
-    { icon: '🌺', name: 'Flor' },
-    { icon: '🌴', name: 'Palmera' },
-    { icon: '🍉', name: 'Sandía' },
-    { icon: '🍓', name: 'Fresa' },
-    { icon: '🎈', name: 'Globo' },
-    { icon: '🎁', name: 'Regalo' },
-    { icon: '🔔', name: 'Campana' },
-    { icon: '👑', name: 'Corona' },
-    { icon: '💎', name: 'Diamante' },
-    { icon: '💡', name: 'Foco' },
-    { icon: '⚓', name: 'Ancla' },
-    { icon: '🏆', name: 'Trofeo' }
-  ];
+  // 2. Llenar el bombo e iniciar desde cero borrando la memoria local
+  function inicializarBombo() {
+    fichasDisponibles = [];
+    historial = [];
+    juegoPausadoPorBingo = false;
+    
+    for (let i = 1; i <= 75; i++) {
+      let letra = '';
+      if (i >= 1 && i <= 15) letra = 'B';
+      else if (i >= 16 && i <= 30) letra = 'I';
+      else if (i >= 31 && i <= 45) letra = 'N';
+      else if (i >= 46 && i <= 60) letra = 'G';
+      else if (i >= 61 && i <= 75) letra = 'O';
+      fichasDisponibles.push(`${letra}-${i}`);
+    }
+    
+    // Limpiar base de datos local del navegador
+    localStorage.removeItem('bingo_fichas');
+    localStorage.removeItem('bingo_historial');
+    localStorage.removeItem('bingo_pausado');
 
-  function drawNextBall() {
-    if (remainingFigures.length === 0) {
-      alert('¡Todas las figuras han sido cantadas en esta sala!');
+    actualizarInterfazVisual("INICIO");
+  }
+
+  // 3. Guardar el estado actual del juego en la memoria del navegador
+  function guardarEnMemoria() {
+    localStorage.setItem('bingo_fichas', JSON.stringify(fichasDisponibles));
+    localStorage.setItem('bingo_historial', JSON.stringify(historial));
+    localStorage.setItem('bingo_pausado', juegoPausadoPorBingo ? "si" : "no");
+  }
+
+  // 4. Cargar la partida guardada al refrescar la página
+  function cargarPartidaGuardada() {
+    const fichasGuardadas = localStorage.getItem('bingo_fichas');
+    const historialGuardado = localStorage.getItem('bingo_historial');
+    const pausadoGuardado = localStorage.getItem('bingo_pausado');
+
+    if (fichasGuardadas && historialGuardado) {
+      fichasDisponibles = JSON.parse(fichasGuardadas);
+      historial = JSON.parse(historialGuardado);
+      juegoPausadoPorBingo = (pausadoGuardado === "si");
+
+      // Si ya había una partida activa, mostrar la última ficha cantada
+      const ultimaFicha = historial.length > 0 ? historial[historial.length - 1] : "INICIO";
+      actualizarInterfazVisual(ultimaFicha);
+      reconstruirHistorialVisual();
+
+      // Si el juego se refrescó estando en pausa por BINGO, restaurar alerta en chat
+      if (juegoPausadoPorBingo) {
+        activarChatBingoVisual();
+      }
+    } else {
+      inicializarBombo();
+    }
+  }
+
+  // 5. Función principal para cantar ficha aleatoria
+  function cantarFicha() {
+    if (juegoPausadoPorBingo) {
+      alert("⚠️ El juego está pausado porque alguien cantó BINGO. El Administrador debe reiniciar.");
       return;
     }
 
-    const nextFig = remainingFigures.shift();
-    drawnCount++;
-
-    // Update Counter
-    const counterDisplay = document.getElementById('counter-display');
-    if (counterDisplay) {
-      counterDisplay.innerHTML = `${drawnCount} <span class="font-body-md text-body-md text-on-surface-variant">/ ${totalFigures}</span>`;
+    if (fichasDisponibles.length === 0) {
+      alert("¡Ya salieron las 75 fichas! El juego ha terminado.");
+      return;
     }
 
-    // Bounce & Update Hero Figure
-    const heroContainer = document.getElementById('hero-figure-container');
-    const heroIcon = document.getElementById('current-figure-icon');
-    const heroTitle = document.getElementById('current-figure-title');
+    const indiceAleatorio = Math.floor(Math.random() * fichasDisponibles.length);
+    const fichaSeleccionada = fichasDisponibles.splice(indiceAleatorio, 1)[0];
 
-    if (heroContainer && heroIcon && heroTitle) {
-      heroContainer.classList.add('scale-125');
-      setTimeout(() => {
-        heroIcon.innerText = nextFig.icon;
-        heroTitle.innerText = nextFig.name;
-        heroContainer.classList.remove('scale-125');
-      }, 150);
-    }
+    historial.push(fichaSeleccionada);
+    guardarEnMemoria(); // Salvar jugada de inmediato
 
-    // Auto vocalize feedback
-    shoutVoice(nextFig.name);
+    actualizarInterfazVisual(fichaSeleccionada);
+    reconstruirHistorialVisual();
   }
 
-  function shoutVoice(overrideName) {
-    const title = overrideName || document.getElementById('current-figure-title').innerText;
-    if ('speechSynthesis' in window) {
-      const utter = new SpeechSynthesisUtterance('¡' + title + '!');
-      utter.lang = 'es-ES';
-      utter.rate = 1.05;
-      utter.pitch = 1.2;
-      window.speechSynthesis.speak(utter);
+  // 6. Actualizar textos y burbuja principal
+  function actualizarInterfazVisual(textoBalota) {
+    const contenedorFicha = document.getElementById('ball-animation-target');
+    if (contenedorFicha) {
+      contenedorFicha.classList.remove('animate-pop-in');
+      void contenedorFicha.offsetWidth; 
+      contenedorFicha.classList.add('animate-pop-in');
+      contenedorFicha.querySelector('span').innerText = textoBalota;
     }
   }
 
-  function toggleMode(mode) {
-    const manualBtn = document.getElementById('mode-manual-btn');
-    const autoBtn = document.getElementById('mode-auto-btn');
+  // 7. Renderizar el historial de balotas en tu carrusel derecho
+  function reconstruirHistorialVisual() {
+    const listaHistorial = document.getElementById('history-list');
+    if (!listaHistorial) return;
+    
+    listaHistorial.innerHTML = '';
+    
+    // Tomamos las últimas fichas omitiendo la actual (penúltimas salidas)
+    // Mostramos máximo 4 en reversa para respetar tu estilo Tailwind
+    const copiasHistorial = [...historial];
+    if (copiasHistorial.length > 0) copiasHistorial.pop(); // Quitar la activa
+    
+    const ultimasFichas = copiasHistorial.slice(-4).reverse();
 
-    if (mode === 'auto') {
-      autoBtn.className = 'px-space-md py-1 rounded-full bg-surface-container-lowest font-label-md text-label-md text-primary shadow-sm transition-all';
-      manualBtn.className = 'px-space-md py-1 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all';
-      if (!autoDrawInterval) {
-        autoDrawInterval = setInterval(drawNextBall, 5000);
+    ultimasFichas.forEach(ficha => {
+      const burbuja = document.createElement('div');
+      burbuja.className = "flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center font-label-bold text-[13px] text-on-surface-variant border border-on-surface/5";
+      burbuja.innerText = ficha;
+      listaHistorial.appendChild(burbuja);
+    });
+  }
+
+  // 8. Activar el botón de BINGO para los jugadores
+  function cantarBingoJugador() {
+    if (historial.length === 0) {
+      alert("❌ Espera a que el juego empiece.");
+      return;
+    }
+    
+    juegoPausadoPorBingo = true;
+    guardarEnMemoria();
+    alert("🎉 ¡¡¡BINGO!!! 🎉  Esperando revisión por el Administrador.");
+    activarChatBingoVisual();
+  }
+
+  function activarChatBingoVisual() {
+    const textoChat = document.querySelector('.px-safe-margin.pt-base p');
+    if (textoChat) {
+      textoChat.innerHTML = '<strong>¡Alguien gritó BINGO!</strong> 🏆 Esperando revisión...';
+      textoChat.className = "font-label-bold text-[13px] text-primary truncate font-bold animate-pulse";
+    }
+  }
+
+  // 9. Seguridad del Administrador para resetear
+  function reiniciarJuegoAdmin() {
+    const intentoClave = prompt("Introduce el PIN de Administrador para reiniciar todo el juego:");
+    if (intentoClave === CLAVE_ADMIN) {
+      inicializarBombo();
+      
+      const textoChat = document.querySelector('.px-safe-margin.pt-base p');
+      if (textoChat) {
+        textoChat.innerHTML = 'D Aular: "Buena suerte! para todos!"';
+        textoChat.className = "font-label-bold text-[13px] text-on-surface truncate";
       }
-    } else {
-      manualBtn.className = 'px-space-md py-1 rounded-full bg-surface-container-lowest font-label-md text-label-md text-primary shadow-sm transition-all';
-      autoBtn.className = 'px-space-md py-1 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all';
-      if (autoDrawInterval) {
-        clearInterval(autoDrawInterval);
-        autoDrawInterval = null;
-      }
+      alert("¡Bingo reiniciado por el Administrador desde cero!");
+    } else if (intentoClave !== null) {
+      alert("Clave de sistema incorrecta.");
     }
   }
 
-  function openCheckModal() {
-    const modal = document.getElementById('check-modal');
-    modal.classList.remove('hidden');
-    document.getElementById('check-result').classList.add('hidden');
-    document.getElementById('card-id-input').value = '';
-  }
+  // 10. Encendido inteligente al cargar la web
+  document.addEventListener('DOMContentLoaded', () => {
+    cargarPartidaGuardada(); // Busca si había un juego activo antes de cerrar
+    
+    const botonBalota = document.getElementById('ball-animation-target');
+    if (botonBalota) {
+      botonBalota.style.cursor = 'pointer';
+      botonBalota.addEventListener('click', cantarFicha);
+    }
+    
+    // Conectar botón Bingo
+    const botones = document.querySelectorAll('button, div, span');
+    let botonBingoEncontrado = null;
+    botones.forEach(el => {
+      if (el.textContent.trim().toUpperCase() === 'BINGO') botonBingoEncontrado = el;
+    });
+    
+    const btnBingo = botonBingoEncontrado || document.getElementById('btn-bingo');
+    if (btnBingo) {
+      btnBingo.style.cursor = 'pointer';
+      btnBingo.addEventListener('click', cantarBingoJugador);
+    }
 
-  function closeCheckModal() {
-    const modal = document.getElementById('check-modal');
-    modal.classList.add('hidden');
-  }
+    // Botón de reset admin discreto en el título
+    const contenedorTexto = document.querySelector('.flex.flex-col.gap-xs.z-10');
+    if (contenedorTexto) {
+      const botonReset = document.createElement('button');
+      botonReset.innerText = "🔄 Reiniciar juego";
+      botonReset.className = "text-[11px] text-primary mt-1 text-left underline opacity-50 hover:opacity-100 transition-all block";
+      botonReset.addEventListener('click', reiniciarJuegoAdmin);
+      contenedorTexto.appendChild(botonReset);
+    }
+  });
+</script>
 
-  function verifyCard() {
-    const res = document.getElementById('check-result');
-    res.classList.remove('hidden');
-  }
-</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(70,72,212,0.06)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-20 px-space-xs max-w-md mx-auto"><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 min-w-[70px] min-h-[48px] py-1 transition-all text-primary font-bold" data-path="sorteador" href="#"><span class="material-symbols-outlined text-[24px]">casino</span><span class="font-label-sm text-label-sm">Sorteador</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[70px] min-h-[48px] py-1 text-on-surface-variant hover:text-on-surface transition-all" data-path="generador" href="#"><span class="material-symbols-outlined text-[24px]">grid_view</span><span class="font-label-sm text-label-sm">Generador</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[70px] min-h-[48px] py-1 text-on-surface-variant hover:text-on-surface transition-all" data-path="mi-carton" href="#"><span class="material-symbols-outlined text-[24px]">playing_cards</span><span class="font-label-sm text-label-sm">Mi Cartón</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[70px] min-h-[48px] py-1 text-on-surface-variant hover:text-on-surface transition-all" data-path="sala-y-db" href="#"><span class="material-symbols-outlined text-[24px]">cloud_sync</span><span class="font-label-sm text-label-sm">Sala &amp; DB</span></a></div></nav></body></html>
+
+
