@@ -1,90 +1,282 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bingo Fiesta</title>
+
   <style>
     :root {
-      --ink: #272344; --muted: #77758d; --pink: #ff5da8;
-      --yellow: #ffd84d; --purple: #8b70f5; --green: #50d6a0;
-      --paper: #fffdf8; --shadow: 0 18px 45px #382a681f;
+      --ink: #272344;
+      --muted: #77758d;
+      --pink: #ff5da8;
+      --yellow: #ffd84d;
+      --purple: #8b70f5;
+      --green: #50d6a0;
+      --paper: #fffdf8;
+      --shadow: 0 18px 45px #382a681f;
     }
+
     * { box-sizing: border-box; }
+
     body {
-      margin: 0; min-height: 100vh; padding: 24px; color: var(--ink);
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px;
+      color: var(--ink);
       font-family: "Trebuchet MS", Arial, sans-serif;
       background: linear-gradient(135deg, #fff7d8, #f4eefe 58%, #e7faff);
     }
+
     button, input { font: inherit; }
     button { cursor: pointer; }
+
     .app { max-width: 1100px; margin: auto; }
-    header { display:flex; justify-content:space-between; align-items:center; gap:16px; margin:8px 0 24px; }
-    .brand { display:flex; align-items:center; gap:14px; }
-    .brand-mark { display:grid; place-items:center; width:56px; height:56px; border-radius:18px; background:var(--yellow); font-size:30px; }
-    h1 { margin:0; font-size:clamp(26px, 4vw, 36px); }
-    .subtitle { color:var(--muted); margin-top:4px; }
-    .card { border:3px solid white; border-radius:26px; background:var(--paper); box-shadow:var(--shadow); padding:24px; }
-    .login { max-width:480px; margin:38px auto; }
-    .login h2 { margin-top:0; }
-    label { display:block; margin:12px 0 6px; font-weight:800; }
-    input { width:100%; padding:13px; border:2px solid #ece8f4; border-radius:13px; outline:none; }
-    input:focus { border-color:var(--purple); }
-    .layout { display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(270px, .8fr); gap:18px; }
-    .game-top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; }
-    .eyebrow { color:var(--purple); font-size:12px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
-    h2 { margin:7px 0; }
-    .status, .code { padding:9px 13px; border-radius:999px; background:#fff2c5; font-weight:800; font-size:13px; }
-    .status.live { color:#168458; background:#e1fff2; }
-    .code { background:#f0eaff; color:#654fc5; }
-    .stage { display:grid; place-items:center; min-height:280px; margin:22px 0; border-radius:22px; text-align:center; background:linear-gradient(135deg,#fff2a8,#ffe1ec 55%,#dff8ff); }
-    .emoji { font-size:clamp(76px, 13vw, 118px); line-height:1.15; }
-    .figure-name { font-size:clamp(30px, 5vw, 44px); font-weight:900; }
-    .muted { color:var(--muted); font-size:14px; }
-    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:16px 0; }
-    .stat { padding:13px 7px; border-radius:15px; background:#f5f1ff; text-align:center; }
-    .stat:nth-child(2) { background:#e8faff; }
-    .stat:nth-child(3) { background:#fff1f7; }
-    .stat strong { display:block; font-size:22px; }
-    .stat span { color:var(--muted); font-size:12px; }
-    .controls { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
-    .btn { border:0; border-radius:14px; padding:12px 16px; min-height:46px; font-weight:900; }
-    .btn:disabled { opacity:.45; cursor:not-allowed; }
-    .btn:hover:not(:disabled) { filter:brightness(1.04); transform:translateY(-1px); }
-    .primary { background:var(--pink); color:white; }
-    .start { background:var(--green); color:#124b37; }
-    .purple { background:var(--purple); color:white; }
-    .soft { background:#eeeaf8; color:#554a79; }
-    .yellow { background:var(--yellow); color:#654900; }
-    .history { display:flex; flex-direction:column; gap:8px; max-height:360px; overflow:auto; }
-    .history-item { display:flex; align-items:center; gap:10px; padding:9px 11px; border-radius:13px; background:#f8f6fc; }
-    .history-num { display:grid; place-items:center; width:30px; height:30px; border-radius:9px; background:#eae4ff; color:#6d55cd; font-weight:900; font-size:12px; }
-    .history-emoji { font-size:22px; }
-    .history-name { font-weight:800; }
-    .notice { margin-top:18px; padding:12px; border-radius:13px; background:#fff7d9; color:#75601f; font-size:13px; line-height:1.5; }
-    .message { min-height:22px; margin-top:12px; color:#a23265; font-size:13px; }
-    .hidden { display:none !important; }
-    @media(max-width:780px) { body { padding:14px; } .layout { grid-template-columns:1fr; } }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin: 8px 0 24px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 14px; }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: var(--yellow);
+      font-size: 30px;
+    }
+
+    h1 { margin: 0; font-size: clamp(26px, 4vw, 36px); }
+    h2 { margin: 7px 0; }
+    h3 { margin-bottom: 12px; }
+    .subtitle, .muted { color: var(--muted); }
+    .muted { font-size: 14px; }
+
+    .card {
+      border: 3px solid white;
+      border-radius: 26px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .login { max-width: 480px; margin: 38px auto; }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 800;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 2px solid #ece8f4;
+      border-radius: 13px;
+      outline: none;
+    }
+
+    input:focus { border-color: var(--purple); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(270px, .8fr);
+      gap: 18px;
+    }
+
+    .game-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .eyebrow {
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .status, .code {
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: #fff2c5;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .status.live { color: #168458; background: #e1fff2; }
+    .code { background: #f0eaff; color: #654fc5; }
+
+    .stage {
+      display: grid;
+      place-items: center;
+      min-height: 250px;
+      margin: 22px 0;
+      border-radius: 22px;
+      text-align: center;
+      background: linear-gradient(135deg, #fff2a8, #ffe1ec 55%, #dff8ff);
+    }
+
+    .emoji {
+      font-size: clamp(76px, 13vw, 118px);
+      line-height: 1.15;
+    }
+
+    .figure-name {
+      font-size: clamp(30px, 5vw, 44px);
+      font-weight: 900;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin: 16px 0;
+    }
+
+    .stat {
+      padding: 13px 7px;
+      border-radius: 15px;
+      background: #f5f1ff;
+      text-align: center;
+    }
+
+    .stat:nth-child(2) { background: #e8faff; }
+    .stat:nth-child(3) { background: #fff1f7; }
+    .stat strong { display: block; font-size: 22px; }
+    .stat span { color: var(--muted); font-size: 12px; }
+
+    .controls { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+
+    .btn {
+      min-height: 46px;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    .btn:disabled { opacity: .45; cursor: not-allowed; }
+    .btn:hover:not(:disabled) { filter: brightness(1.04); transform: translateY(-1px); }
+    .primary { background: var(--pink); color: white; }
+    .start { background: var(--green); color: #124b37; }
+    .purple { background: var(--purple); color: white; }
+    .soft { background: #eeeaf8; color: #554a79; }
+    .yellow { background: var(--yellow); color: #654900; }
+
+    .history {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 360px;
+      overflow: auto;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: 13px;
+      background: #f8f6fc;
+    }
+
+    .history-num {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: #eae4ff;
+      color: #6d55cd;
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .history-emoji { font-size: 22px; }
+    .history-name { font-weight: 800; }
+
+    .notice {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 13px;
+      background: #fff7d9;
+      color: #75601f;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message { min-height: 22px; margin-top: 12px; color: #a23265; font-size: 13px; }
+    .hidden { display: none !important; }
+
+    .bingo-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 7px;
+      max-width: 520px;
+    }
+
+    .bingo-cell {
+      display: grid;
+      place-items: center;
+      min-height: 58px;
+      padding: 5px;
+      border: 2px solid #ece8f4;
+      border-radius: 12px;
+      background: white;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .bingo-cell.marked {
+      border-color: var(--green);
+      background: #dffff0;
+    }
+
+    @media (max-width: 780px) {
+      body { padding: 14px; }
+      .layout { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
+
 <body>
   <main class="app">
     <header>
       <div class="brand">
         <div class="brand-mark">🎉</div>
-        <div><h1>Bingo Fiesta</h1><div class="subtitle">¡Que comience la diversión!</div></div>
+        <div>
+          <h1>Bingo Fiesta</h1>
+          <div class="subtitle">¡Que comience la diversión!</div>
+        </div>
       </div>
       <button id="logoutBtn" class="btn soft hidden">Cerrar sesión</button>
     </header>
 
     <section id="loginPanel" class="card login">
-      <h2>🎈 Entrar al panel</h2>
-      <p class="muted">Inicia sesión con tu cuenta de Supabase.</p>
+      <h2>🎈 Ingresar</h2>
+      <p class="muted">Inicia sesión o crea una cuenta para entrar.</p>
+
       <form id="authForm">
         <label for="email">Correo</label>
         <input id="email" type="email" autocomplete="email" required>
+
         <label for="password">Contraseña</label>
         <input id="password" type="password" autocomplete="current-password" required>
+
         <div class="controls">
           <button class="btn primary" type="submit">Iniciar sesión</button>
           <button class="btn yellow" type="button" id="signupBtn">Crear cuenta</button>
@@ -93,11 +285,12 @@
       <div id="authMessage" class="message"></div>
     </section>
 
-    <section id="gamePanel" class="layout hidden">
+    <!-- Sala de administración: solo se muestra a cuentas en bingo_admins -->
+    <section id="adminPanel" class="layout hidden">
       <section class="card">
         <div class="game-top">
           <div>
-            <div class="eyebrow">Partida actual</div>
+            <div class="eyebrow">Sala de administración</div>
             <h2 id="gameTitle">Crea una partida para empezar</h2>
           </div>
           <div id="status" class="status">Sin partida</div>
@@ -130,10 +323,13 @@
       <aside class="card">
         <div class="eyebrow">Nueva partida</div>
         <h2>🎨 Organiza el bingo</h2>
+
         <label for="displayName">Tu nombre</label>
         <input id="displayName" maxlength="80" placeholder="Nombre del organizador">
+
         <label for="titleInput">Nombre de la partida</label>
         <input id="titleInput" maxlength="120" placeholder="Ej. Bingo familiar">
+
         <div class="controls">
           <button id="createBtn" class="btn yellow">Crear partida</button>
         </div>
@@ -144,11 +340,57 @@
         </div>
 
         <div class="eyebrow" style="margin:20px 0 9px">Figuras sorteadas</div>
-        <div id="history" class="history"><div class="muted">Todavía no hay sorteos.</div></div>
+        <div id="history" class="history">
+          <div class="muted">Todavía no hay sorteos.</div>
+        </div>
+
         <div class="notice">
-          Los sorteos se guardan en la base de datos. Los cambios de la partida se reciben por Broadcast privado.
+          Comparte el código con los jugadores. Los sorteos se guardan en la base y se envían por Broadcast privado.
         </div>
       </aside>
+    </section>
+
+    <!-- Sala de juego: se muestra a cuentas que no son administradoras -->
+    <section id="playerPanel" class="card hidden">
+      <div id="joinBox">
+        <div class="eyebrow">Sala de juego</div>
+        <h2>🎟️ Únete a una partida</h2>
+
+        <form id="joinForm">
+          <label for="playerName">Tu nombre</label>
+          <input id="playerName" maxlength="80" placeholder="Nombre para mostrar" required>
+
+          <label for="playerJoinCode">Código de la partida</label>
+          <input id="playerJoinCode" maxlength="8" placeholder="Ej. A1B2C3D4" required>
+
+          <div class="controls">
+            <button id="joinBtn" class="btn primary" type="submit">Entrar a la sala</button>
+          </div>
+        </form>
+        <div id="playerMessage" class="message"></div>
+      </div>
+
+      <div id="playerRoom" class="hidden">
+        <div class="eyebrow">Sala de juego</div>
+        <h2 id="playerGameTitle">Partida</h2>
+        <p id="playerStatus" class="muted"></p>
+
+        <div class="stage">
+          <div>
+            <div id="playerCurrentEmoji" class="emoji">🎁</div>
+            <div id="playerCurrentFigure" class="figure-name">Esperando el sorteo</div>
+          </div>
+        </div>
+
+        <h3>Mi cartón</h3>
+        <div id="playerCardGrid" class="bingo-grid"></div>
+        <p id="playerCardMessage" class="muted"></p>
+        <button id="createCardBtn" class="btn yellow">Crear mi cartón</button>
+
+        <div class="controls">
+          <button id="changeGameBtn" class="btn soft">Entrar a otra partida</button>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -157,35 +399,34 @@
 
     const SUPABASE_URL = "https://lzzkgnntpnzwffunemqo.supabase.co";
     const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_gsj1KCUdHSMG0n6DIW2IOg_sP1up-Gv";
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
     const icons = {
-      "Perro":"🐶","Gato":"🐱","León":"🦁","Delfín":"🐬","Pizza":"🍕",
-      "Hamburguesa":"🍔","Helado":"🍦","Guitarra":"🎸","Trompeta":"🎺",
-      "Arcoíris":"🌈","Estrella":"⭐","Luna":"🌙","Sol":"☀️","Cohete":"🚀",
-      "Elefante":"🐘","Mariposa":"🦋","Manzana":"🍎","Barco":"⛵",
-      "Pelota":"⚽","Flor":"🌸","Casa":"🏠","Pato":"🦆","Coche":"🚗",
-      "Avión":"✈️","Corazón":"❤️","Tambor":"🥁","Fuego":"🔥","Nube":"☁️",
-      "Oso":"🐻","Payaso":"🤡"
+      "Perro":"🐶", "Gato":"🐱", "León":"🦁", "Delfín":"🐬", "Pizza":"🍕",
+      "Hamburguesa":"🍔", "Helado":"🍦", "Guitarra":"🎸", "Trompeta":"🎺",
+      "Arcoíris":"🌈", "Estrella":"⭐", "Luna":"🌙", "Sol":"☀️", "Cohete":"🚀",
+      "Elefante":"🐘", "Mariposa":"🦋", "Manzana":"🍎", "Barco":"⛵",
+      "Pelota":"⚽", "Flor":"🌸", "Casa":"🏠", "Pato":"🦆", "Coche":"🚗",
+      "Avión":"✈️", "Corazón":"❤️", "Tambor":"🥁", "Fuego":"🔥", "Nube":"☁️",
+      "Oso":"🐻", "Payaso":"🤡", "LIBRE":"⭐"
     };
 
     const $ = id => document.getElementById(id);
+    const rowOf = data => Array.isArray(data) ? data[0] : data;
+    const setMessage = (id, text) => { $(id).textContent = text || ""; };
+
     let session = null;
+    let activeUserId = null;
+    let roleLoaded = false;
+    let isAdmin = false;
     let game = null;
     let draws = [];
+    let playerCard = null;
     let channel = null;
     let autoTimer = null;
-    let busy = false;
     let refreshTimer = null;
-
-    function setMessage(id, text) { $(id).textContent = text || ""; }
-    function rowOf(data) { return Array.isArray(data) ? data[0] : data; }
-
-    function stopAuto() {
-      if (autoTimer) clearInterval(autoTimer);
-      autoTimer = null;
-      $("pauseBtn").disabled = true;
-    }
+    let busy = false;
 
     async function leaveChannel() {
       stopAuto();
@@ -195,30 +436,53 @@
       }
     }
 
+    function stopAuto() {
+      if (autoTimer) clearInterval(autoTimer);
+      autoTimer = null;
+      if ($("pauseBtn")) $("pauseBtn").disabled = true;
+    }
+
     function render() {
-      if (!game) return;
+      if (!game) {
+        renderPlayer();
+        return;
+      }
+
       const last = draws[draws.length - 1];
       $("gameTitle").textContent = game.title;
       $("joinCode").textContent = game.join_code || "—";
-      $("status").textContent = game.status === "active" ? "🟢 Partida en vivo"
-        : game.status === "finished" ? "🏁 Finalizada" : "🟡 Lista para empezar";
+
+      $("status").textContent = game.status === "active"
+        ? "🟢 Partida en vivo"
+        : game.status === "finished"
+          ? "🏁 Finalizada"
+          : "🟡 Lista para empezar";
+
       $("status").classList.toggle("live", game.status === "active");
       $("drawCount").textContent = draws.length;
-      $("remainingCount").textContent = Math.max(0, (game.figure_pool || []).length - draws.length);
-      $("gameState").textContent = game.status === "active" ? "En juego"
-        : game.status === "finished" ? "Finalizada" : "En espera";
+      $("remainingCount").textContent =
+        Math.max(0, (game.figure_pool || []).length - draws.length);
+
+      $("gameState").textContent = game.status === "active"
+        ? "En juego"
+        : game.status === "finished"
+          ? "Finalizada"
+          : "En espera";
 
       $("currentEmoji").textContent = last ? (icons[last.figure] || "🎉") : "🎁";
-      $("drawLabel").textContent = last ? `Figura número ${last.sequence_no}` : "La próxima figura está esperando";
+      $("drawLabel").textContent = last
+        ? `Figura número ${last.sequence_no}`
+        : "La próxima figura está esperando";
       $("currentFigure").textContent = last ? last.figure : "¡Suerte!";
 
-      $("startBtn").disabled = game.status !== "waiting";
+      $("startBtn").disabled = game.status !== "waiting" || busy;
       $("drawBtn").disabled = game.status !== "active" || busy;
       $("autoBtn").disabled = game.status !== "active" || busy || !!autoTimer;
       $("finishBtn").disabled = game.status !== "active" || busy;
 
       const history = $("history");
       history.replaceChildren();
+
       if (!draws.length) {
         const empty = document.createElement("div");
         empty.className = "muted";
@@ -228,193 +492,194 @@
         [...draws].reverse().forEach(item => {
           const row = document.createElement("div");
           row.className = "history-item";
+
           const number = document.createElement("div");
           number.className = "history-num";
           number.textContent = String(item.sequence_no).padStart(2, "0");
+
           const emoji = document.createElement("div");
           emoji.className = "history-emoji";
           emoji.textContent = icons[item.figure] || "🎉";
+
           const name = document.createElement("div");
           name.className = "history-name";
           name.textContent = item.figure;
+
           row.append(number, emoji, name);
           history.appendChild(row);
         });
       }
+
+      renderPlayer();
+    }
+
+    function renderPlayer() {
+      if (isAdmin || !$("playerPanel")) return;
+
+      const hasGame = !!game;
+      $("joinBox").classList.toggle("hidden", hasGame);
+      $("playerRoom").classList.toggle("hidden", !hasGame);
+
+      if (!hasGame) return;
+
+      $("playerGameTitle").textContent = game.title;
+      $("playerStatus").textContent = game.status === "active"
+        ? "🟢 Partida en vivo"
+        : game.status === "finished"
+          ? "🏁 Partida finalizada"
+          : "🟡 Esperando que comience la partida";
+
+      const last = draws[draws.length - 1];
+      $("playerCurrentEmoji").textContent = last ? (icons[last.figure] || "🎉") : "🎁";
+      $("playerCurrentFigure").textContent = last ? last.figure : "Esperando el sorteo";
+
+      const grid = $("playerCardGrid");
+      grid.replaceChildren();
+
+      if (!playerCard) {
+        $("playerCardMessage").textContent = game.status === "waiting"
+          ? "Todavía no tienes cartón."
+          : "No tienes un cartón para esta partida.";
+        $("createCardBtn").classList.toggle("hidden", game.status !== "waiting");
+        $("createCardBtn").disabled = false;
+        return;
+      }
+
+      $("playerCardMessage").textContent = "";
+      $("createCardBtn").classList.add("hidden");
+
+      const calledFigures = new Set(draws.map(item => item.figure));
+
+      (playerCard.cells || []).forEach(value => {
+        const cell = document.createElement("div");
+        cell.className = "bingo-cell";
+        cell.textContent = value;
+
+        if (value === "LIBRE" || calledFigures.has(value)) {
+          cell.classList.add("marked");
+        }
+
+        grid.appendChild(cell);
+      });
     }
 
     async function loadGameData() {
       if (!game || !session) return;
+
       const { data: freshGame, error: gameError } = await supabase
-        .from("bingo_games").select("*").eq("id", game.id).maybeSingle();
+        .from("bingo_games")
+        .select("*")
+        .eq("id", game.id)
+        .maybeSingle();
+
       if (gameError) throw gameError;
       if (!freshGame) throw new Error("No se pudo leer la partida.");
       game = freshGame;
 
       const { data: freshDraws, error: drawsError } = await supabase
-        .from("bingo_draws").select("*").eq("game_id", game.id)
+        .from("bingo_draws")
+        .select("*")
+        .eq("game_id", game.id)
         .order("sequence_no", { ascending: true });
+
       if (drawsError) throw drawsError;
       draws = freshDraws || [];
       render();
+    }
+
+    async function loadPlayerCard() {
+      if (!game || !session) return;
+
+      const { data, error } = await supabase
+        .from("bingo_cards")
+        .select("id, cells")
+        .eq("game_id", game.id)
+        .eq("user_id", session.user.id)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (error) throw error;
+      playerCard = data;
     }
 
     async function subscribeToGame() {
       await leaveChannel();
       await supabase.realtime.setAuth();
 
-      channel = supabase.channel(`game:${game.id}`, {
-        config: { private: true }
-      }).on("broadcast", { event: "*" }, () => {
-        clearTimeout(refreshTimer);
-        refreshTimer = setTimeout(() => {
-          loadGameData().catch(error => setMessage("gameMessage", error.message));
-        }, 200);
-      }).subscribe(status => {
-        if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
-          setMessage("gameMessage", "Se perdió la conexión en vivo; vuelve a cargar la página.");
-        }
-      });
+      channel = supabase
+        .channel(`game:${game.id}`, { config: { private: true } })
+        .on("broadcast", { event: "*" }, () => {
+          clearTimeout(refreshTimer);
+          refreshTimer = setTimeout(async () => {
+            try {
+              await loadGameData();
+            } catch (error) {
+              setMessage(isAdmin ? "gameMessage" : "playerMessage", error.message);
+            }
+          }, 200);
+        })
+        .subscribe(status => {
+          if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
+            setMessage(
+              isAdmin ? "gameMessage" : "playerMessage",
+              "Se perdió la conexión en vivo. Recarga la página para reconectar."
+            );
+          }
+        });
     }
 
     async function openGame(gameId) {
       const { data, error } = await supabase
-        .from("bingo_games").select("*").eq("id", gameId).maybeSingle();
+        .from("bingo_games")
+        .select("*")
+        .eq("id", gameId)
+        .maybeSingle();
+
       if (error) throw error;
       if (!data) throw new Error("No se encontró la partida.");
+
       game = data;
-      localStorage.setItem("bingo-fiesta-game-id", game.id);
+
+      if (isAdmin) {
+        localStorage.setItem("bingo-fiesta-admin-game-id", game.id);
+      } else {
+        localStorage.setItem("bingo-fiesta-player-game-id", game.id);
+      }
+
       await loadGameData();
+
+      if (!isAdmin) {
+        await loadPlayerCard();
+        renderPlayer();
+      }
+
       await subscribeToGame();
     }
 
-    async function handleSession(newSession) {
-      session = newSession;
+    async function handleSession(nextSession) {
+      const nextUserId = nextSession?.user?.id || null;
+
+      if (nextUserId !== activeUserId) {
+        await leaveChannel();
+        activeUserId = nextUserId;
+        roleLoaded = false;
+        isAdmin = false;
+        game = null;
+        draws = [];
+        playerCard = null;
+      }
+
+      session = nextSession;
+
       $("loginPanel").classList.toggle("hidden", !!session);
-      $("gamePanel").classList.toggle("hidden", !session);
       $("logoutBtn").classList.toggle("hidden", !session);
 
       if (!session) {
-        await leaveChannel();
-        game = null;
-        draws = [];
+        $("adminPanel").classList.add("hidden");
+        $("playerPanel").classList.add("hidden");
         return;
       }
 
-      await supabase.realtime.setAuth();
-      const savedId = localStorage.getItem("bingo-fiesta-game-id");
-      if (savedId) {
-        try { await openGame(savedId); }
-        catch (error) { setMessage("gameMessage", error.message); }
-      }
-    }
-
-    $("authForm").addEventListener("submit", async event => {
-      event.preventDefault();
-      setMessage("authMessage", "Conectando…");
-      const { error } = await supabase.auth.signInWithPassword({
-        email: $("email").value.trim(),
-        password: $("password").value
-      });
-      setMessage("authMessage", error ? error.message : "Sesión iniciada.");
-    });
-
-    $("signupBtn").addEventListener("click", async () => {
-      setMessage("authMessage", "Creando cuenta…");
-      const { data, error } = await supabase.auth.signUp({
-        email: $("email").value.trim(),
-        password: $("password").value
-      });
-      if (error) return setMessage("authMessage", error.message);
-      setMessage("authMessage", data.session
-        ? "Cuenta creada. Ya puedes iniciar sesión."
-        : "Cuenta creada. Confirma el correo y luego inicia sesión.");
-    });
-
-    $("logoutBtn").addEventListener("click", async () => {
-      stopAuto();
-      await supabase.auth.signOut();
-      localStorage.removeItem("bingo-fiesta-game-id");
-      game = null; draws = [];
-      await handleSession(null);
-    });
-
-    $("createBtn").addEventListener("click", async () => {
-      setMessage("gameMessage", "");
-      const title = $("titleInput").value.trim();
-      const displayName = $("displayName").value.trim();
-      if (!title || !displayName) return setMessage("gameMessage", "Escribe el nombre de la partida y el tuyo.");
-      setMessage("gameMessage", "Creando partida…");
-      const { data, error } = await supabase.rpc("bingo_fiesta_create_game", {
-        p_title: title,
-        p_display_name: displayName
-      });
-      if (error) return setMessage("gameMessage", error.message);
-      try {
-        await openGame(rowOf(data).id);
-        setMessage("gameMessage", "Partida creada y conectada.");
-      } catch (e) {
-        setMessage("gameMessage", e.message);
-      }
-    });
-
-    $("startBtn").addEventListener("click", async () => {
-      if (!game) return;
-      busy = true; render();
-      const { error } = await supabase.rpc("bingo_fiesta_set_game_status", {
-        p_game_id: game.id, p_status: "active"
-      });
-      busy = false;
-      if (error) setMessage("gameMessage", error.message);
-      else { setMessage("gameMessage", "¡Partida iniciada!"); await loadGameData(); }
-    });
-
-    async function drawOne() {
-      if (!game || busy) return;
-      busy = true; render();
-      const { data, error } = await supabase.rpc("bingo_fiesta_draw_figure", {
-        p_game_id: game.id
-      });
-      busy = false;
-      if (error) {
-        stopAuto();
-        setMessage("gameMessage", error.message);
-        return;
-      }
-      setMessage("gameMessage", "");
-      await loadGameData();
-      if (!rowOf(data) || game.status === "finished") stopAuto();
-    }
-
-    $("drawBtn").addEventListener("click", drawOne);
-    $("autoBtn").addEventListener("click", async () => {
-      if (autoTimer) return;
-      await drawOne();
-      if (game?.status === "active") {
-        autoTimer = setInterval(drawOne, 2200);
-        $("pauseBtn").disabled = false;
-        render();
-      }
-    });
-    $("pauseBtn").addEventListener("click", () => { stopAuto(); render(); });
-
-    $("finishBtn").addEventListener("click", async () => {
-      if (!game) return;
-      stopAuto(); busy = true; render();
-      const { error } = await supabase.rpc("bingo_fiesta_set_game_status", {
-        p_game_id: game.id, p_status: "finished"
-      });
-      busy = false;
-      if (error) setMessage("gameMessage", error.message);
-      else { setMessage("gameMessage", "Partida finalizada."); await loadGameData(); }
-    });
-
-    supabase.auth.onAuthStateChange((_event, newSession) => {
-      setTimeout(() => handleSession(newSession), 0);
-    });
-
-    const { data: { session: initialSession } } = await supabase.auth.getSession();
-    await handleSession(initialSession);
-  </script>
-</body>
-</html>
+      if (roleLoaded)
+    
