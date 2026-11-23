@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Bingo Cósmico Interactivo - Marcado Manual</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cosmicBg: '#1e0c38',
+            neonCyan: '#00ffd5',
+            neonBlue: '#3b82f6',
+            waGreen: '#25D366',
+            cookieBorder: '#d97706',
+            frostingPink: '#f472b6',
+            deepSpace: '#0f051d'
+          },
+          fontFamily: {
+            sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: CustomStyles -->
+<style data-purpose="custom-game-styles">
+    /* Fondo cósmico espacial con nebulosas y planetas */
+    body {
+      background: radial-gradient(circle at 50% 20%, #341259 0%, #150624 55%, #08020f 100%);
+      min-height: 100vh;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+    /* Fondo con colinas de chocolate dulce */
+    .candy-hills {
+      background: radial-gradient(ellipse at bottom, #592416 0%, #2e0f08 60%, transparent 100%);
+    }
+
+    /* Patrón de celdas y cartones */
+    .waffle-pattern {
+      background-color: #f7d088;
+      background-image: 
+        linear-gradient(45deg, #e4b664 25%, transparent 25%), 
+        linear-gradient(-45deg, #e4b664 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #e4b664 75%), 
+        linear-gradient(-45deg, transparent 75%, #e4b664 75%);
+      background-size: 10px 10px;
+    }
+
+    .frosting-header {
+      background: linear-gradient(180deg, #ff85b2 0%, #f43f5e 90%, #db2777 100%);
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .frosting-header::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: radial-gradient(circle at 6px 0, #db2777 6px, transparent 7px);
+      background-size: 12px 8px;
+    }
+
+    /* Estilo uniforme de casilla no marcada: fondo marrón claro suave uniforme (galleta/madera clara/toffee suave) */
+    .bingo-cell-default {
+      background: linear-gradient(180deg, #ebd2b2 0%, #dec09c 100%);
+      color: #532d16;
+      border: 1px solid #c8a379;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.7), 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Ficha marcada estilo azul claro celeste brillante (#5ec2ff a #6ecbf5) */
+    .marked-cell {
+      background: linear-gradient(135deg, #6ecbf5 0%, #5ec2ff 50%, #38bdf8 100%) !important;
+      color: #ffffff !important;
+      font-weight: 900 !important;
+      box-shadow: inset 0 0 8px #bae6fd, 0 0 12px rgba(94, 194, 255, 0.95), 0 2px 4px rgba(12, 74, 110, 0.5) !important;
+      border: 1.5px solid #e0f2fe !important;
+      text-shadow: 0 1px 2px #0369a1;
+      transform: scale(0.98);
+      position: relative;
+      animation: popMark 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popMark {
+      0% { transform: scale(0.75); }
+      70% { transform: scale(1.08); }
+      100% { transform: scale(0.98); }
+    }
+
+    /* Estilo de balotas cantadas */
+    .bingo-ball {
+      box-shadow: inset -2px -2px 5px rgba(0,0,0,0.35), inset 2px 2px 4px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    /* Display digital neón cian */
+    .digital-slot {
+      background: #061f23;
+      border: 1.5px solid #00ffd5;
+      box-shadow: inset 0 0 8px rgba(0, 255, 213, 0.25), 0 0 6px rgba(0, 255, 213, 0.2);
+    }
+
+    /* Cohete dispensador */
+    .rocket-body {
+      background: linear-gradient(180deg, #fdf4f5 0%, #e2e8f0 70%, #cbd5e1 100%);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 2px 4px #ffffff;
+    }
+
+    /* Animación de pulso para la última bola cantada */
+    .pulse-glow {
+      animation: ballGlow 1.4s infinite alternate;
+    }
+
+    @keyframes ballGlow {
+      from { transform: scale(1); filter: drop-shadow(0 0 6px #f59e0b); }
+      to { transform: scale(1.06); filter: drop-shadow(0 0 16px #ec4899); }
+    }
+
+    /* Brillo para la figura en juego */
+    .pattern-card-glow {
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    .neon-dot-active {
+      box-shadow: 0 0 6px #facc15, inset 0 0 2px #fff;
+    }
+
+    /* Efecto pulsante de victoria dorada en BINGO */
+    .victory-bingo-glow {
+      box-shadow: 0 0 35px #facc15, 0 0 65px rgba(245, 158, 11, 0.9), inset 0 0 15px #fff !important;
+      animation: victoryPulse 0.9s infinite alternate !important;
+    }
+
+    @keyframes victoryPulse {
+      0% { transform: scale(0.99); filter: brightness(1); }
+      100% { transform: scale(1.03); filter: brightness(1.25); }
+    }
+
+    /* Barra de progreso de validación */
+    @keyframes validationProgress {
+      0% { width: 4%; }
+      30% { width: 45%; }
+      70% { width: 82%; }
+      100% { width: 100%; }
+    }
+    .animate-progress {
+      animation: validationProgress 3.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+  </style>
+<!-- END: CustomStyles -->
+</head>
+<body class="text-white flex flex-col items-center justify-between pb-4 relative">
+<!-- Canvas overlay para confetis festivos -->
+<canvas class="fixed inset-0 pointer-events-none z-50 w-full h-full" id="confetti-canvas"></canvas>
+<!-- BEGIN: ValidationModalOverlay -->
+<!-- Modal / Overlay de Partida en Pausa por Validación -->
+<div class="fixed inset-0 z-40 bg-black/85 backdrop-blur-md flex items-center justify-center px-4 hidden transition-opacity duration-300" id="validation-modal">
+<div class="w-full max-w-sm bg-gradient-to-b from-[#2a0e44] via-[#1c0830] to-[#0d0317] border-2 border-amber-400/90 rounded-2xl p-5 shadow-[0_0_40px_rgba(245,158,11,0.55)] text-center relative overflow-hidden">
+<!-- Efecto resplandor decorativo de fondo -->
+<div class="absolute -top-12 -left-12 w-32 h-32 bg-amber-500/20 rounded-full blur-2xl"></div>
+<div class="absolute -bottom-12 -right-12 w-32 h-32 bg-pink-500/20 rounded-full blur-2xl"></div>
+<!-- Badge de estado superior -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/90 border border-red-300/80 shadow mb-3">
+<span class="w-2 h-2 rounded-full bg-yellow-300 animate-ping"></span>
+<span class="text-[9.5px] font-black uppercase tracking-wider text-white">PARTIDA EN PAUSA</span>
+</div>
+<!-- Título principal llamativo -->
+<h2 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-400 tracking-wider uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+      ¡BINGO CANTADO!
+    </h2>
+<p class="text-xs text-amber-200/90 font-bold mt-0.5">Validando cartón ganador con la sala central...</p>
+<!-- Indicador de estado y Spinner -->
+<div class="my-4 bg-purple-950/80 border border-purple-500/50 rounded-xl p-3 shadow-inner flex flex-col items-center">
+<div class="flex items-center gap-3">
+<!-- Spinner animado con gradiente neón -->
+<div class="relative w-8 h-8">
+<div class="w-8 h-8 rounded-full border-2 border-amber-400/30 border-t-amber-400 border-r-cyan-300 animate-spin"></div>
+<div class="absolute inset-1 rounded-full border-2 border-pink-400/30 border-b-pink-400 animate-[spin_1.5s_linear_infinite_reverse]"></div>
+</div>
+<div class="text-left">
+<span class="text-[9px] uppercase font-black text-cyan-300 block tracking-wider">ESTADO DE VERIFICACIÓN</span>
+<span class="text-xs font-black text-white" id="validation-step-text">Revisando aciertos de balotas...</span>
+</div>
+</div>
+<!-- Barra de progreso de verificación -->
+<div class="w-full bg-black/60 rounded-full h-2 mt-3 overflow-hidden border border-cyan-400/30 p-[1px]">
+<div class="h-full bg-gradient-to-r from-amber-400 via-pink-500 to-cyan-400 rounded-full animate-progress" id="validation-bar"></div>
+</div>
+</div>
+<!-- Badge oficial del juez -->
+<div class="flex items-center justify-center gap-1.5 mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-neonCyan animate-pulse"></span>
+<span class="text-[8.5px] font-black tracking-widest uppercase text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-400/40">
+        EN REVISIÓN POR EL JUEZ / SISTEMA
+      </span>
+</div>
+<!-- Botones de acción modal -->
+<div class="flex items-center gap-2">
+<button class="flex-1 py-2 px-3 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-white font-black text-xs rounded-xl shadow-lg border border-teal-200 active:scale-95 transition-transform uppercase tracking-wider" id="btn-modal-dismiss">
+        Entendido / En espera
+      </button>
+<button class="py-2 px-3 bg-purple-900/80 hover:bg-purple-800 text-amber-200 font-extrabold text-xs rounded-xl border border-amber-400/40 active:scale-95 transition-transform" id="btn-modal-resume">
+        Reanudar
+      </button>
+</div>
+</div>
+</div>
+<!-- END: ValidationModalOverlay -->
+<!-- BEGIN: GameContainer -->
+<main class="w-full max-w-md mx-auto flex flex-col px-2 min-h-screen relative" data-purpose="mobile-game-wrapper">
+<!-- BEGIN: TopPaytable -->
+<!-- Banner de la Figura en Juego activa de la partida -->
+<header class="w-full pt-1.5 pb-1 border-b border-purple-900/60" data-purpose="prize-table-bar">
+<div class="pattern-card-glow bg-gradient-to-r from-purple-950/90 via-[#2d1245] to-purple-950/90 border border-amber-400/50 rounded-xl px-2.5 py-1.5 flex items-center justify-between gap-2">
+<!-- Mini Cuadrícula de la Figura Activa (3 filas x 5 columnas tipo Cartón) -->
+<div class="flex items-center gap-1.5 shrink-0">
+<div class="bg-amber-950/80 p-1 rounded-md border border-amber-500/70 shadow-inner">
+<div class="grid grid-cols-5 gap-0.5" title="Patrón Cartón Lleno">
+<!-- Fila 1 -->
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<!-- Fila 2 -->
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<!-- Fila 3 -->
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+<span class="w-2 h-2 bg-amber-400 rounded-[2px] neon-dot-active"></span>
+</div>
+</div>
+</div>
+<!-- Información de la Figura Activa -->
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-neonCyan animate-ping"></span>
+<span class="text-[9.5px] font-black uppercase tracking-wider text-cyan-300">FIGURA EN JUEGO</span>
+<span class="text-[8px] bg-pink-600/90 text-white font-extrabold px-1 rounded-sm leading-tight uppercase">Activa</span>
+</div>
+<div class="text-[12px] font-black text-amber-200 tracking-tight truncate flex items-center gap-1 mt-0.5">
+<span>CARTÓN LLENO</span>
+<span class="text-pink-400 font-bold">•</span>
+<span class="text-white text-[10px] font-extrabold">15 ACIERTOS</span>
+</div>
+</div>
+<!-- Premio Destacado -->
+<div class="shrink-0 flex flex-col items-end justify-center bg-black/40 border border-amber-400/40 rounded-lg px-2 py-0.5">
+<span class="text-[8px] font-extrabold text-amber-300/90 uppercase tracking-tighter leading-none">PREMIO</span>
+<div class="flex items-baseline gap-0.5">
+<span class="text-[13px] font-black text-amber-300 leading-tight">75.000,00</span>
+<span class="text-[9px] font-black text-amber-400">Bs</span>
+</div>
+</div>
+</div>
+</header>
+<!-- END: TopPaytable -->
+<!-- BEGIN: BallShooterRocket -->
+<!-- Cohete futurista dispensador con display de balotas cantadas -->
+<section class="mt-2 relative w-full flex items-center justify-between" data-purpose="ball-dispenser-section"><!-- Planeta y última bola cantada 3D esférica flotante -->
+<div class="flex flex-col items-center justify-center relative w-20 shrink-0 select-none">
+<!-- Halo estelar / Anillo orbital neón cósmico -->
+<div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-400 via-pink-500 to-cyan-400 opacity-60 blur-sm animate-pulse"></div>
+<!-- Esfera principal cantada 3D con relieve, brillo especular e iluminación volumétrica -->
+<div class="relative flex flex-col items-center justify-center">
+<div class="pulse-glow relative w-14 h-14 rounded-full flex flex-col items-center justify-center shadow-[0_10px_25px_rgba(245,158,11,0.6),inset_-4px_-6px_12px_rgba(180,83,9,0.8),inset_4px_5px_10px_rgba(255,255,255,0.9)] border-2 border-amber-200 z-20 overflow-hidden" id="latest-ball-badge" style="background: radial-gradient(circle at 35% 28%, #ffffff 0%, #fef08a 18%, #f59e0b 55%, #b45309 88%, #78350f 100%);">
+<!-- Reflejo especular hiperrealista superior (glare/shine) -->
+<span class="absolute top-1 left-2.5 w-6 h-3 rounded-full bg-white/70 blur-[0.6px] -rotate-12 pointer-events-none"></span>
+<span class="absolute top-1.5 left-4 w-2 h-1 rounded-full bg-white blur-[0.2px] pointer-events-none"></span>
+<!-- Círculo interior blanco de ficha tradicional de bingo -->
+<div class="w-9 h-9 rounded-full bg-white/95 border border-amber-300/80 flex flex-col items-center justify-center shadow-inner pt-0.5">
+<span class="text-[7px] font-black uppercase tracking-widest text-amber-900 leading-none">BOLA</span>
+<span class="text-[19px] font-black text-slate-950 leading-none tracking-tighter" id="current-ball-num">29</span>
+</div>
+</div>
+<!-- Aro orbital neón decorativo -->
+<div class="absolute -bottom-1 w-12 h-2.5 rounded-full border border-amber-300/60 bg-amber-400/20 blur-[0.5px] -rotate-6 z-10 pointer-events-none"></div>
+</div>
+<!-- Etiqueta estilizada BOLA CANTADA -->
+<div class="mt-1.5 px-1.5 py-0.5 rounded-full bg-purple-950/80 border border-cyan-400/50 shadow flex items-center gap-0.5">
+<span class="w-1 h-1 rounded-full bg-neonCyan animate-ping"></span>
+<span class="text-[7.5px] font-black text-cyan-300 uppercase tracking-tighter">¡CANTADA!</span>
+</div>
+</div>
+<!-- Cápsula / Tubo dispensador estilo cohete acrílico translúcido futurista -->
+<div class="rocket-body flex-1 ml-2 rounded-3xl p-1.5 border-2 border-rose-300/60 flex items-center relative overflow-hidden shadow-2xl backdrop-blur-md" style="background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(203,213,225,0.12) 50%, rgba(255,255,255,0.05) 100%), radial-gradient(circle at 50% 0%, rgba(244,114,182,0.15), transparent 70%);">
+<!-- Reflejo curvo del cristal del cohete (brillo longitudinal de tubo) -->
+<div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-b from-white/35 to-transparent pointer-events-none rounded-t-3xl"></div>
+<!-- Turbina / Cono de escape a la izquierda con remaches de luz -->
+<div class="w-8 h-20 rounded-l-full bg-gradient-to-b from-teal-800 via-teal-900 to-slate-950 border-r-2 border-rose-400/80 flex flex-col justify-around py-1.5 items-center shrink-0 shadow-inner relative">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] border border-emerald-200"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee] border border-cyan-200"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] border border-emerald-200"></span>
+</div>
+<!-- Tablero de bolitas esmaltadas en 3D cantadas -->
+<div class="grid grid-cols-7 gap-1 px-1.5 py-1 flex-1 max-h-24 overflow-y-auto" id="called-balls-container">
+<!-- Fila 1 de bolitas en esmalte 3D con colores representativos de bingo -->
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-blue-950 border border-blue-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #93c5fd 40%, #2563eb 85%, #1e40af 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">30</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-purple-950 border border-purple-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #d8b4fe 40%, #9333ea 85%, #6b21a8 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">16</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-pink-950 border border-pink-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #f472b6 40%, #db2777 85%, #9d174d 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">86</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-rose-950 border border-rose-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fda4af 40%, #e11d48 85%, #9f1239 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">5</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-emerald-950 border border-emerald-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #6ee7b7 40%, #059669 85%, #064e3b 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">73</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-green-950 border border-green-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #86efac 40%, #16a34a 85%, #14532d 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">71</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-amber-950 border border-amber-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fde047 40%, #d97706 85%, #78350f 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">83</span></div>
+<!-- Fila 2 -->
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-amber-950 border border-amber-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fde047 40%, #d97706 85%, #78350f 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">84</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-teal-950 border border-teal-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #5eead4 40%, #0d9488 85%, #134e4a 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">69</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-blue-950 border border-blue-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #93c5fd 40%, #2563eb 85%, #1e40af 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">21</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-rose-950 border border-rose-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fda4af 40%, #e11d48 85%, #9f1239 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">37</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-purple-950 border border-purple-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #d8b4fe 40%, #9333ea 85%, #6b21a8 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">19</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-cyan-950 border border-cyan-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #67e8f9 40%, #0891b2 85%, #164e63 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">56</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-amber-950 border border-amber-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fde047 40%, #d97706 85%, #78350f 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">87</span></div>
+<!-- Fila 3 -->
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-blue-950 border border-blue-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #93c5fd 40%, #2563eb 85%, #1e40af 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">62</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-rose-950 border border-rose-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fda4af 40%, #e11d48 85%, #9f1239 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">80</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-blue-950 border border-blue-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #93c5fd 40%, #2563eb 85%, #1e40af 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">81</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-lime-950 border border-lime-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #bef264 40%, #65a30d 85%, #365314 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">29</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-violet-950 border border-violet-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #c4b5fd 40%, #7c3aed 85%, #4c1d95 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">1</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-orange-950 border border-orange-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fdba74 40%, #ea580c 85%, #7c2d12 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">6</span></div>
+<div class="bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-sky-950 border border-sky-200/90 shadow-sm relative overflow-hidden select-none" style="background: radial-gradient(circle at 35% 30%, #ffffff 0%, #7dd3fc 40%, #0284c7 85%, #0c4a6e 100%);"><span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">10</span></div>
+</div>
+</div></section>
+<!-- END: BallShooterRocket -->
+<!-- BEGIN: ManualDabberBar -->
+<!-- Barra interactiva del jugador: información de toque manual y botón de auxilio -->
+<div class="flex items-center justify-between mt-2 px-1 bg-purple-950/70 py-1 rounded-lg border border-purple-500/40" data-purpose="interaction-mode-indicator">
+<div class="flex items-center gap-1.5" id="status-mode-container">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" id="status-indicator-dot"></span>
+</span>
+<span class="text-[10px] font-black text-amber-200" id="status-mode-text">¡TOCA LOS NÚMEROS CANTADOS EN TUS CARTONES!</span>
+</div>
+<button class="text-[9px] bg-pink-600 hover:bg-pink-500 text-white font-black px-2 py-0.5 rounded shadow transition-colors" id="toggle-help-btn">
+        Auto-Marcar
+      </button>
+</div>
+<!-- END: ManualDabberBar -->
+<!-- BEGIN: BingoCardsGrid -->
+<!-- Cuadrícula con los 4 cartones de galleta dulce glaseada -->
+<section class="grid grid-cols-2 gap-2 mt-2 transition-opacity" data-purpose="four-bingo-cards" id="cards-grid-section">
+<!-- CARTÓN 1 -->
+<article class="rounded-xl overflow-hidden waffle-pattern p-1 shadow-xl border-2 border-amber-800/80 relative" data-purpose="carton-1">
+<!-- Cabecera de galleta y glaseado marrón caramelo suave -->
+<div class="frosting-header px-1.5 py-0.5 flex items-center justify-between text-[9px] font-black text-white">
+<span class="tracking-wide">CARTÓN 1</span>
+<div class="flex items-center gap-1">
+<span class="text-[7.5px] opacity-90">CÓD: #A892</span>
+<button class="bg-amber-950/60 hover:bg-red-600 text-white rounded px-0.5 text-[8px] leading-none transition-colors">✕</button>
+</div>
+</div>
+<!-- Matriz de juego 5 columnas x 3 filas -->
+<div class="grid grid-cols-5 gap-1 mt-1.5 bg-[#451e12] p-1 rounded-lg shadow-inner text-center font-black">
+<!-- Fila 1 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="1">1</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="23">23</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="59">59</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="64">64</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="78">78</button>
+<!-- Fila 2 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="5">5</button>
+<!-- Celda 29 marcada con azul claro celeste brillante -->
+<button class="bingo-cell marked-cell h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="29">29</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="61">61</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="71">71</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="86">86</button>
+<!-- Fila 3 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="12">12</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="58">58</button>
+<!-- Celda 62 marcada con azul claro celeste brillante -->
+<button class="bingo-cell marked-cell h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="62">62</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="73">73</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="88">88</button>
+</div>
+</article>
+<!-- CARTÓN 2 -->
+<article class="rounded-xl overflow-hidden waffle-pattern p-1 shadow-xl border-2 border-amber-800/80 relative" data-purpose="carton-2">
+<div class="frosting-header px-1.5 py-0.5 flex items-center justify-between text-[9px] font-black text-white">
+<span class="tracking-wide">CARTÓN 2</span>
+<div class="flex items-center gap-1">
+<span class="text-[7.5px] opacity-90">CÓD: #B417</span>
+<button class="bg-amber-950/60 hover:bg-red-600 text-white rounded px-0.5 text-[8px] leading-none transition-colors">✕</button>
+</div>
+</div>
+<div class="grid grid-cols-5 gap-1 mt-1.5 bg-[#451e12] p-1 rounded-lg shadow-inner text-center font-black">
+<!-- Fila 1 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="6">6</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="21">21</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="47">47</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="54">54</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="72">72</button>
+<!-- Fila 2 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="16">16</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="24">24</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="52">52</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="66">66</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="74">74</button>
+<!-- Fila 3 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="20">20</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="40">40</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="53">53</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="69">69</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="87">87</button>
+</div>
+</article>
+<!-- CARTÓN 3 -->
+<article class="rounded-xl overflow-hidden waffle-pattern p-1 shadow-xl border-2 border-amber-800/80 relative" data-purpose="carton-3">
+<div class="frosting-header px-1.5 py-0.5 flex items-center justify-between text-[9px] font-black text-white">
+<span class="tracking-wide">CARTÓN 3</span>
+<div class="flex items-center gap-1">
+<span class="text-[7.5px] opacity-90">CÓD: #C530</span>
+<button class="bg-amber-950/60 hover:bg-red-600 text-white rounded px-0.5 text-[8px] leading-none transition-colors">✕</button>
+</div>
+</div>
+<div class="grid grid-cols-5 gap-1 mt-1.5 bg-[#451e12] p-1 rounded-lg shadow-inner text-center font-black">
+<!-- Fila 1 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="10">10</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="25">25</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="33">33</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="50">50</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="57">57</button>
+<!-- Fila 2 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="15">15</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="28">28</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="41">41</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="55">55</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="67">67</button>
+<!-- Fila 3 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="19">19</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="30">30</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="46">46</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="56">56</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="85">85</button>
+</div>
+</article>
+<!-- CARTÓN 4 -->
+<article class="rounded-xl overflow-hidden waffle-pattern p-1 shadow-xl border-2 border-amber-800/80 relative" data-purpose="carton-4">
+<div class="frosting-header px-1.5 py-0.5 flex items-center justify-between text-[9px] font-black text-white">
+<span class="tracking-wide">CARTÓN 4</span>
+<div class="flex items-center gap-1">
+<span class="text-[7.5px] opacity-90">CÓD: #D764</span>
+<button class="bg-amber-950/60 hover:bg-red-600 text-white rounded px-0.5 text-[8px] leading-none transition-colors">✕</button>
+</div>
+</div>
+<div class="grid grid-cols-5 gap-1 mt-1.5 bg-[#451e12] p-1 rounded-lg shadow-inner text-center font-black">
+<!-- Fila 1 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="2">2</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="22">22</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="37">37</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="48">48</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="82">82</button>
+<!-- Fila 2 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="11">11</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="26">26</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="39">39</button>
+<!-- Celda 80 marcada con azul claro celeste brillante -->
+<button class="bingo-cell marked-cell h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="80">80</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="83">83</button>
+<!-- Fila 3 -->
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="17">17</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="27">27</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="44">44</button>
+<!-- Celda 81 marcada con azul claro celeste brillante -->
+<button class="bingo-cell marked-cell h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="81">81</button>
+<button class="bingo-cell bingo-cell-default h-7 rounded flex items-center justify-center text-xs font-black shadow" data-num="84">84</button>
+</div>
+</article>
+</section>
+<!-- END: BingoCardsGrid -->
+<!-- BEGIN: ActionControlsRow -->
+<!-- Botón gigante de BINGO con validación interactiva y confetis -->
+<div class="mt-3 px-1" data-purpose="bingo-trigger-section">
+<button class="btn-wa-animated w-full py-2.5 px-4 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(245,158,11,0.65)] border-2 border-amber-200 active:scale-98 transition-all cursor-pointer select-none" id="btn-cantar-whatsapp">
+<span class="text-lg font-black tracking-widest text-amber-950 uppercase drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]" id="bingo-btn-label">BINGO</span>
+</button>
+</div><section class="flex items-center justify-between mt-3 px-2" data-purpose="main-game-actions">
+<!-- Botón de recargar/auto-juego -->
+<button class="w-12 h-12 rounded-full bg-gradient-to-b from-amber-400 to-amber-600 border-2 border-amber-200 flex items-center justify-center shadow-lg active:scale-95 transition-transform" id="btn-spin-again" title="Girar balotera">
+<svg class="w-7 h-7 text-amber-950" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Botón verde azulado: CARTONES 🔀 -->
+<button class="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 border border-teal-200 px-3 py-2 rounded-xl flex items-center gap-1.5 shadow-lg active:scale-95 transition-transform" id="btn-shuffle-cards">
+<span class="text-xs font-black tracking-tight text-white">CARTONES</span>
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</section>
+<!-- END: ActionControlsRow -->
+<!-- BEGIN: BottomStatusBar -->
+<!-- Barra inferior con APUESTA TOTAL, PREMIO TOTAL, JUGADORES y Rayo de energía -->
+<footer class="mt-3 w-full bg-slate-950/80 p-2 rounded-2xl border border-teal-500/30 backdrop-blur-sm" data-purpose="hud-metrics-bar">
+<!-- Indicador de barra de carga con rayo turquesa -->
+<div class="flex items-center gap-1.5 mb-2 px-1">
+<div class="bg-teal-900/80 border border-teal-400 p-1 rounded-md flex items-center justify-center">
+<svg class="w-3.5 h-3.5 text-cyan-300 fill-current" viewbox="0 0 24 24">
+<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+</svg>
+</div>
+<div class="flex-1 flex gap-1 h-3 items-center">
+<span class="h-2.5 flex-1 bg-amber-400 rounded-sm"></span>
+<span class="h-2.5 flex-1 bg-amber-400 rounded-sm"></span>
+<span class="h-2.5 flex-1 bg-amber-400 rounded-sm"></span>
+<span class="h-2.5 flex-1 bg-orange-500 rounded-sm"></span>
+<span class="h-2.5 flex-1 bg-orange-600 rounded-sm"></span>
+<span class="h-2.5 flex-1 bg-gray-700/80 rounded-sm"></span>
+</div>
+</div>
+<!-- Displays de valores estilo cian digital -->
+<div class="grid grid-cols-3 gap-1.5 text-center">
+<!-- Apuesta Total -->
+<div>
+<span class="text-[9px] font-black text-amber-200 uppercase tracking-tighter">SORTEO N°</span>
+<div class="digital-slot rounded-lg py-1 mt-0.5">
+<span class="text-xs font-black text-cyan-300">#1042</span>
+</div>
+</div>
+<!-- Premio Total -->
+<div>
+<span class="text-[9px] font-black text-amber-200 uppercase tracking-tighter">TOTAL CARTONES</span>
+<div class="digital-slot rounded-lg py-1 mt-0.5">
+<span class="text-xs font-black text-cyan-300" id="display-premio">4 en juego</span>
+</div>
+</div>
+<!-- JUGADORES -->
+<div>
+<span class="text-[9px] font-black text-amber-200 uppercase tracking-tighter">JUGADORES</span>
+<div class="digital-slot rounded-lg py-1 mt-0.5 flex items-center justify-center gap-1">
+<span class="relative flex h-2 w-2 shrink-0">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+<span class="text-xs font-black text-cyan-300" id="display-jugadores">148 en línea</span>
+</div>
+</div>
+</div>
+</footer><section class="mt-3 w-full bg-slate-950/80 p-2.5 rounded-2xl border border-purple-500/40 backdrop-blur-sm shadow-xl" data-purpose="live-chat-section">
+<div class="flex items-center justify-between pb-1.5 border-b border-purple-900/60">
+<div class="flex items-center gap-1.5">
+<svg class="w-4 h-4 text-cyan-300" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="text-[11px] font-black uppercase tracking-wider text-amber-200">Chat en vivo</span>
+</div>
+<div class="flex items-center gap-1 bg-purple-950/80 border border-emerald-400/50 px-1.5 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+<span class="text-[8px] font-black text-emerald-400 uppercase tracking-tight">Activo</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 my-2 max-h-32 overflow-y-auto pr-0.5">
+<div class="bg-purple-950/70 border border-purple-500/30 rounded-lg p-1.5 text-[10px] leading-tight">
+<div class="flex items-center justify-between mb-0.5">
+<span class="font-black text-cyan-300">Carlos_92</span>
+<span class="text-[8px] text-gray-400 font-medium">hace 30s</span>
+</div>
+<p class="text-white/95 font-medium">¡A una bola del bingo en el cartón 3! 🚀</p>
+</div>
+<div class="bg-purple-950/70 border border-purple-500/30 rounded-lg p-1.5 text-[10px] leading-tight">
+<div class="flex items-center justify-between mb-0.5">
+<span class="font-black text-amber-300">Elena_M</span>
+<span class="text-[8px] text-gray-400 font-medium">hace 1m</span>
+</div>
+<p class="text-white/95 font-medium">Suerte a todos en este sorteo #1042 🙌</p>
+</div>
+<div class="bg-purple-950/70 border border-amber-400/40 rounded-lg p-1.5 text-[10px] leading-tight">
+<div class="flex items-center justify-between mb-0.5">
+<span class="font-black text-amber-400 flex items-center gap-1">
+          Admin
+          <span class="text-[7.5px] bg-amber-400 text-purple-950 px-1 rounded font-black uppercase">MOD</span>
+</span>
+<span class="text-[8px] text-gray-400 font-medium">hace 2m</span>
+</div>
+<p class="text-amber-200 font-medium">¡Quedan pocas bolas para cerrar la figura! ⚡</p>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-1 border-t border-purple-900/60">
+<input class="flex-1 bg-black/40 border border-teal-500/40 rounded-lg px-2.5 py-1 text-[11px] text-white placeholder-gray-400 focus:outline-none focus:border-cyan-400 transition-colors" placeholder="Escribe un mensaje..." type="text"/>
+<button class="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-white p-1.5 rounded-lg active:scale-95 transition-transform shrink-0 shadow flex items-center justify-center" title="Enviar mensaje">
+<svg class="w-3.5 h-3.5 rotate-45 -translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</section>
+<!-- END: BottomStatusBar -->
+</main>
+<!-- END: GameContainer -->
+<!-- BEGIN: InteractiveScript -->
+<script data-purpose="interactive-gameplay-logic">
+    document.addEventListener('DOMContentLoaded', () => {
+      // Estado del juego
+      const calledNumbers = new Set([30, 16, 86, 5, 73, 71, 83, 84, 69, 21, 37, 19, 56, 87, 62, 80, 81, 29, 1, 6, 10]);
+      let currentNumber = 29;
+      let autoMark = false;
+      let isPausedForValidation = false;
+      let confettiAnimationId = null;
+
+      // Elementos DOM
+      const ballContainer = document.getElementById('called-balls-container');
+      const latestBallNum = document.getElementById('current-ball-num');
+      const latestBallBadge = document.getElementById('latest-ball-badge');
+      const btnSpinAgain = document.getElementById('btn-spin-again');
+      const btnShuffle = document.getElementById('btn-shuffle-cards');
+      const toggleHelpBtn = document.getElementById('toggle-help-btn');
+      const bingoBtn = document.getElementById('btn-cantar-whatsapp');
+      const bingoBtnLabel = document.getElementById('bingo-btn-label');
+      const statusModeText = document.getElementById('status-mode-text');
+      const statusIndicatorDot = document.getElementById('status-indicator-dot');
+      const validationModal = document.getElementById('validation-modal');
+      const validationStepText = document.getElementById('validation-step-text');
+      const validationBar = document.getElementById('validation-bar');
+      const btnModalDismiss = document.getElementById('btn-modal-dismiss');
+      const btnModalResume = document.getElementById('btn-modal-resume');
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Redimensionar canvas de confeti
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      // Sistema de confetis con físicas
+      let confettiParticles = [];
+      const CONFETTI_COLORS = ['#f59e0b', '#facc15', '#00ffd5', '#ec4899', '#3b82f6', '#10b981', '#ffffff', '#a855f7'];
+
+      function createConfettiExplosion(count = 130) {
+        const originX = canvas.width / 2;
+        const originY = canvas.height * 0.45;
+
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const velocity = 5 + Math.random() * 14;
+          confettiParticles.push({
+            x: originX + (Math.random() - 0.5) * 60,
+            y: originY + (Math.random() - 0.5) * 40,
+            vx: Math.cos(angle) * velocity,
+            vy: Math.sin(angle) * velocity - 3,
+            size: 6 + Math.random() * 7,
+            color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 12,
+            gravity: 0.28,
+            drag: 0.985,
+            opacity: 1,
+            shape: Math.random() > 0.3 ? 'rect' : 'circle'
+          });
+        }
+
+        // Lluvia superior adicional continua
+        for (let j = 0; j < 60; j++) {
+          confettiParticles.push({
+            x: Math.random() * canvas.width,
+            y: -20 - Math.random() * 120,
+            vx: (Math.random() - 0.5) * 3,
+            vy: 2 + Math.random() * 5,
+            size: 5 + Math.random() * 6,
+            color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 8,
+            gravity: 0.18,
+            drag: 0.99,
+            opacity: 1,
+            shape: Math.random() > 0.35 ? 'rect' : 'circle'
+          });
+        }
+
+        if (!confettiAnimationId) {
+          animateConfetti();
+        }
+      }
+
+      function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = confettiParticles.length - 1; i >= 0; i--) {
+          const p = confettiParticles[i];
+          p.vx *= p.drag;
+          p.vy = (p.vy + p.gravity) * p.drag;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rotation += p.rotationSpeed;
+          p.opacity -= 0.0035;
+
+          if (p.opacity <= 0 || p.y > canvas.height + 50) {
+            confettiParticles.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.opacity);
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+
+          if (p.shape === 'rect') {
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size / 2.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+
+        if (confettiParticles.length > 0) {
+          confettiAnimationId = requestAnimationFrame(animateConfetti);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          confettiAnimationId = null;
+        }
+      }
+
+      // Función: Sonidos Web Audio API
+      function playTone(freq = 520, type = 'sine', duration = 0.08) {
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContext) return;
+          const ctxAudio = new AudioContext();
+          const osc = ctxAudio.createOscillator();
+          const gain = ctxAudio.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, ctxAudio.currentTime);
+          gain.gain.setValueAtTime(0.2, ctxAudio.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctxAudio.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(ctxAudio.destination);
+          osc.start();
+          osc.stop(ctxAudio.currentTime + duration);
+        } catch (e) {
+          // Audio bloqueado por políticas del navegador
+        }
+      }
+
+      // Fanfarria de victoria sintética
+      function playVictoryFanfare() {
+        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+        notes.forEach((freq, idx) => {
+          setTimeout(() => {
+            playTone(freq, 'triangle', 0.28);
+          }, idx * 120);
+        });
+      }
+
+      // Marcado interactivo manual por el jugador
+      const allCells = document.querySelectorAll('.bingo-cell');
+      allCells.forEach(cell => {
+        cell.addEventListener('click', () => {
+          // Bloquear si la partida está en pausa por validación
+          if (isPausedForValidation) {
+            playTone(220, 'sawtooth', 0.08);
+            return;
+          }
+
+          const num = parseInt(cell.getAttribute('data-num'), 10);
+          
+          if (cell.classList.contains('marked-cell')) {
+            cell.classList.remove('marked-cell');
+            cell.classList.add('bingo-cell-default');
+            playTone(300, 'triangle', 0.05);
+          } else {
+            cell.classList.remove('bingo-cell-default');
+            cell.classList.add('marked-cell');
+            if (calledNumbers.has(num)) {
+              playTone(880, 'sine', 0.12);
+            } else {
+              playTone(440, 'sine', 0.06);
+            }
+          }
+        });
+      });
+
+      // ACTIVACIÓN DEL BINGO: Confeti + Pausa + Validación
+      let validationTimer1 = null;
+      let validationTimer2 = null;
+
+      function triggerBingoValidation() {
+        isPausedForValidation = true;
+
+        // 1. Sonido y confetis festivos
+        playVictoryFanfare();
+        createConfettiExplosion(150);
+        setTimeout(() => createConfettiExplosion(80), 500);
+
+        // 2. Efecto visual pulsante dorado de victoria en el botón
+        bingoBtn.classList.add('victory-bingo-glow');
+        bingoBtnLabel.textContent = '¡BINGO CANTADO!';
+
+        // 3. Cambiar estado superior a EN PAUSA / VALIDANDO
+        statusModeText.textContent = 'EN PAUSA / VALIDANDO CARTÓN GANADOR...';
+        statusModeText.className = 'text-[10px] font-black text-yellow-300 animate-pulse';
+        statusIndicatorDot.className = 'relative inline-flex rounded-full h-2.5 w-2.5 bg-yellow-400';
+
+        // 4. Desplegar modal emergente de validación
+        validationModal.classList.remove('hidden');
+        validationStepText.textContent = 'Revisando aciertos de balotas con la sala...';
+
+        // Reset animación de la barra
+        validationBar.style.animation = 'none';
+        void validationBar.offsetWidth; // Reflow
+        validationBar.style.animation = 'validationProgress 3.8s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+
+        // Progresión de pasos simulados de validación
+        clearTimeout(validationTimer1);
+        clearTimeout(validationTimer2);
+
+        validationTimer1 = setTimeout(() => {
+          if (isPausedForValidation) {
+            validationStepText.textContent = 'Cotejando código CÓD: #A892 y serie...';
+            playTone(700, 'sine', 0.1);
+          }
+        }, 1600);
+
+        validationTimer2 = setTimeout(() => {
+          if (isPausedForValidation) {
+            validationStepText.textContent = '¡15 ACIERTOS CONFIRMADOS! Validación exitosa 🎉';
+            playTone(980, 'triangle', 0.2);
+            createConfettiExplosion(70);
+          }
+        }, 3400);
+      }
+
+      bingoBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerBingoValidation();
+      });
+
+      // Reanudar la partida
+      function resumeGame() {
+        isPausedForValidation = false;
+        validationModal.classList.add('hidden');
+        bingoBtn.classList.remove('victory-bingo-glow');
+        bingoBtnLabel.textContent = 'BINGO';
+
+        // Restaurar estado regular
+        statusModeText.textContent = '¡TOCA LOS NÚMEROS CANTADOS EN TUS CARTONES!';
+        statusModeText.className = 'text-[10px] font-black text-amber-200';
+        statusIndicatorDot.className = 'relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500';
+        playTone(550, 'sine', 0.08);
+      }
+
+      btnModalDismiss.addEventListener('click', () => {
+        validationModal.classList.add('hidden');
+      });
+
+      btnModalResume.addEventListener('click', resumeGame);
+
+      // Botón Auto-Marcar toggle
+      toggleHelpBtn.addEventListener('click', () => {
+        if (isPausedForValidation) return;
+        autoMark = !autoMark;
+        if (autoMark) {
+          toggleHelpBtn.textContent = 'Manual';
+          toggleHelpBtn.className = 'text-[9px] bg-emerald-600 hover:bg-emerald-500 text-white font-black px-2 py-0.5 rounded shadow transition-colors';
+          calledNumbers.forEach(n => autoMarkCells(n));
+        } else {
+          toggleHelpBtn.textContent = 'Auto-Marcar';
+          toggleHelpBtn.className = 'text-[9px] bg-pink-600 hover:bg-pink-500 text-white font-black px-2 py-0.5 rounded shadow transition-colors';
+        }
+        playTone(600, 'square', 0.08);
+      });
+
+      function autoMarkCells(num) {
+        document.querySelectorAll(`.bingo-cell[data-num="${num}"]`).forEach(el => {
+          el.classList.remove('bingo-cell-default');
+          el.classList.add('marked-cell');
+        });
+      }
+
+      // Barajar cartones
+      btnShuffle.addEventListener('click', () => {
+        if (isPausedForValidation) {
+          playTone(220, 'sawtooth', 0.08);
+          return;
+        }
+        playTone(400, 'sine', 0.1);
+        const articles = document.querySelectorAll('[data-purpose^="carton-"]');
+        articles.forEach(carton => {
+          const cells = carton.querySelectorAll('.bingo-cell');
+          const setNums = new Set();
+          while (setNums.size < cells.length) {
+            setNums.add(Math.floor(Math.random() * 89) + 1);
+          }
+          const arr = Array.from(setNums).sort((a,b) => a - b);
+          cells.forEach((cell, idx) => {
+            const val = arr[idx];
+            cell.setAttribute('data-num', val);
+            cell.textContent = val;
+            cell.classList.remove('marked-cell');
+            cell.classList.add('bingo-cell-default');
+            if (autoMark && calledNumbers.has(val)) {
+              cell.classList.remove('bingo-cell-default');
+              cell.classList.add('marked-cell');
+            }
+          });
+        });
+      });
+
+      // Extraer o girar nueva bola con btn-spin-again
+      btnSpinAgain.addEventListener('click', () => {
+        if (isPausedForValidation) {
+          playTone(220, 'sawtooth', 0.08);
+          return;
+        }
+        let candidate;
+        let attempts = 0;
+        do {
+          candidate = Math.floor(Math.random() * 90) + 1;
+          attempts++;
+        } while (calledNumbers.has(candidate) && attempts < 100);
+
+        currentNumber = candidate;
+        calledNumbers.add(currentNumber);
+
+        latestBallNum.textContent = currentNumber;
+        latestBallBadge.classList.remove('pulse-glow');
+        void latestBallBadge.offsetWidth;
+        latestBallBadge.classList.add('pulse-glow');
+        playTone(650, 'sawtooth', 0.15);
+
+        const miniBall = document.createElement('div');
+        miniBall.className = `bingo-ball w-5 h-5 rounded-full flex items-center justify-center font-black text-[9px] text-amber-950 border border-amber-200 shadow-sm relative overflow-hidden select-none animate-bounce`;
+        miniBall.style.background = 'radial-gradient(circle at 35% 30%, #ffffff 0%, #fde047 40%, #d97706 85%, #78350f 100%)';
+        miniBall.innerHTML = `<span class="absolute top-0.5 left-1 w-2 h-1 bg-white/75 rounded-full pointer-events-none"></span><span class="relative drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">${currentNumber}</span>`;
+        ballContainer.prepend(miniBall);
+
+        if (autoMark) {
+          autoMarkCells(currentNumber);
+        }
+      });
+    });
+  </script>
+<!-- END: InteractiveScript -->
+</body></html>
