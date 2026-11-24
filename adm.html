@@ -1,738 +1,584 @@
-<!DOCTYPE html>
-
-<html class="dark" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&amp;family=Sora:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface-variant": "#b9cac3", "on-primary-fixed": "#002019", "error": "#ffb4ab", "background": "#190e27", "secondary-fixed": "#ffd9e2", "surface-container-highest": "#3b304a", "surface-container": "#251a34", "on-surface": "#eedcff", "on-primary-fixed-variant": "#005142", "inverse-primary": "#006b58", "primary-container": "#00ffd5", "primary-fixed-dim": "#00e0bb", "surface-tint": "#00e0bb", "tertiary-fixed-dim": "#ffb95f", "error-container": "#93000a", "on-primary": "#00382d", "primary": "#ffffff", "on-secondary-container": "#ffd0dc", "secondary-container": "#be0062", "inverse-surface": "#eedcff", "secondary-fixed-dim": "#ffb1c7", "on-background": "#eedcff", "surface-container-high": "#30253f", "inverse-on-surface": "#372b46", "surface-variant": "#3b304a", "secondary": "#ffb1c7", "outline-variant": "#3a4a45", "on-error": "#690005", "surface-container-low": "#211630", "on-tertiary-fixed": "#2a1700", "on-tertiary-container": "#8d5900", "on-secondary": "#650031", "surface": "#190e27", "tertiary-container": "#ffddb8", "on-tertiary-fixed-variant": "#653e00", "tertiary-fixed": "#ffddb8", "outline": "#83948e", "surface-bright": "#40344f", "on-secondary-fixed": "#3f001c", "on-error-container": "#ffdad6", "tertiary": "#ffffff", "on-tertiary": "#472a00", "on-secondary-fixed-variant": "#8e0048", "primary-fixed": "#00ffd5", "on-primary-container": "#00725e", "surface-dim": "#190e27", "surface-container-lowest": "#130921" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "gutter": "1rem", "space-md": "1rem", "space-xl": "2.5rem", "margin-desktop": "2rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "margin": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem" }, fontFamily: { "body-lg": ["Sora"], "headline-xl": ["Space Grotesk"], "label-lg": ["JetBrains Mono"], "body-sm": ["Sora"], "label-sm": ["JetBrains Mono"], "headline-md": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "headline-xl-mobile": ["Space Grotesk"], "label-md": ["JetBrains Mono"], "headline-lg": ["Space Grotesk"], "body-md": ["Sora"] }, fontSize: { "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "headline-xl": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }], "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.06em", fontWeight: "600" }], "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "500" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "headline-lg-mobile": ["24px", { lineHeight: "30px", letterSpacing: "0em", fontWeight: "600" }], "headline-xl-mobile": ["30px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sala administrativa · Bingo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
     body {
-      min-height: max(884px, 100dvh);
+      background:
+        radial-gradient(ellipse at 15% 0%, rgba(13,148,136,.17), transparent 40%),
+        radial-gradient(ellipse at 100% 20%, rgba(147,51,234,.14), transparent 35%),
+        #070b12;
     }
+    .panel { background: rgba(15, 23, 42, .86); }
+    .digital { text-shadow: 0 0 16px rgba(34,211,238,.55); }
   </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head><body class="bg-background font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_4px_20px_rgba(0,255,213,0.06)]"><div class="h-14 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-xl bg-surface-container-highest flex items-center justify-center shadow-[0_0_12px_rgba(0,255,213,0.3)]"><span class="material-symbols-outlined text-primary-container text-[20px]">cyclone</span></div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-wider text-on-surface">CANTA</span><span class="font-headline-md text-headline-md text-primary-container drop-shadow-[0_0_8px_rgba(0,255,213,0.6)]">BINGO</span></div><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse shadow-[0_0_6px_#00ffd5]"></span><span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">SYNC ORBITAL</span></div></div></div><div class="flex items-center gap-space-sm"><div class="px-space-sm py-0.5 rounded-full bg-surface-container-high flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[14px]">satellite_alt</span><span class="font-label-sm text-label-sm text-secondary font-semibold">LIVE</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_10px_rgba(255,255,255,0.2)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-margin pt-14 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full gap-space-md text-on-surface">
-<!-- CABECERA TÁCTICA DEL ANFITRIÓN & RESUMEN DE SALA -->
-<div class="flex flex-col bg-surface-container-high/90 rounded-xl p-space-md shadow-xl backdrop-blur-xl gap-space-sm relative overflow-hidden">
-<!-- Luz ambiental sutil de fondo -->
-<div class="absolute -right-12 -top-12 w-40 h-40 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center shadow-[0_0_12px_rgba(0,255,213,0.3)]">
-<span class="material-symbols-outlined text-primary-container text-[20px]">tune</span>
-</div>
-<div class="flex flex-col">
-<span class="font-headline-md text-headline-md tracking-wider text-on-surface flex items-center gap-1">
-            MESA DE CONTROL
-          </span>
-<span class="font-label-sm text-label-sm text-primary-container uppercase tracking-wider">RONDA #1042 • SALA ALFA</span>
-</div>
-</div>
-<div class="flex items-center gap-space-xs">
-<a class="px-space-sm py-1 rounded-lg bg-surface-container-highest text-primary hover:bg-surface-container-highest/80 flex items-center gap-1 transition-all shadow-sm" href="bingo.html" target="_blank">
-<span class="material-symbols-outlined text-[16px] text-primary-container">open_in_new</span>
-<span class="font-label-sm text-label-sm uppercase">Ver Sala</span>
-</a>
-</div>
-</div>
-<!-- Telemetría rápida en píldoras métricas -->
-<div class="grid grid-cols-3 gap-space-xs pt-space-xs">
-<div class="flex flex-col p-space-xs rounded-lg bg-surface-container-lowest/80 text-center">
-<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-center gap-1">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span> JUGADORES
-        </span>
-<span class="font-label-lg text-label-lg font-bold text-on-surface">148</span>
-</div>
-<div class="flex flex-col p-space-xs rounded-lg bg-surface-container-lowest/80 text-center">
-<span class="font-label-sm text-label-sm text-on-surface-variant">CARTONES</span>
-<span class="font-label-lg text-label-lg font-bold text-tertiary-fixed-dim">412</span>
-</div>
-<div class="flex flex-col p-space-xs rounded-lg bg-surface-container-lowest/80 text-center">
-<span class="font-label-sm text-label-sm text-on-surface-variant">CICLO AUTO</span>
-<span class="font-label-lg text-label-lg font-bold text-secondary-fixed">5s Activo</span>
-</div>
-</div>
-<!-- Comandos rápidos de extracción -->
-<div class="grid grid-cols-5 gap-space-xs pt-space-xs">
-<button class="col-span-3 py-3 px-space-md rounded-xl bg-primary-container text-on-primary-container font-headline-md text-headline-md tracking-wider font-bold shadow-[0_0_24px_rgba(0,255,213,0.4)] flex items-center justify-center gap-2 active:scale-95 transition-all" id="btnCantarBalota">
-<span class="material-symbols-outlined text-[24px]">stream</span>
-        CANTAR BALOTA
+</head>
+
+<body class="min-h-screen text-slate-100">
+  <main class="mx-auto max-w-7xl p-4 sm:p-6">
+    <header class="mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <p class="text-xs font-black uppercase tracking-[.25em] text-teal-300">Bingo · Control de sala</p>
+        <h1 class="mt-1 text-2xl font-black sm:text-3xl">Panel administrativo</h1>
+        <p id="connection-status" class="mt-1 text-sm text-slate-400">Desconectado</p>
+      </div>
+      <button id="signout-btn" class="hidden rounded-xl border border-slate-700 px-4 py-2 text-sm font-bold hover:bg-slate-800">
+        Cerrar sesión
       </button>
-<button class="col-span-2 py-3 px-space-xs rounded-xl bg-error-container text-on-error-container font-label-md text-label-md uppercase tracking-wider font-bold shadow-[0_0_16px_rgba(147,0,10,0.5)] flex items-center justify-center gap-1 active:scale-95 transition-all" id="btnPausaEmergencia">
-<span class="material-symbols-outlined text-[20px]">pause_circle</span>
-        PAUSA LIVE
-      </button>
-</div>
-</div>
-<!-- ALERTA URGENTE: VALIDACIÓN Y AUDITORÍA DE BINGO EN VIVO (SISTEMA DE JUEZ) -->
-<div class="flex flex-col bg-surface-container-lowest rounded-xl p-space-md shadow-2xl relative overflow-hidden transition-all" id="moduloAuditoria">
-<div class="absolute -left-10 -bottom-10 w-32 h-32 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div>
-<!-- Indicador de Alerta -->
-<div class="flex items-center justify-between pb-space-xs">
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 rounded-full bg-secondary-container animate-pulse shadow-[0_0_10px_#db2777]"></span>
-<span class="font-label-sm text-label-sm tracking-widest text-secondary font-bold uppercase">RECLAMO BINGO EN TIEMPO REAL</span>
-</div>
-<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-secondary text-label-sm font-label-sm font-semibold">1 Pendiente</span>
-</div>
-<!-- Ficha del Usuario reclamante -->
-<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-high/60 my-space-xs">
-<div class="flex items-center gap-space-sm">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center">
-<span class="material-symbols-outlined text-secondary text-[22px]">person_check</span>
-</div>
-<div class="flex flex-col">
-<span class="font-body-md text-body-md font-bold text-on-surface">Carlos_92</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Cartón Serie #A892</span>
-</div>
-</div>
-<div class="flex flex-col items-end">
-<span class="font-label-md text-label-md font-bold text-primary-container">15/15 HIT</span>
-<span class="font-label-sm text-label-sm text-tertiary-fixed-dim">75.000 Bs</span>
-</div>
-</div>
-<!-- Visor de auditoría 5x3 del cartón del jugador -->
-<div class="p-space-sm rounded-lg bg-surface-container-high/40 flex flex-col gap-space-xs">
-<div class="flex justify-between items-center text-label-sm font-label-sm text-on-surface-variant">
-<span>Matriz de Aciertos vs Balotas Cantadas</span>
-<span class="text-primary-container">HASH: 9F2C...E14A</span>
-</div>
-<!-- Cuadrícula 5x3 simulando el cartón oficial de bingo -->
-<div class="grid grid-cols-5 gap-1 text-center py-1">
-<!-- Fila 1 -->
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">04</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">17</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">32</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">58</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">81</div>
-<!-- Fila 2 -->
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">12</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">29</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">44</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">69</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">87</div>
-<!-- Fila 3 -->
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">14</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">21</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">50</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">62</div>
-<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">80</div>
-</div>
-<div class="flex items-center justify-between text-label-sm font-label-sm text-primary-container pt-1">
-<span class="flex items-center gap-1">
-<span class="material-symbols-outlined text-[16px]">verified</span>
-          100% de coincidencias confirmadas por balotera
-        </span>
-</div>
-</div>
-<!-- Botones de Acción de Juez -->
-<div class="grid grid-cols-2 gap-space-xs pt-space-sm">
-<button class="py-2.5 px-space-sm rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-bold shadow-[0_0_12px_rgba(0,255,213,0.4)] flex items-center justify-center gap-1 active:scale-95 transition-all" id="btnAprobarBingo">
-<span class="material-symbols-outlined text-[18px]">check_circle</span>
-        Aprobar y Pagar
-      </button>
-<button class="py-2.5 px-space-sm rounded-lg bg-surface-container-highest text-error font-label-md text-label-md font-semibold flex items-center justify-center gap-1 active:scale-95 transition-all hover:bg-error-container/40" id="btnRechazarBingo">
-<span class="material-symbols-outlined text-[18px]">cancel</span>
-        Rechazar
-      </button>
-</div>
-<!-- Toast de Confirmación Oculto -->
-<div class="hidden mt-space-sm p-space-sm rounded-lg bg-primary-container/20 text-primary-container font-label-sm text-label-sm flex items-center justify-between" id="toastVerificacion">
-<span>¡Premio de 75.000,00 Bs adjudicado a Carlos_92 con éxito!</span>
-<span class="material-symbols-outlined text-[18px]">celebration</span>
-</div>
-</div>
-<!-- CONTROL DE BALOTERA & SECUENCIA 3D -->
-<div class="flex flex-col bg-surface-container rounded-xl p-space-md shadow-lg gap-space-sm">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-tertiary-fixed-dim text-[20px]">sports_volleyball</span>
-<span class="font-headline-md text-headline-md text-on-surface">BALOTERA CÓSMICA</span>
-</div>
-<div class="flex items-center gap-1">
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-highest text-on-surface hover:text-primary-container" id="btnSpeed3s">3s</button>
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-primary-container text-on-primary-container font-bold shadow-sm" id="btnSpeed5s">5s</button>
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-highest text-on-surface hover:text-primary-container" id="btnSpeedManual">Man</button>
-</div>
-</div>
-<!-- Visualizador Central de Balota Cantada -->
-<div class="flex items-center justify-around py-space-sm bg-surface-container-lowest/60 rounded-xl relative overflow-hidden">
-<!-- Glow Cósmico Central -->
-<div class="absolute inset-0 bg-gradient-to-r from-transparent via-tertiary-fixed-dim/5 to-transparent pointer-events-none"></div>
-<!-- Balota Cantada 3D Esférica -->
-<div class="flex flex-col items-center">
-<div class="w-20 h-20 rounded-full bg-gradient-to-br from-tertiary-fixed via-tertiary-fixed-dim to-on-tertiary shadow-[0_0_28px_rgba(255,185,95,0.7)] flex flex-col items-center justify-center relative active:scale-110 transition-transform" id="balotaActual">
-<!-- Reflejo especular superior -->
-<div class="absolute top-2 left-3 w-5 h-2.5 bg-primary/60 rounded-full blur-[1px] rotate-[-25deg]"></div>
-<span class="font-headline-xl-mobile text-headline-xl-mobile text-on-tertiary font-bold tracking-tight">29</span>
-</div>
-<span class="font-label-sm text-label-sm font-bold text-tertiary-fixed-dim uppercase tracking-wider mt-1">VEINTINUEVE</span>
-</div>
-<!-- Riel de Últimas Balotas -->
-<div class="flex flex-col gap-1">
-<span class="font-label-sm text-label-sm text-on-surface-variant">ÚLTIMAS EXTRAÍDAS:</span>
-<div class="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-[190px]">
-<span class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold flex items-center justify-center shrink-0 shadow-[0_0_8px_rgba(0,255,213,0.3)]">87</span>
-<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">62</span>
-<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">80</span>
-<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">81</span>
-<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">14</span>
-<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">69</span>
-</div>
-<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant pt-1">
-<span>Extraídas: 34 / 90</span>
-<button class="text-error hover:underline flex items-center gap-0.5" id="btnResetBalotera">
-<span class="material-symbols-outlined text-[14px]">restart_alt</span> Reiniciar
-          </button>
-</div>
-</div>
-</div>
-</div>
-<!-- MÓDULO CLAVE: FIGURA / JUGADA ASIGNADA POR RONDA -->
-<div class="flex flex-col bg-surface-container-high rounded-xl p-space-md shadow-lg gap-space-sm">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-secondary text-[20px]">pattern</span>
-<span class="font-headline-md text-headline-md text-on-surface">JUGADA EN DISPUTA</span>
-</div>
-<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary-container text-label-sm font-label-sm font-bold">Activa</span>
-</div>
-<!-- Fila Interactiva: Mini-Grid Paytable y Detalles del Premio -->
-<div class="grid grid-cols-12 gap-space-sm items-center bg-surface-container-lowest/70 p-space-sm rounded-lg">
-<!-- Mini cuadrícula de 3x5 de la figura (Cartón Lleno) -->
-<div class="col-span-5 flex flex-col items-center">
-<span class="font-label-sm text-label-sm text-on-surface-variant mb-1">Patrón Ronda</span>
-<div class="grid grid-cols-5 gap-1 p-1.5 rounded-lg bg-surface-container-highest/60 shadow-inner" id="miniGridPatron">
-<!-- 15 puntos iluminados en dorado/neón -->
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
-</div>
-</div>
-<!-- Datos del Premio y Selector -->
-<div class="col-span-7 flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant" for="selectorJugada">Modo de Victoria:</label>
-<select class="w-full bg-surface-container-highest text-on-surface text-label-md font-label-md rounded p-1.5 focus:outline-none focus:ring-1 focus:ring-primary-container" id="selectorJugada">
-<option selected="" value="pleno">Cartón Lleno (15 hits)</option>
-<option value="linea">Línea Horizontal (5 hits)</option>
-<option value="esquinas">Cuatro Esquinas (4 hits)</option>
-<option value="cruz">Cruz Cósmica (9 hits)</option>
-</select>
-<div class="flex items-center justify-between pt-1">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Bote Ronda:</span>
-<span class="font-label-md text-label-md font-bold text-tertiary-fixed-dim">75.000,00 Bs</span>
-</div>
-<div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Pozo Acumulado:</span>
-<span class="font-label-md text-label-md font-bold text-primary-container">210.500,00 Bs</span>
-</div>
-</div>
-</div>
-<!-- Botones de Cambio y Avance de Ronda -->
-<div class="grid grid-cols-2 gap-space-xs">
-<button class="py-2 px-space-xs rounded bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-container-highest/80 transition-all flex items-center justify-center gap-1" id="btnGuardarFigura">
-<span class="material-symbols-outlined text-[16px]">sync_alt</span>
-        Actualizar Figura
-      </button>
-<button class="py-2 px-space-xs rounded bg-surface-tint text-on-primary font-label-md text-label-md font-bold shadow-md hover:brightness-110 transition-all flex items-center justify-center gap-1" id="btnAvanzarRonda">
-<span class="material-symbols-outlined text-[16px]">fast_forward</span>
-        Próxima Ronda
-      </button>
-</div>
-</div>
-<!-- MATRIZ MAESTRA DE 90 BALOTAS -->
-<div class="flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-lg gap-space-sm">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-primary-container text-[20px]">grid_on</span>
-<span class="font-headline-md text-headline-md text-on-surface">MATRIZ MAESTRA (90)</span>
-</div>
-<!-- Pestañas de Grupo -->
-<div class="flex rounded-lg bg-surface-container-highest p-0.5" id="pestañasMatriz">
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm font-bold bg-primary-container text-on-primary-container" data-tab="1-30">1-30</button>
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant" data-tab="31-60">31-60</button>
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant" data-tab="61-90">61-90</button>
-</div>
-</div>
-<!-- Muestra de Cuadrícula Táctil (Muestra del grupo 1-30) -->
-<div class="grid grid-cols-6 gap-1.5 p-space-xs rounded-lg bg-surface-container-lowest/80 text-center" id="gridMatrizBalotas">
-<!-- Casillas con estados: Cantada (Cian Neón), Actual (Dorado Radiante), Pendiente (Gris Tenue) -->
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">01</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">02</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">03</div>
-<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">04</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">05</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">06</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">07</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">08</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">09</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">10</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">11</div>
-<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">12</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">13</div>
-<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">14</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">15</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">16</div>
-<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">17</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">18</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">19</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">20</div>
-<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">21</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">22</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">23</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">24</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">25</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">26</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">27</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">28</div>
-<!-- Casilla Actual (Dorado Radiante) -->
-<div class="p-1 rounded bg-tertiary-fixed text-on-tertiary font-label-sm text-label-sm font-bold shadow-[0_0_12px_rgba(255,185,95,0.8)] animate-pulse">29</div>
-<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">30</div>
-</div>
-<!-- Leyenda de Estados -->
-<div class="flex items-center justify-center gap-space-md text-label-sm font-label-sm pt-1">
-<div class="flex items-center gap-1">
-<span class="w-2.5 h-2.5 rounded bg-tertiary-fixed"></span>
-<span class="text-on-surface-variant">Actual</span>
-</div>
-<div class="flex items-center gap-1">
-<span class="w-2.5 h-2.5 rounded bg-primary-container"></span>
-<span class="text-on-surface-variant">Cantada</span>
-</div>
-<div class="flex items-center gap-1">
-<span class="w-2.5 h-2.5 rounded bg-surface-container-highest"></span>
-<span class="text-on-surface-variant">En Espera</span>
-</div>
-</div>
-</div>
-<!-- MODERACIÓN Y CHAT EN VIVO DE LA SALA -->
-<div class="flex flex-col bg-surface-container rounded-xl p-space-md shadow-lg gap-space-sm">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-secondary text-[20px]">forum</span>
-<span class="font-headline-md text-headline-md text-on-surface">MODERACIÓN DE CHAT</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Actividad Alta</span>
-</div>
-<!-- Registro de Mensajes Recientes -->
-<div class="flex flex-col gap-1.5 max-h-36 overflow-y-auto pr-1">
-<div class="flex items-start justify-between bg-surface-container-lowest/60 p-space-xs rounded-lg text-body-sm font-body-sm">
-<div class="flex flex-col">
-<span class="font-bold text-primary-container">Lucia_Bingo:</span>
-<span class="text-on-surface">¡Canten el 77 por favor que me falta uno! 😱</span>
-</div>
-<button class="text-on-surface-variant hover:text-error transition-colors p-1" title="Moderar">
-<span class="material-symbols-outlined text-[16px]">block</span>
-</button>
-</div>
-<div class="flex items-start justify-between bg-surface-container-lowest/60 p-space-xs rounded-lg text-body-sm font-body-sm">
-<div class="flex flex-col">
-<span class="font-bold text-tertiary-fixed-dim">Pedro_Caracas:</span>
-<span class="text-on-surface">Buena suerte a todos, ¡esta ronda es mía! 🔥</span>
-</div>
-<button class="text-on-surface-variant hover:text-error transition-colors p-1" title="Moderar">
-<span class="material-symbols-outlined text-[16px]">block</span>
-</button>
-</div>
-<div class="flex items-start justify-between bg-surface-container-lowest/60 p-space-xs rounded-lg text-body-sm font-body-sm">
-<div class="flex flex-col">
-<span class="font-bold text-secondary">Mariana_Star:</span>
-<span class="text-on-surface">Esa balota 29 me dejó a tiro de esquina 🤞</span>
-</div>
-<button class="text-on-surface-variant hover:text-error transition-colors p-1" title="Moderar">
-<span class="material-symbols-outlined text-[16px]">block</span>
-</button>
-</div>
-</div>
-<!-- Envío de Anuncio General de Moderador -->
-<div class="flex items-center gap-space-xs pt-1">
-<input class="flex-1 bg-surface-container-highest text-on-surface text-body-sm font-body-sm px-space-sm py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-container placeholder:text-on-surface-variant" id="inputAvisoGeneral" placeholder="Enviar anuncio oficial a la sala..." type="text"/>
-<button class="p-2 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center hover:opacity-90 transition-opacity" id="btnEnviarAviso">
-<span class="material-symbols-outlined text-[20px]">campaign</span>
-</button>
-</div>
-</div>
-<!-- HISTORIAL DE GANADORES AUDITADOS RECIENTES -->
-<div class="flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-lg gap-space-sm">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-xs">
-<span class="material-symbols-outlined text-tertiary-fixed-dim text-[20px]">military_tech</span>
-<span class="font-headline-md text-headline-md text-on-surface">PAGOS SESIÓN</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Últimas Rondas</span>
-</div>
-<div class="flex flex-col gap-1.5">
-<!-- Item Historial 1 -->
-<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-high/60">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary-container text-[18px]">verified_user</span>
-<div class="flex flex-col">
-<span class="font-label-md text-label-md font-bold text-on-surface">Elena_R (Ronda #1041)</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Línea Horizontal • REF: #TX-9021</span>
-</div>
-</div>
-<span class="font-label-md text-label-md font-bold text-tertiary-fixed-dim">25.000 Bs</span>
-</div>
-<!-- Item Historial 2 -->
-<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-high/60">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary-container text-[18px]">verified_user</span>
-<div class="flex flex-col">
-<span class="font-label-md text-label-md font-bold text-on-surface">Marcos_V (Ronda #1040)</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Cartón Lleno • REF: #TX-8834</span>
-</div>
-</div>
-<span class="font-label-md text-label-md font-bold text-tertiary-fixed-dim">75.000 Bs</span>
-</div>
-</div>
-</div>
-</div>
-<script>
-(function initMesaControl() {
-  const selector = document.getElementById('selectorJugada');
-  const miniGrid = document.getElementById('miniGridPatron');
-  const gridMatriz = document.getElementById('gridMatrizBalotas');
-  const balotaActual = document.getElementById('balotaActual');
-  const btnCantar = document.getElementById('btnCantarBalota');
-  const btnPausa = document.getElementById('btnPausaEmergencia');
-  const btnAvanzarRonda = document.getElementById('btnAvanzarRonda');
-  const btnGuardarFigura = document.getElementById('btnGuardarFigura');
-  const btnEnviarAviso = document.getElementById('btnEnviarAviso');
-  const inputAviso = document.getElementById('inputAvisoGeneral');
-  const btnAprobar = document.getElementById('btnAprobarBingo');
-  const btnRechazar = document.getElementById('btnRechazarBingo');
-  const toast = document.getElementById('toastVerificacion');
+    </header>
 
-  const patrones = {
-    pleno: [
-      1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1
-    ],
-    linea: [
-      0, 0, 0, 0, 0,
-      1, 1, 1, 1, 1,
-      0, 0, 0, 0, 0
-    ],
-    esquinas: [
-      1, 0, 0, 0, 1,
-      0, 0, 0, 0, 0,
-      1, 0, 0, 0, 1
-    ],
-    cruz: [
-      0, 0, 1, 0, 0,
-      1, 1, 1, 1, 1,
-      0, 0, 1, 0, 0
-    ]
-  };
+    <section id="login-panel" class="panel mx-auto max-w-md rounded-2xl border border-teal-500/30 p-6 shadow-2xl">
+      <h2 class="text-xl font-black">Acceso de administración</h2>
+      <p class="mt-1 text-sm text-slate-400">Inicia sesión con una cuenta autorizada como administrador del bingo.</p>
+      <form id="login-form" class="mt-5 space-y-3">
+        <label class="block text-sm font-semibold">
+          Correo
+          <input id="email" type="email" autocomplete="username" required
+            class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 outline-none focus:border-teal-400" />
+        </label>
+        <label class="block text-sm font-semibold">
+          Contraseña
+          <input id="password" type="password" autocomplete="current-password" required
+            class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 outline-none focus:border-teal-400" />
+        </label>
+        <button class="w-full rounded-xl bg-teal-500 px-4 py-2.5 font-black text-slate-950 hover:bg-teal-400">
+          Entrar
+        </button>
+      </form>
+    </section>
 
-  // Una cruz en una cuadrícula de 3 × 5 tiene 7 casillas.
-  if (selector) {
-    const opcionCruz = selector.querySelector('option[value="cruz"]');
-    if (opcionCruz) opcionCruz.textContent = 'Cruz Cósmica (7 hits)';
-  }
+    <section id="app-panel" class="hidden">
+      <div id="notice" class="mb-4 hidden rounded-xl border px-4 py-3 text-sm"></div>
 
-  function renderMiniGrid(tipo) {
-    if (!miniGrid) return;
+      <div class="mb-4 grid gap-3 sm:grid-cols-2">
+        <label class="panel rounded-xl border border-slate-800 p-3 text-sm font-bold">
+          Partida
+          <select id="game-select" class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2">
+            <option value="">Cargando partidas…</option>
+          </select>
+        </label>
+        <div class="panel flex items-center justify-between rounded-xl border border-slate-800 p-3">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Estado de la partida</p>
+            <p id="game-status" class="mt-1 text-lg font-black">—</p>
+          </div>
+          <div class="flex gap-2">
+            <button id="start-btn" class="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-black text-slate-950 hover:bg-emerald-400">
+              Iniciar
+            </button>
+            <button id="finish-btn" class="rounded-lg bg-rose-500 px-3 py-2 text-sm font-black text-white hover:bg-rose-400">
+              Finalizar
+            </button>
+          </div>
+        </div>
+      </div>
 
-    const patron = patrones[tipo] || patrones.pleno;
-    const fragmento = document.createDocumentFragment();
+      <div class="mb-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <article class="panel rounded-xl border border-slate-800 p-4">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Última bolilla</p>
+          <p id="latest-number" class="digital mt-1 text-4xl font-black text-cyan-300">—</p>
+        </article>
+        <article class="panel rounded-xl border border-slate-800 p-4">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Bolillas cantadas</p>
+          <p id="draw-count" class="mt-2 text-3xl font-black">0</p>
+        </article>
+        <article class="panel rounded-xl border border-slate-800 p-4">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Jugadores</p>
+          <p id="player-count" class="mt-2 text-3xl font-black">0</p>
+        </article>
+        <article class="panel rounded-xl border border-slate-800 p-4">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Cartones</p>
+          <p id="card-count" class="mt-2 text-3xl font-black">0</p>
+        </article>
+      </div>
 
-    patron.forEach((activo) => {
-      const punto = document.createElement('span');
-      punto.className = activo
-        ? 'w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]'
-        : 'w-3 h-3 rounded-full bg-surface-container-lowest/70 opacity-30';
-      fragmento.appendChild(punto);
-    });
+      <div class="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+        <section class="panel rounded-2xl border border-teal-500/20 p-4 sm:p-5">
+          <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 class="text-lg font-black">Tablero de bolillas</h2>
+              <p class="text-sm text-slate-400">Números del 1 al 90</p>
+            </div>
+            <button id="draw-btn" class="rounded-xl bg-gradient-to-r from-teal-400 to-emerald-400 px-5 py-3 font-black text-slate-950 shadow-lg hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40">
+              Cantar siguiente número
+            </button>
+          </div>
+          <div id="number-board" class="grid grid-cols-10 gap-1.5 sm:gap-2"></div>
+          <div class="mt-5 border-t border-slate-800 pt-4">
+            <h3 class="mb-2 text-sm font-black uppercase tracking-wider text-slate-300">Historial reciente</h3>
+            <div id="draw-history" class="flex min-h-10 flex-wrap gap-2"></div>
+          </div>
+          <p class="mt-4 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3 text-xs leading-relaxed text-amber-100/80">
+            Esta versión elige la bolilla en el navegador y luego intenta guardarla. Para un sorteo con premios,
+            implementa la extracción en una función segura de base de datos para evitar duplicados o manipulación desde el cliente.
+          </p>
+        </section>
 
-    miniGrid.replaceChildren(fragmento);
-  }
+        <div class="space-y-4">
+          <section class="panel rounded-2xl border border-slate-800 p-4">
+            <div class="mb-3 flex items-center justify-between">
+              <h2 class="text-lg font-black">Jugadores</h2>
+              <button id="refresh-btn" class="rounded-lg border border-slate-700 px-3 py-1.5 text-xs font-bold hover:bg-slate-800">
+                Actualizar
+              </button>
+            </div>
+            <div id="players-list" class="max-h-64 space-y-2 overflow-auto text-sm">
+              <p class="text-slate-400">Selecciona una partida.</p>
+            </div>
+          </section>
 
-  if (selector) {
-    renderMiniGrid(selector.value);
-    selector.addEventListener('change', () => renderMiniGrid(selector.value));
-  }
+          <section class="panel rounded-2xl border border-purple-500/20 p-4">
+            <div class="mb-3 flex items-center justify-between">
+              <h2 class="text-lg font-black">Chat de la sala</h2>
+              <span id="chat-status" class="text-xs text-slate-400"></span>
+            </div>
+            <div id="chat-list" class="max-h-72 space-y-2 overflow-auto text-sm">
+              <p class="text-slate-400">Selecciona una partida.</p>
+            </div>
+          </section>
 
-  // Conserva como cantadas las balotas que ya aparecían marcadas en el HTML.
-  const balotasCantadas = new Set();
-  let balotaEnCurso = null;
+          <section class="panel rounded-2xl border border-amber-500/20 p-4">
+            <h2 class="mb-3 text-lg font-black">Ganadores</h2>
+            <div id="winners-list" class="space-y-2 text-sm">
+              <p class="text-slate-400">Selecciona una partida.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  if (gridMatriz) {
-    Array.from(gridMatriz.children).forEach((casilla) => {
-      const numero = Number(casilla.textContent.trim());
-      if (!Number.isInteger(numero)) return;
+  <script>
+    // Sustituye estos valores por la URL del proyecto y la clave publicable.
+    // Nunca pongas aquí una service_role ni una sb_secret.
+    const SUPABASE_URL = 'https://lzzkgnntpnzwffunemqo.supabase.co/rest/v1/';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_gsj1KCUdHSMG0n6DIW2IOg_sP1up-Gv';
 
-      if (casilla.classList.contains('bg-tertiary-fixed')) {
-        balotaEnCurso = numero;
-      } else if (casilla.classList.contains('bg-primary-container')) {
-        balotasCantadas.add(numero);
-      }
-    });
-  }
-
-  function mostrarBalota(numero) {
-    if (!balotaActual) return;
-
-    const destino = balotaActual.querySelector('span') || balotaActual;
-    destino.textContent = numero === null
-      ? '—'
-      : String(numero).padStart(2, '0');
-  }
-
-  function actualizarMatriz() {
-    if (!gridMatriz) return;
-
-    const pestañaActiva = document.querySelector(
-      '#pestañasMatriz button.bg-primary-container'
+    const $ = (id) => document.getElementById(id);
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
     );
-    const rango = pestañaActiva ? pestañaActiva.dataset.tab : '1-30';
-    const [inicio, fin] = rango.split('-').map(Number);
-    const fragmento = document.createDocumentFragment();
 
-    for (let numero = inicio; numero <= fin; numero++) {
-      const casilla = document.createElement('div');
-      casilla.textContent = String(numero).padStart(2, '0');
-      casilla.className = 'p-1 rounded font-label-sm text-label-sm';
+    let currentUser = null;
+    let currentGame = null;
+    let realtimeChannel = null;
+    let refreshTimer = null;
+    let draws = [];
 
-      if (numero === balotaEnCurso) {
-        casilla.classList.add(
-          'bg-tertiary-fixed',
-          'text-on-tertiary',
-          'font-bold',
-          'shadow-[0_0_12px_rgba(255,185,95,0.8)]',
-          'animate-pulse'
-        );
-      } else if (balotasCantadas.has(numero)) {
-        casilla.classList.add(
-          'bg-primary-container',
-          'text-on-primary-container',
-          'font-bold',
-          'shadow-[0_0_8px_rgba(0,255,213,0.5)]'
-        );
-      } else {
-        casilla.classList.add(
-          'bg-surface-container-highest',
-          'text-on-surface-variant'
-        );
-      }
+    const text = (value) => value == null ? '' : String(value);
+    const statusLabels = {
+      waiting: 'En espera',
+      active: 'En curso',
+      finished: 'Finalizada'
+    };
 
-      fragmento.appendChild(casilla);
+    function showNotice(message, isError = false) {
+      const el = $('notice');
+      el.textContent = message;
+      el.className = `mb-4 rounded-xl border px-4 py-3 text-sm ${
+        isError
+          ? 'border-rose-500/40 bg-rose-500/10 text-rose-200'
+          : 'border-teal-500/40 bg-teal-500/10 text-teal-100'
+      }`;
+      el.classList.remove('hidden');
     }
 
-    gridMatriz.replaceChildren(fragmento);
-  }
+    function hideNotice() {
+      $('notice').classList.add('hidden');
+    }
 
-  document.querySelectorAll('#pestañasMatriz button[data-tab]').forEach((boton) => {
-    boton.addEventListener('click', () => {
-      document.querySelectorAll('#pestañasMatriz button[data-tab]').forEach((otro) => {
-        otro.classList.remove(
-          'bg-primary-container',
-          'text-on-primary-container',
-          'font-bold'
-        );
-        otro.classList.add('text-on-surface-variant');
+    function setConnected(message) {
+      $('connection-status').textContent = message;
+    }
+
+    function renderBoard() {
+      const called = new Set(draws.map(d => Number(d.figure)));
+      const board = $('number-board');
+      board.replaceChildren();
+
+      for (let n = 1; n <= 90; n++) {
+        const cell = document.createElement('div');
+        cell.textContent = n;
+        cell.className = called.has(n)
+          ? 'flex aspect-square items-center justify-center rounded-md bg-amber-400 text-xs font-black text-slate-950 sm:text-sm'
+          : 'flex aspect-square items-center justify-center rounded-md border border-slate-800 bg-slate-950/70 text-xs font-bold text-slate-500 sm:text-sm';
+        board.appendChild(cell);
+      }
+
+      $('draw-count').textContent = draws.length;
+      $('latest-number').textContent = draws.length
+        ? text(draws[draws.length - 1].figure)
+        : '—';
+
+      const history = $('draw-history');
+      history.replaceChildren();
+      draws.slice(-12).reverse().forEach(d => {
+        const ball = document.createElement('span');
+        ball.textContent = text(d.figure);
+        ball.className = 'flex h-9 w-9 items-center justify-center rounded-full bg-amber-400 font-black text-slate-950';
+        history.appendChild(ball);
       });
 
-      boton.classList.add(
-        'bg-primary-container',
-        'text-on-primary-container',
-        'font-bold'
-      );
-      boton.classList.remove('text-on-surface-variant');
+      $('draw-btn').disabled = !currentGame || currentGame.status !== 'active';
+      $('start-btn').disabled = !currentGame || currentGame.status !== 'waiting';
+      $('finish-btn').disabled = !currentGame || currentGame.status === 'finished';
+    }
 
-      actualizarMatriz();
-    });
-  });
+    function renderPlayers(players) {
+      $('player-count').textContent = players.length;
+      const list = $('players-list');
+      list.replaceChildren();
 
-  actualizarMatriz();
-
-  // Sorteo local sin repetir números dentro de la ronda.
-  if (btnCantar) {
-    btnCantar.addEventListener('click', () => {
-      const disponibles = [];
-
-      for (let numero = 1; numero <= 90; numero++) {
-        if (
-          !balotasCantadas.has(numero) &&
-          numero !== balotaEnCurso
-        ) {
-          disponibles.push(numero);
-        }
-      }
-
-      if (disponibles.length === 0) {
-        btnCantar.disabled = true;
+      if (!players.length) {
+        list.textContent = 'Todavía no hay jugadores registrados.';
         return;
       }
 
-      const indice = window.crypto && window.crypto.getRandomValues
-        ? window.crypto.getRandomValues(new Uint32Array(1))[0] % disponibles.length
-        : Math.floor(Math.random() * disponibles.length);
+      players.forEach(player => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between gap-3 rounded-lg border border-slate-800 bg-slate-950/60 p-2.5';
 
-      if (balotaEnCurso !== null) {
-        balotasCantadas.add(balotaEnCurso);
-      }
+        const name = document.createElement('span');
+        name.className = 'truncate font-bold';
+        name.textContent = text(player.display_name || 'Jugador');
 
-      balotaEnCurso = disponibles[indice];
-      mostrarBalota(balotaEnCurso);
-      actualizarMatriz();
-    });
-  }
+        const cards = document.createElement('span');
+        cards.className = 'shrink-0 text-xs text-slate-400';
+        cards.textContent = `${player.cards_allowed ?? 0} cartón(es)`;
 
-  if (btnGuardarFigura && selector) {
-    btnGuardarFigura.addEventListener('click', () => {
-      renderMiniGrid(selector.value);
-    });
-  }
-
-  // Pestaña de pausa: cambia el estado visual de la interfaz.
-  if (btnPausa) {
-    const textoPausa = btnPausa.innerHTML;
-    let enPausa = false;
-
-    btnPausa.addEventListener('click', () => {
-      enPausa = !enPausa;
-
-      if (enPausa) {
-        btnPausa.innerHTML =
-          '<span class="material-symbols-outlined text-[20px]">play_circle</span> REANUDAR';
-        btnPausa.classList.remove('bg-error-container', 'text-on-error-container');
-        btnPausa.classList.add('bg-tertiary-fixed', 'text-on-tertiary');
-      } else {
-        btnPausa.innerHTML = textoPausa;
-        btnPausa.classList.remove('bg-tertiary-fixed', 'text-on-tertiary');
-        btnPausa.classList.add('bg-error-container', 'text-on-error-container');
-      }
-    });
-  }
-
-  // Avanza la ronda reiniciando el estado local de las balotas.
-  if (btnAvanzarRonda) {
-    btnAvanzarRonda.addEventListener('click', () => {
-      balotasCantadas.clear();
-      balotaEnCurso = null;
-      mostrarBalota(null);
-      actualizarMatriz();
-
-      if (btnCantar) btnCantar.disabled = false;
-      if (toast) toast.classList.add('hidden');
-
-      if (btnAprobar) {
-        btnAprobar.disabled = false;
-        btnAprobar.classList.remove('opacity-50');
-      }
-      if (btnRechazar) {
-        btnRechazar.disabled = false;
-        btnRechazar.classList.remove('opacity-50');
-      }
-    });
-  }
-
-  // Estas acciones solo muestran el resultado en la interfaz; no procesan pagos.
-  function mostrarResultado(texto, esError) {
-    if (!toast) return;
-
-    toast.classList.remove('hidden', 'text-primary-container', 'bg-primary-container/20');
-    toast.classList.remove('text-error', 'bg-error-container/40');
-    toast.classList.add(
-      esError ? 'text-error' : 'text-primary-container',
-      esError ? 'bg-error-container/40' : 'bg-primary-container/20'
-    );
-
-    const mensaje = document.createElement('span');
-    mensaje.textContent = texto;
-
-    const icono = document.createElement('span');
-    icono.className = 'material-symbols-outlined text-[18px]';
-    icono.textContent = esError ? 'info' : 'celebration';
-
-    toast.replaceChildren(mensaje, icono);
-  }
-
-  if (btnAprobar) {
-    btnAprobar.addEventListener('click', () => {
-      mostrarResultado(
-        'Reclamo marcado como validado en esta interfaz. No se ha procesado ningún pago.',
-        false
-      );
-      btnAprobar.disabled = true;
-      btnAprobar.classList.add('opacity-50');
-      if (btnRechazar) btnRechazar.disabled = true;
-    });
-  }
-
-  if (btnRechazar) {
-    btnRechazar.addEventListener('click', () => {
-      mostrarResultado('Reclamo marcado como rechazado en esta interfaz.', true);
-      btnRechazar.disabled = true;
-      btnRechazar.classList.add('opacity-50');
-      if (btnAprobar) btnAprobar.disabled = true;
-    });
-  }
-
-  // Moderación visual de mensajes: los elimina solamente de esta página.
-  document.addEventListener('click', (evento) => {
-    const botonModerar = evento.target.closest('button[title="Moderar"]');
-    if (!botonModerar) return;
-
-    const mensaje = botonModerar.closest('.flex.items-start.justify-between');
-    if (mensaje) mensaje.remove();
-  });
-
-  // Agrega el anuncio al chat visible, sin enviarlo a un servidor.
-  function enviarAviso() {
-    if (!inputAviso || !inputAviso.value.trim()) return;
-
-    const listaMensajes = document.querySelector('.max-h-36.overflow-y-auto');
-    if (!listaMensajes) {
-      inputAviso.value = '';
-      return;
+        row.append(name, cards);
+        list.appendChild(row);
+      });
     }
 
-    const tarjeta = document.createElement('div');
-    tarjeta.className =
-      'flex items-start justify-between bg-surface-container-lowest/60 p-space-xs rounded-lg text-body-sm font-body-sm';
+    function renderMessages(messages) {
+      const list = $('chat-list');
+      list.replaceChildren();
 
-    const contenido = document.createElement('div');
-    contenido.className = 'flex flex-col';
+      if (!messages.length) {
+        list.textContent = 'No hay mensajes para mostrar.';
+        return;
+      }
 
-    const autor = document.createElement('span');
-    autor.className = 'font-bold text-primary-container';
-    autor.textContent = 'Moderación:';
+      messages.forEach(message => {
+        const item = document.createElement('article');
+        item.className = 'rounded-lg border border-purple-500/20 bg-slate-950/60 p-2.5';
 
-    const texto = document.createElement('span');
-    texto.className = 'text-on-surface';
-    texto.textContent = inputAviso.value.trim();
+        const header = document.createElement('div');
+        header.className = 'mb-1 flex justify-between gap-2 text-xs text-slate-400';
 
-    contenido.append(autor, texto);
-    tarjeta.appendChild(contenido);
-    listaMensajes.appendChild(tarjeta);
-    listaMensajes.scrollTop = listaMensajes.scrollHeight;
-    inputAviso.value = '';
-  }
+        const user = document.createElement('span');
+        user.className = 'truncate font-bold text-cyan-300';
+        user.textContent = text(message.user_id).slice(0, 8) || 'Jugador';
 
-  if (btnEnviarAviso) {
-    btnEnviarAviso.addEventListener('click', enviarAviso);
-  }
+        const time = document.createElement('time');
+        time.textContent = message.created_at
+          ? new Date(message.created_at).toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' })
+          : '';
 
-  if (inputAviso) {
-    inputAviso.addEventListener('keydown', (evento) => {
-      if (evento.key === 'Enter') enviarAviso();
+        const body = document.createElement('p');
+        body.className = 'break-words text-slate-100';
+        body.textContent = text(message.message);
+
+        header.append(user, time);
+        item.append(header, body);
+        list.appendChild(item);
+      });
+    }
+
+    function renderWinners(winners) {
+      const list = $('winners-list');
+      list.replaceChildren();
+
+      if (!winners.length) {
+        list.textContent = 'Aún no hay ganadores registrados.';
+        return;
+      }
+
+      winners.forEach(winner => {
+        const row = document.createElement('div');
+        row.className = 'rounded-lg border border-amber-500/20 bg-slate-950/60 p-2.5';
+        row.textContent = `${text(winner.user_id).slice(0, 8)} · ${text(winner.winning_line)}`;
+        list.appendChild(row);
+      });
+    }
+
+    async function loadGames() {
+      const { data, error } = await supabaseClient
+        .from('bingo_games')
+        .select('id,title,status,public_code,prize,created_at')
+        .eq('created_by', currentUser.id)
+        .order('created_at', { ascending: false })
+        .limit(50);
+
+      if (error) throw error;
+
+      const select = $('game-select');
+      select.replaceChildren();
+
+      if (!data?.length) {
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = 'No hay partidas disponibles';
+        select.appendChild(option);
+        currentGame = null;
+        renderBoard();
+        return;
+      }
+
+      data.forEach(game => {
+        const option = document.createElement('option');
+        option.value = game.id;
+        option.textContent = `${game.title} · ${statusLabels[game.status] || game.status}`;
+        select.appendChild(option);
+      });
+
+      currentGame = data[0];
+      select.value = currentGame.id;
+      await loadGameData();
+    }
+
+    async function loadGameData() {
+      if (!currentGame) return;
+      hideNotice();
+
+      $('game-status').textContent = statusLabels[currentGame.status] || currentGame.status;
+      $('chat-status').textContent = 'Consultando…';
+
+      const [drawResult, playersResult, cardsResult, messagesResult, winnersResult] =
+        await Promise.all([
+          supabaseClient.from('bingo_draws')
+            .select('id,sequence_no,figure,drawn_at')
+            .eq('game_id', currentGame.id)
+            .order('sequence_no', { ascending: true }),
+          supabaseClient.from('bingo_players')
+            .select('user_id,display_name,joined_at,cards_allowed')
+            .eq('game_id', currentGame.id)
+            .order('joined_at', { ascending: true }),
+          supabaseClient.from('bingo_cards')
+            .select('id', { count: 'exact', head: true })
+            .eq('game_id', currentGame.id),
+          supabaseClient.from('bingo_messages')
+            .select('id,user_id,message,created_at')
+            .eq('game_id', currentGame.id)
+            .order('created_at', { ascending: false })
+            .limit(30),
+          supabaseClient.from('bingo_winners')
+            .select('user_id,winning_line,claimed_at')
+            .eq('game_id', currentGame.id)
+            .order('claimed_at', { ascending: false })
+        ]);
+
+      if (drawResult.error) showNotice(`No pude cargar las bolillas: ${drawResult.error.message}`, true);
+      draws = drawResult.data || [];
+      renderBoard();
+
+      if (playersResult.error) {
+        $('players-list').textContent = `No se pudieron cargar los jugadores: ${playersResult.error.message}`;
+        $('player-count').textContent = '—';
+      } else {
+        renderPlayers(playersResult.data || []);
+      }
+
+      $('card-count').textContent = cardsResult.error
+        ? '—'
+        : (cardsResult.count ?? 0);
+
+      if (messagesResult.error) {
+        $('chat-status').textContent = 'Sin permiso de lectura';
+        $('chat-list').textContent = `No se pudo leer el chat: ${messagesResult.error.message}`;
+      } else {
+        $('chat-status').textContent = 'Actualizado';
+        renderMessages(messagesResult.data || []);
+      }
+
+      if (winnersResult.error) {
+        $('winners-list').textContent = `No se pudieron cargar ganadores: ${winnersResult.error.message}`;
+      } else {
+        renderWinners(winnersResult.data || []);
+      }
+    }
+
+    async function setGameStatus(status) {
+      if (!currentGame) return;
+
+      const patch = { status };
+      if (status === 'active') patch.started_at = new Date().toISOString();
+      if (status === 'finished') patch.finished_at = new Date().toISOString();
+
+      const { data, error } = await supabaseClient
+        .from('bingo_games')
+        .update(patch)
+        .eq('id', currentGame.id)
+        .eq('created_by', currentUser.id)
+        .select('id,title,status,public_code,prize')
+        .single();
+
+      if (error) {
+        showNotice(`No se pudo cambiar el estado. Revisa las políticas RLS de bingo_games: ${error.message}`, true);
+        return;
+      }
+
+      currentGame = data;
+      $('game-status').textContent = statusLabels[data.status] || data.status;
+      renderBoard();
+      showNotice(`Partida ${statusLabels[data.status]?.toLowerCase() || 'actualizada'}.`);
+      await loadGames();
+    }
+
+    async function drawNextNumber() {
+      if (!currentGame || currentGame.status !== 'active') return;
+
+      $('draw-btn').disabled = true;
+      try {
+        const used = new Set(draws.map(d => Number(d.figure)));
+        const available = Array.from({ length: 90 }, (_, i) => i + 1)
+          .filter(n => !used.has(n));
+
+        if (!available.length) {
+          showNotice('Ya se cantaron todas las bolillas.', true);
+          return;
+        }
+
+        const number = available[Math.floor(Math.random() * available.length)];
+        const sequence = draws.length + 1;
+
+        const { error } = await supabaseClient
+          .from('bingo_draws')
+          .insert({
+            game_id: currentGame.id,
+            sequence_no: sequence,
+            figure: String(number)
+          });
+
+        if (error) {
+          showNotice(`No se pudo guardar la bolilla: ${error.message}`, true);
+          return;
+        }
+
+        await loadGameData();
+      } finally {
+        $('draw-btn').disabled = !currentGame || currentGame.status !== 'active';
+      }
+    }
+
+    async function selectGame(gameId) {
+      const { data, error } = await supabaseClient
+        .from('bingo_games')
+        .select('id,title,status,public_code,prize')
+        .eq('id', gameId)
+        .single();
+
+      if (error) {
+        showNotice(`No se pudo abrir esa partida: ${error.message}`, true);
+        return;
+      }
+
+      currentGame = data;
+      await subscribeToGame();
+      await loadGameData();
+    }
+
+    async function subscribeToGame() {
+      if (realtimeChannel) {
+        await supabaseClient.removeChannel(realtimeChannel);
+        realtimeChannel = null;
+      }
+      if (!currentGame) return;
+
+      // El servidor debe emitir estos eventos en el mismo topic privado.
+      const topic = `game:${currentGame.id}:admin`;
+      realtimeChannel = supabaseClient.channel(topic, {
+        config: { private: true }
+      });
+
+      ['draw_created', 'player_joined', 'message_created', 'game_updated', 'winner_claimed']
+        .forEach(eventName => {
+          realtimeChannel.on('broadcast', { event: eventName }, () => loadGameData());
+        });
+
+      realtimeChannel.subscribe(status => {
+        setConnected(status === 'SUBSCRIBED'
+          ? 'Conectado · sala administrativa'
+          : `Realtime · ${status}`);
+      });
+    }
+
+    async function enterApp(session) {
+      currentUser = session.user;
+
+      const { data: admin, error } = await supabaseClient
+        .from('bingo_admins')
+        .select('user_id')
+        .eq('user_id', currentUser.id)
+        .maybeSingle();
+
+      if (error || !admin) {
+        showNotice('Esta cuenta no tiene acceso de administrador al bingo.', true);
+        await supabaseClient.auth.signOut();
+        return;
+      }
+
+      $('login-panel').classList.add('hidden');
+      $('app-panel').classList.remove('hidden');
+      $('signout-btn').classList.remove('hidden');
+      setConnected('Sesión autenticada · cargando partidas…');
+
+      try {
+        await loadGames();
+        await subscribeToGame();
+        if (refreshTimer) clearInterval(refreshTimer);
+        refreshTimer = setInterval(() => loadGameData(), 20000);
+      } catch (error) {
+        showNotice(`No se pudieron cargar las partidas: ${error.message}`, true);
+      }
+    }
+
+    $('login-form').addEventListener('submit', async event => {
+      event.preventDefault();
+
+      if (SUPABASE_URL.includes('<project-ref>') ||
+          SUPABASE_PUBLISHABLE_KEY.includes('<sb_publishable_key>')) {
+        showNotice('Primero configura SUPABASE_URL y SUPABASE_PUBLISHABLE_KEY en el archivo.', true);
+        return;
+      }
+
+      const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: $('email').value.trim(),
+        password: $('password').value
+      });
+
+      if (error) {
+        showNotice(`No se pudo iniciar sesión: ${error.message}`, true);
+        return;
+      }
+
+      await enterApp(data.session);
     });
-  }
-})();
-</script>
+
+    $('game-select').addEventListener('change', event => selectGame(event.target.value));
+    $('draw-btn').addEventListener('click', drawNextNumber);
+    $('start-btn').addEventListener('click', () => setGameStatus('active'));
+    $('finish-btn').addEventListener('click', () => {
+      if (confirm('¿Finalizar esta partida?')) setGameStatus('finished');
+    });
+    $('refresh-btn').addEventListener('click', loadGameData);
+
+    $('signout-btn').addEventListener('click', async () => {
+      if (refreshTimer) clearInterval(refreshTimer);
+      if (realtimeChannel) await supabaseClient.removeChannel(realtimeChannel);
+      await supabaseClient.auth.signOut();
+      location.reload();
+    });
+
+    supabaseClient.auth.getSession().then(({ data }) => {
+      if (data.session) enterApp(data.session);
+    });
+  </script>
+</body>
+</html>
