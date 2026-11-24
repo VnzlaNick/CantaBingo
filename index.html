@@ -52,11 +52,6 @@
     const welcome = document.querySelector("#welcome");
     const loginButton = document.querySelector("#login-button");
 
-    if (SUPABASE_PUBLISHABLE_KEY.includes("PEGA_AQUI")) {
-      loginMessage.textContent =
-        "Configura SUPABASE_PUBLISHABLE_KEY con la clave publishable del proyecto.";
-    }
-
     const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
     function showDashboard(title, message = "") {
@@ -89,8 +84,9 @@
     async function loadAccess() {
       showDashboard("Comprobando acceso…");
 
-      // Verifica al usuario con Auth; RLS determina qué datos puede consultar.
-      const { data: userData, error: userError } = await supabase.auth.getUser();
+      const { data: userData, error: userError } =
+        await supabase.auth.getUser();
+
       if (userError || !userData.user) {
         showLogin("Inicia sesión para entrar a tu sala.");
         return;
@@ -98,7 +94,8 @@
 
       const user = userData.user;
 
-      // Los administradores se registran en bingo_admins.
+      // El administrador debe tener una fila en bingo_admins
+      // donde user_id coincida con el ID de su usuario de Auth.
       const { data: admin, error: adminError } = await supabase
         .from("bingo_admins")
         .select("user_id")
@@ -111,40 +108,11 @@
       }
 
       if (admin) {
-        await loadAdminRoom(user.id);
+        window.location.replace("adm.html");
         return;
       }
 
       await loadPlayerRoom(user.id);
-    }
-
-    async function loadAdminRoom(userId) {
-      showDashboard("Sala administrativa", "Tus salas:");
-
-      const { data, error } = await supabase
-        .from("bingo_games")
-        .select("id, title, status, public_code, created_at")
-        .eq("created_by", userId)
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        showError(error);
-        return;
-      }
-
-      if (!data?.length) {
-        addText(rooms, "p", "Aún no tienes salas creadas.");
-        return;
-      }
-
-      for (const game of data) {
-        const section = document.createElement("section");
-        section.className = "room";
-        addText(section, "h3", game.title);
-        addText(section, "p", `Estado: ${game.status}`);
-        if (game.public_code) addText(section, "p", `Código público: ${game.public_code}`);
-        rooms.append(section);
-      }
     }
 
     async function loadPlayerRoom(userId) {
@@ -192,6 +160,7 @@
           showError(error);
           return;
         }
+
         games = data ?? [];
       }
 
@@ -216,24 +185,42 @@
         const game = gameById.get(gameId);
         const section = document.createElement("section");
         section.className = "room";
-        addText(section, "h3", game?.title ?? "Sala de juego");
-        if (game?.status) addText(section, "p", `Estado: ${game.status}`);
 
-        const gameCards = (cards ?? []).filter(card => card.game_id === gameId);
+        addText(section, "h3", game?.title ?? "Sala de juego");
+
+        if (game?.status) {
+          addText(section, "p", `Estado: ${game.status}`);
+        }
+
+        const gameCards = (cards ?? []).filter(
+          card => card.game_id === gameId
+        );
+
         if (!gameCards.length) {
-          addText(section, "p", "El administrador aún no te ha asignado cartones.");
+          addText(
+            section,
+            "p",
+            "El administrador aún no te ha asignado cartones."
+          );
         }
 
         for (const card of gameCards) {
           const cardSection = document.createElement("article");
           cardSection.className = "card";
-          addText(cardSection, "strong", `Cartón ${card.watermark_code ?? ""}`);
+
+          addText(
+            cardSection,
+            "strong",
+            `Cartón ${card.watermark_code ?? ""}`
+          );
 
           const values = Array.isArray(card.cells) ? card.cells : [];
           const list = document.createElement("ol");
+
           for (const value of values) {
             addText(list, "li", String(value));
           }
+
           cardSection.append(list);
           section.append(cardSection);
         }
@@ -242,31 +229,41 @@
       }
     }
 
-    document.querySelector("#login-form").addEventListener("submit", async event => {
-      event.preventDefault();
-      loginButton.disabled = true;
-      loginMessage.textContent = "Ingresando…";
+    document
+      .querySelector("#login-form")
+      .addEventListener("submit", async event => {
+        event.preventDefault();
+        loginButton.disabled = true;
+        loginMessage.textContent = "Ingresando…";
 
-      const email = document.querySelector("#email").value;
-      const password = document.querySelector("#password").value;
+        const email = document.querySelector("#email").value;
+        const password = document.querySelector("#password").value;
 
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
 
-      loginButton.disabled = false;
-      if (error) {
-        loginMessage.textContent = "No se pudo iniciar sesión. Revisa tus datos.";
-        return;
-      }
+        loginButton.disabled = false;
 
-      await loadAccess();
-    });
+        if (error) {
+          loginMessage.textContent =
+            "No se pudo iniciar sesión. Revisa tus datos.";
+          return;
+        }
 
-    document.querySelector("#logout-button").addEventListener("click", async () => {
-      await supabase.auth.signOut();
-      showLogin("Sesión cerrada.");
-    });
+        await loadAccess();
+      });
+
+    document
+      .querySelector("#logout-button")
+      .addEventListener("click", async () => {
+        await supabase.auth.signOut();
+        showLogin("Sesión cerrada.");
+      });
 
     const { data: sessionData } = await supabase.auth.getSession();
+
     if (sessionData.session) {
       await loadAccess();
     }
