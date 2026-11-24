@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&amp;family=Sora:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface-variant": "#b9cac3", "on-primary-fixed": "#002019", "error": "#ffb4ab", "background": "#190e27", "secondary-fixed": "#ffd9e2", "surface-container-highest": "#3b304a", "surface-container": "#251a34", "on-surface": "#eedcff", "on-primary-fixed-variant": "#005142", "inverse-primary": "#006b58", "primary-container": "#00ffd5", "primary-fixed-dim": "#00e0bb", "surface-tint": "#00e0bb", "tertiary-fixed-dim": "#ffb95f", "error-container": "#93000a", "on-primary": "#00382d", "primary": "#ffffff", "on-secondary-container": "#ffd0dc", "secondary-container": "#be0062", "inverse-surface": "#eedcff", "secondary-fixed-dim": "#ffb1c7", "on-background": "#eedcff", "surface-container-high": "#30253f", "inverse-on-surface": "#372b46", "surface-variant": "#3b304a", "secondary": "#ffb1c7", "outline-variant": "#3a4a45", "on-error": "#690005", "surface-container-low": "#211630", "on-tertiary-fixed": "#2a1700", "on-tertiary-container": "#8d5900", "on-secondary": "#650031", "surface": "#190e27", "tertiary-container": "#ffddb8", "on-tertiary-fixed-variant": "#653e00", "tertiary-fixed": "#ffddb8", "outline": "#83948e", "surface-bright": "#40344f", "on-secondary-fixed": "#3f001c", "on-error-container": "#ffdad6", "tertiary": "#ffffff", "on-tertiary": "#472a00", "on-secondary-fixed-variant": "#8e0048", "primary-fixed": "#00ffd5", "on-primary-container": "#00725e", "surface-dim": "#190e27", "surface-container-lowest": "#130921" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "gutter": "1rem", "space-md": "1rem", "space-xl": "2.5rem", "margin-desktop": "2rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "margin": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem" }, fontFamily: { "body-lg": ["Sora"], "headline-xl": ["Space Grotesk"], "label-lg": ["JetBrains Mono"], "body-sm": ["Sora"], "label-sm": ["JetBrains Mono"], "headline-md": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "headline-xl-mobile": ["Space Grotesk"], "label-md": ["JetBrains Mono"], "headline-lg": ["Space Grotesk"], "body-md": ["Sora"] }, fontSize: { "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "headline-xl": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }], "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.06em", fontWeight: "600" }], "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "500" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "headline-lg-mobile": ["24px", { lineHeight: "30px", letterSpacing: "0em", fontWeight: "600" }], "headline-xl-mobile": ["30px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-body-md text-on-surface flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_4px_20px_rgba(0,255,213,0.06)]"><div class="h-14 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-xl bg-surface-container-highest flex items-center justify-center shadow-[0_0_12px_rgba(0,255,213,0.3)]"><span class="material-symbols-outlined text-primary-container text-[20px]">cyclone</span></div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-wider text-on-surface">CANTA</span><span class="font-headline-md text-headline-md text-primary-container drop-shadow-[0_0_8px_rgba(0,255,213,0.6)]">BINGO</span></div><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse shadow-[0_0_6px_#00ffd5]"></span><span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">SYNC ORBITAL</span></div></div></div><div class="flex items-center gap-space-sm"><div class="px-space-sm py-0.5 rounded-full bg-surface-container-high flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[14px]">satellite_alt</span><span class="font-label-sm text-label-sm text-secondary font-semibold">LIVE</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_10px_rgba(255,255,255,0.2)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-margin pt-14 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full gap-space-md text-on-surface">
+<!-- CABECERA TÁCTICA DEL ANFITRIÓN & RESUMEN DE SALA -->
+<div class="flex flex-col bg-surface-container-high/90 rounded-xl p-space-md shadow-xl backdrop-blur-xl gap-space-sm relative overflow-hidden">
+<!-- Luz ambiental sutil de fondo -->
+<div class="absolute -right-12 -top-12 w-40 h-40 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center shadow-[0_0_12px_rgba(0,255,213,0.3)]">
+<span class="material-symbols-outlined text-primary-container text-[20px]">tune</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md tracking-wider text-on-surface flex items-center gap-1">
+            MESA DE CONTROL
+          </span>
+<span class="font-label-sm text-label-sm text-primary-container uppercase tracking-wider">RONDA #1042 • SALA ALFA</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<a class="px-space-sm py-1 rounded-lg bg-surface-container-highest text-primary hover:bg-surface-container-highest/80 flex items-center gap-1 transition-all shadow-sm" href="bingo.html" target="_blank">
+<span class="material-symbols-outlined text-[16px] text-primary-container">open_in_new</span>
+<span class="font-label-sm text-label-sm uppercase">Ver Sala</span>
+</a>
+</div>
+</div>
+<!-- Telemetría rápida en píldoras métricas -->
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs">
+<div class="flex flex-col p-space-xs rounded-lg bg-surface-container-lowest/80 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span> JUGADORES
+        </span>
+<span class="font-label-lg text-label-lg font-bold text-on-surface">148</span>
+</div>
+<div class="flex flex-col p-space-xs rounded-lg bg-surface-container-lowest/80 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">CARTONES</span>
+<span class="font-label-lg text-label-lg font-bold text-tertiary-fixed-dim">412</span>
+</div>
+<div class="flex flex-col p-space-xs rounded-lg bg-surface-container-lowest/80 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">CICLO AUTO</span>
+<span class="font-label-lg text-label-lg font-bold text-secondary-fixed">5s Activo</span>
+</div>
+</div>
+<!-- Comandos rápidos de extracción -->
+<div class="grid grid-cols-5 gap-space-xs pt-space-xs">
+<button class="col-span-3 py-3 px-space-md rounded-xl bg-primary-container text-on-primary-container font-headline-md text-headline-md tracking-wider font-bold shadow-[0_0_24px_rgba(0,255,213,0.4)] flex items-center justify-center gap-2 active:scale-95 transition-all" id="btnCantarBalota">
+<span class="material-symbols-outlined text-[24px]">stream</span>
+        CANTAR BALOTA
+      </button>
+<button class="col-span-2 py-3 px-space-xs rounded-xl bg-error-container text-on-error-container font-label-md text-label-md uppercase tracking-wider font-bold shadow-[0_0_16px_rgba(147,0,10,0.5)] flex items-center justify-center gap-1 active:scale-95 transition-all" id="btnPausaEmergencia">
+<span class="material-symbols-outlined text-[20px]">pause_circle</span>
+        PAUSA LIVE
+      </button>
+</div>
+</div>
+<!-- ALERTA URGENTE: VALIDACIÓN Y AUDITORÍA DE BINGO EN VIVO (SISTEMA DE JUEZ) -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl p-space-md shadow-2xl relative overflow-hidden transition-all" id="moduloAuditoria">
+<div class="absolute -left-10 -bottom-10 w-32 h-32 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Indicador de Alerta -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary-container animate-pulse shadow-[0_0_10px_#db2777]"></span>
+<span class="font-label-sm text-label-sm tracking-widest text-secondary font-bold uppercase">RECLAMO BINGO EN TIEMPO REAL</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-secondary text-label-sm font-label-sm font-semibold">1 Pendiente</span>
+</div>
+<!-- Ficha del Usuario reclamante -->
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-high/60 my-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[22px]">person_check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-bold text-on-surface">Carlos_92</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cartón Serie #A892</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-md text-label-md font-bold text-primary-container">15/15 HIT</span>
+<span class="font-label-sm text-label-sm text-tertiary-fixed-dim">75.000 Bs</span>
+</div>
+</div>
+<!-- Visor de auditoría 5x3 del cartón del jugador -->
+<div class="p-space-sm rounded-lg bg-surface-container-high/40 flex flex-col gap-space-xs">
+<div class="flex justify-between items-center text-label-sm font-label-sm text-on-surface-variant">
+<span>Matriz de Aciertos vs Balotas Cantadas</span>
+<span class="text-primary-container">HASH: 9F2C...E14A</span>
+</div>
+<!-- Cuadrícula 5x3 simulando el cartón oficial de bingo -->
+<div class="grid grid-cols-5 gap-1 text-center py-1">
+<!-- Fila 1 -->
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">04</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">17</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">32</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">58</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">81</div>
+<!-- Fila 2 -->
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">12</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">29</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">44</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">69</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">87</div>
+<!-- Fila 3 -->
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">14</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">21</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">50</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">62</div>
+<div class="p-1 rounded bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold shadow-[0_0_6px_rgba(0,255,213,0.3)]">80</div>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-primary-container pt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+          100% de coincidencias confirmadas por balotera
+        </span>
+</div>
+</div>
+<!-- Botones de Acción de Juez -->
+<div class="grid grid-cols-2 gap-space-xs pt-space-sm">
+<button class="py-2.5 px-space-sm rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-bold shadow-[0_0_12px_rgba(0,255,213,0.4)] flex items-center justify-center gap-1 active:scale-95 transition-all" id="btnAprobarBingo">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+        Aprobar y Pagar
+      </button>
+<button class="py-2.5 px-space-sm rounded-lg bg-surface-container-highest text-error font-label-md text-label-md font-semibold flex items-center justify-center gap-1 active:scale-95 transition-all hover:bg-error-container/40" id="btnRechazarBingo">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+        Rechazar
+      </button>
+</div>
+<!-- Toast de Confirmación Oculto -->
+<div class="hidden mt-space-sm p-space-sm rounded-lg bg-primary-container/20 text-primary-container font-label-sm text-label-sm flex items-center justify-between" id="toastVerificacion">
+<span>¡Premio de 75.000,00 Bs adjudicado a Carlos_92 con éxito!</span>
+<span class="material-symbols-outlined text-[18px]">celebration</span>
+</div>
+</div>
+<!-- CONTROL DE BALOTERA & SECUENCIA 3D -->
+<div class="flex flex-col bg-surface-container rounded-xl p-space-md shadow-lg gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[20px]">sports_volleyball</span>
+<span class="font-headline-md text-headline-md text-on-surface">BALOTERA CÓSMICA</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-highest text-on-surface hover:text-primary-container" id="btnSpeed3s">3s</button>
+<button class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-primary-container text-on-primary-container font-bold shadow-sm" id="btnSpeed5s">5s</button>
+<button class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-highest text-on-surface hover:text-primary-container" id="btnSpeedManual">Man</button>
+</div>
+</div>
+<!-- Visualizador Central de Balota Cantada -->
+<div class="flex items-center justify-around py-space-sm bg-surface-container-lowest/60 rounded-xl relative overflow-hidden">
+<!-- Glow Cósmico Central -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-tertiary-fixed-dim/5 to-transparent pointer-events-none"></div>
+<!-- Balota Cantada 3D Esférica -->
+<div class="flex flex-col items-center">
+<div class="w-20 h-20 rounded-full bg-gradient-to-br from-tertiary-fixed via-tertiary-fixed-dim to-on-tertiary shadow-[0_0_28px_rgba(255,185,95,0.7)] flex flex-col items-center justify-center relative active:scale-110 transition-transform" id="balotaActual">
+<!-- Reflejo especular superior -->
+<div class="absolute top-2 left-3 w-5 h-2.5 bg-primary/60 rounded-full blur-[1px] rotate-[-25deg]"></div>
+<span class="font-headline-xl-mobile text-headline-xl-mobile text-on-tertiary font-bold tracking-tight">29</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-tertiary-fixed-dim uppercase tracking-wider mt-1">VEINTINUEVE</span>
+</div>
+<!-- Riel de Últimas Balotas -->
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">ÚLTIMAS EXTRAÍDAS:</span>
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-[190px]">
+<span class="w-8 h-8 rounded-full bg-primary-container/20 text-primary-container font-label-md text-label-md font-bold flex items-center justify-center shrink-0 shadow-[0_0_8px_rgba(0,255,213,0.3)]">87</span>
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">62</span>
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">80</span>
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">81</span>
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">14</span>
+<span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold flex items-center justify-center shrink-0">69</span>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant pt-1">
+<span>Extraídas: 34 / 90</span>
+<button class="text-error hover:underline flex items-center gap-0.5" id="btnResetBalotera">
+<span class="material-symbols-outlined text-[14px]">restart_alt</span> Reiniciar
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- MÓDULO CLAVE: FIGURA / JUGADA ASIGNADA POR RONDA -->
+<div class="flex flex-col bg-surface-container-high rounded-xl p-space-md shadow-lg gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">pattern</span>
+<span class="font-headline-md text-headline-md text-on-surface">JUGADA EN DISPUTA</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary-container text-label-sm font-label-sm font-bold">Activa</span>
+</div>
+<!-- Fila Interactiva: Mini-Grid Paytable y Detalles del Premio -->
+<div class="grid grid-cols-12 gap-space-sm items-center bg-surface-container-lowest/70 p-space-sm rounded-lg">
+<!-- Mini cuadrícula de 3x5 de la figura (Cartón Lleno) -->
+<div class="col-span-5 flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-1">Patrón Ronda</span>
+<div class="grid grid-cols-5 gap-1 p-1.5 rounded-lg bg-surface-container-highest/60 shadow-inner" id="miniGridPatron">
+<!-- 15 puntos iluminados en dorado/neón -->
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]"></span>
+</div>
+</div>
+<!-- Datos del Premio y Selector -->
+<div class="col-span-7 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="selectorJugada">Modo de Victoria:</label>
+<select class="w-full bg-surface-container-highest text-on-surface text-label-md font-label-md rounded p-1.5 focus:outline-none focus:ring-1 focus:ring-primary-container" id="selectorJugada">
+<option selected="" value="pleno">Cartón Lleno (15 hits)</option>
+<option value="linea">Línea Horizontal (5 hits)</option>
+<option value="esquinas">Cuatro Esquinas (4 hits)</option>
+<option value="cruz">Cruz Cósmica (9 hits)</option>
+</select>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Bote Ronda:</span>
+<span class="font-label-md text-label-md font-bold text-tertiary-fixed-dim">75.000,00 Bs</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pozo Acumulado:</span>
+<span class="font-label-md text-label-md font-bold text-primary-container">210.500,00 Bs</span>
+</div>
+</div>
+</div>
+<!-- Botones de Cambio y Avance de Ronda -->
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="py-2 px-space-xs rounded bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-surface-container-highest/80 transition-all flex items-center justify-center gap-1" id="btnGuardarFigura">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+        Actualizar Figura
+      </button>
+<button class="py-2 px-space-xs rounded bg-surface-tint text-on-primary font-label-md text-label-md font-bold shadow-md hover:brightness-110 transition-all flex items-center justify-center gap-1" id="btnAvanzarRonda">
+<span class="material-symbols-outlined text-[16px]">fast_forward</span>
+        Próxima Ronda
+      </button>
+</div>
+</div>
+<!-- MATRIZ MAESTRA DE 90 BALOTAS -->
+<div class="flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-lg gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[20px]">grid_on</span>
+<span class="font-headline-md text-headline-md text-on-surface">MATRIZ MAESTRA (90)</span>
+</div>
+<!-- Pestañas de Grupo -->
+<div class="flex rounded-lg bg-surface-container-highest p-0.5" id="pestañasMatriz">
+<button class="px-2 py-0.5 rounded text-label-sm font-label-sm font-bold bg-primary-container text-on-primary-container" data-tab="1-30">1-30</button>
+<button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant" data-tab="31-60">31-60</button>
+<button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant" data-tab="61-90">61-90</button>
+</div>
+</div>
+<!-- Muestra de Cuadrícula Táctil (Muestra del grupo 1-30) -->
+<div class="grid grid-cols-6 gap-1.5 p-space-xs rounded-lg bg-surface-container-lowest/80 text-center" id="gridMatrizBalotas">
+<!-- Casillas con estados: Cantada (Cian Neón), Actual (Dorado Radiante), Pendiente (Gris Tenue) -->
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">01</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">02</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">03</div>
+<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">04</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">05</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">06</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">07</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">08</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">09</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">10</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">11</div>
+<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">12</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">13</div>
+<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">14</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">15</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">16</div>
+<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">17</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">18</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">19</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">20</div>
+<div class="p-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-[0_0_8px_rgba(0,255,213,0.5)]">21</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">22</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">23</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">24</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">25</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">26</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">27</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">28</div>
+<!-- Casilla Actual (Dorado Radiante) -->
+<div class="p-1 rounded bg-tertiary-fixed text-on-tertiary font-label-sm text-label-sm font-bold shadow-[0_0_12px_rgba(255,185,95,0.8)] animate-pulse">29</div>
+<div class="p-1 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm">30</div>
+</div>
+<!-- Leyenda de Estados -->
+<div class="flex items-center justify-center gap-space-md text-label-sm font-label-sm pt-1">
+<div class="flex items-center gap-1">
+<span class="w-2.5 h-2.5 rounded bg-tertiary-fixed"></span>
+<span class="text-on-surface-variant">Actual</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2.5 h-2.5 rounded bg-primary-container"></span>
+<span class="text-on-surface-variant">Cantada</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2.5 h-2.5 rounded bg-surface-container-highest"></span>
+<span class="text-on-surface-variant">En Espera</span>
+</div>
+</div>
+</div>
+<!-- MODERACIÓN Y CHAT EN VIVO DE LA SALA -->
+<div class="flex flex-col bg-surface-container rounded-xl p-space-md shadow-lg gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">forum</span>
+<span class="font-headline-md text-headline-md text-on-surface">MODERACIÓN DE CHAT</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Actividad Alta</span>
+</div>
+<!-- Registro de Mensajes Recientes -->
+<div class="flex flex-col gap-1.5 max-h-36 overflow-y-auto pr-1">
+<div class="flex items-start justify-between bg-surface-container-lowest/60 p-space-xs rounded-lg text-body-sm font-body-sm">
+<div class="flex flex-col">
+<span class="font-bold text-primary-container">Lucia_Bingo:</span>
+<span class="text-on-surface">¡Canten el 77 por favor que me falta uno! 😱</span>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" title="Moderar">
+<span class="material-symbols-outlined text-[16px]">block</span>
+</button>
+</div>
+<div class="flex items-start justify-between bg-surface-container-lowest/60 p-space-xs rounded-lg text-body-sm font-body-sm">
+<div class="flex flex-col">
+<span class="font-bold text-tertiary-fixed-dim">Pedro_Caracas:</span>
+<span class="text-on-surface">Buena suerte a todos, ¡esta ronda es mía! 🔥</span>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" title="Moderar">
+<span class="material-symbols-outlined text-[16px]">block</span>
+</button>
+</div>
+<div class="flex items-start justify-between bg-surface-container-lowest/60 p-space-xs rounded-lg text-body-sm font-body-sm">
+<div class="flex flex-col">
+<span class="font-bold text-secondary">Mariana_Star:</span>
+<span class="text-on-surface">Esa balota 29 me dejó a tiro de esquina 🤞</span>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-1" title="Moderar">
+<span class="material-symbols-outlined text-[16px]">block</span>
+</button>
+</div>
+</div>
+<!-- Envío de Anuncio General de Moderador -->
+<div class="flex items-center gap-space-xs pt-1">
+<input class="flex-1 bg-surface-container-highest text-on-surface text-body-sm font-body-sm px-space-sm py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary-container placeholder:text-on-surface-variant" id="inputAvisoGeneral" placeholder="Enviar anuncio oficial a la sala..." type="text"/>
+<button class="p-2 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center hover:opacity-90 transition-opacity" id="btnEnviarAviso">
+<span class="material-symbols-outlined text-[20px]">campaign</span>
+</button>
+</div>
+</div>
+<!-- HISTORIAL DE GANADORES AUDITADOS RECIENTES -->
+<div class="flex flex-col bg-surface-container-low rounded-xl p-space-md shadow-lg gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[20px]">military_tech</span>
+<span class="font-headline-md text-headline-md text-on-surface">PAGOS SESIÓN</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Últimas Rondas</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<!-- Item Historial 1 -->
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-high/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px]">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Elena_R (Ronda #1041)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Línea Horizontal • REF: #TX-9021</span>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-tertiary-fixed-dim">25.000 Bs</span>
+</div>
+<!-- Item Historial 2 -->
+<div class="flex items-center justify-between p-space-xs rounded-lg bg-surface-container-high/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px]">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Marcos_V (Ronda #1040)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cartón Lleno • REF: #TX-8834</span>
+</div>
+</div>
+<span class="font-label-md text-label-md font-bold text-tertiary-fixed-dim">75.000 Bs</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function initMesaControl() {
+  const selector = document.getElementById('selectorJugada');
+  const miniGrid = document.getElementById('miniGridPatron');
+  const gridMatriz = document.getElementById('gridMatrizBalotas');
+  const balotaActual = document.getElementById('balotaActual');
+  const btnCantar = document.getElementById('btnCantarBalota');
+  const btnPausa = document.getElementById('btnPausaEmergencia');
+  const btnAvanzarRonda = document.getElementById('btnAvanzarRonda');
+  const btnGuardarFigura = document.getElementById('btnGuardarFigura');
+  const btnEnviarAviso = document.getElementById('btnEnviarAviso');
+  const inputAviso = document.getElementById('inputAvisoGeneral');
+  const btnAprobar = document.getElementById('btnAprobarBingo');
+  const btnRechazar = document.getElementById('btnRechazarBingo');
+  const toast = document.getElementById('toastVerificacion');
+
+  const patrones = {
+    pleno: [
+      1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1
+    ],
+    linea: [
+      0, 0, 0, 0, 0,
+      1, 1, 1, 1, 1,
+      0, 0, 0, 0, 0
+    ],
+    esquinas: [
+      1, 0, 0, 0, 1,
+      0, 0, 0, 0, 0,
+      1, 0, 0, 0, 1
+    ],
+    cruz: [
+      0, 0, 1, 0, 0,
+      1, 1, 1, 1, 1,
+      0, 0, 1, 0, 0
+    ]
+  };
+
+  // Una cruz en una cuadrícula de 3 × 5 tiene 7 casillas.
+  if (selector) {
+    const opcionCruz = selector.querySelector('option[value="cruz"]');
+    if (opcionCruz) opcionCruz.textContent = 'Cruz Cósmica (7 hits)';
+  }
+
+  function renderMiniGrid(tipo) {
+    if (!miniGrid) return;
+
+    const patron = patrones[tipo] || patrones.pleno;
+    const fragmento = document.createDocumentFragment();
+
+    patron.forEach((activo) => {
+      const punto = document.createElement('span');
+      punto.className = activo
+        ? 'w-3 h-3 rounded-full bg-tertiary-fixed-dim shadow-[0_0_6px_#ffb95f]'
+        : 'w-3 h-3 rounded-full bg-surface-container-lowest/70 opacity-30';
+      fragmento.appendChild(punto);
+    });
+
+    miniGrid.replaceChildren(fragmento);
+  }
+
+  if (selector) {
+    renderMiniGrid(selector.value);
+    selector.addEventListener('change', () => renderMiniGrid(selector.value));
+  }
+
+  // Conserva como cantadas las balotas que ya aparecían marcadas en el HTML.
+  const balotasCantadas = new Set();
+  let balotaEnCurso = null;
+
+  if (gridMatriz) {
+    Array.from(gridMatriz.children).forEach((casilla) => {
+      const numero = Number(casilla.textContent.trim());
+      if (!Number.isInteger(numero)) return;
+
+      if (casilla.classList.contains('bg-tertiary-fixed')) {
+        balotaEnCurso = numero;
+      } else if (casilla.classList.contains('bg-primary-container')) {
+        balotasCantadas.add(numero);
+      }
+    });
+  }
+
+  function mostrarBalota(numero) {
+    if (!balotaActual) return;
+
+    const destino = balotaActual.querySelector('span') || balotaActual;
+    destino.textContent = numero === null
+      ? '—'
+      : String(numero).padStart(2, '0');
+  }
+
+  function actualizarMatriz() {
+    if (!gridMatriz) return;
+
+    const pestañaActiva = document.querySelector(
+      '#pestañasMatriz button.bg-primary-container'
+    );
+    const rango = pestañaActiva ? pestañaActiva.dataset.tab : '1-30';
+    const [inicio, fin] = rango.split('-').map(Number);
+    const fragmento = document.createDocumentFragment();
+
+    for (let numero = inicio; numero <= fin; numero++) {
+      const casilla = document.createElement('div');
+      casilla.textContent = String(numero).padStart(2, '0');
+      casilla.className = 'p-1 rounded font-label-sm text-label-sm';
+
+      if (numero === balotaEnCurso) {
+        casilla.classList.add(
+          'bg-tertiary-fixed',
+          'text-on-tertiary',
+          'font-bold',
+          'shadow-[0_0_12px_rgba(255,185,95,0.8)]',
+          'animate-pulse'
+        );
+      } else if (balotasCantadas.has(numero)) {
+        casilla.classList.add(
+          'bg-primary-container',
+          'text-on-primary-container',
+          'font-bold',
+          'shadow-[0_0_8px_rgba(0,255,213,0.5)]'
+        );
+      } else {
+        casilla.classList.add(
+          'bg-surface-container-highest',
+          'text-on-surface-variant'
+        );
+      }
+
+      fragmento.appendChild(casilla);
+    }
+
+    gridMatriz.replaceChildren(fragmento);
+  }
+
+  document.querySelectorAll('#pestañasMatriz button[data-tab]').forEach((boton) => {
+    boton.addEventListener('click', () => {
+      document.querySelectorAll('#pestañasMatriz button[data-tab]').forEach((otro) => {
+        otro.classList.remove(
+          'bg-primary-container',
+          'text-on-primary-container',
+          'font-bold'
+        );
+        otro.classList.add('text-on-surface-variant');
+      });
+
+      boton.classList.add(
+        'bg-primary-container',
+        'text-on-primary-container',
+        'font-bold'
+      );
+      boton.classList.remove('text-on-surface-variant');
+
+      actualizarMatriz();
+    });
+  });
+
+  actualizarMatriz();
+
+  // Sorteo local sin repetir números dentro de la ronda.
+  if (btnCantar) {
+    btnCantar.addEventListener('click', () => {
+      const disponibles = [];
+
+      for (let numero = 1; numero <= 90; numero++) {
+        if (
+          !balotasCantadas.has(numero) &&
+          numero !== balotaEnCurso
+        ) {
+          disponibles.push(numero);
+        }
+      }
+
+      if (disponibles.length === 0) {
+        btnCantar.disabled = true;
+        return;
+      }
+
+      const indice = window.crypto && window.crypto.getRandomValues
+        ? window.crypto.getRandomValues(new Uint32Array(1))[0] % disponibles.length
+        : Math.floor(Math.random() * disponibles.length);
+
+      if (balotaEnCurso !== null) {
+        balotasCantadas.add(balotaEnCurso);
+      }
+
+      balotaEnCurso = disponibles[indice];
+      mostrarBalota(balotaEnCurso);
+      actualizarMatriz();
+    });
+  }
+
+  if (btnGuardarFigura && selector) {
+    btnGuardarFigura.addEventListener('click', () => {
+      renderMiniGrid(selector.value);
+    });
+  }
+
+  // Pestaña de pausa: cambia el estado visual de la interfaz.
+  if (btnPausa) {
+    const textoPausa = btnPausa.innerHTML;
+    let enPausa = false;
+
+    btnPausa.addEventListener('click', () => {
+      enPausa = !enPausa;
+
+      if (enPausa) {
+        btnPausa.innerHTML =
+          '<span class="material-symbols-outlined text-[20px]">play_circle</span> REANUDAR';
+        btnPausa.classList.remove('bg-error-container', 'text-on-error-container');
+        btnPausa.classList.add('bg-tertiary-fixed', 'text-on-tertiary');
+      } else {
+        btnPausa.innerHTML = textoPausa;
+        btnPausa.classList.remove('bg-tertiary-fixed', 'text-on-tertiary');
+        btnPausa.classList.add('bg-error-container', 'text-on-error-container');
+      }
+    });
+  }
+
+  // Avanza la ronda reiniciando el estado local de las balotas.
+  if (btnAvanzarRonda) {
+    btnAvanzarRonda.addEventListener('click', () => {
+      balotasCantadas.clear();
+      balotaEnCurso = null;
+      mostrarBalota(null);
+      actualizarMatriz();
+
+      if (btnCantar) btnCantar.disabled = false;
+      if (toast) toast.classList.add('hidden');
+
+      if (btnAprobar) {
+        btnAprobar.disabled = false;
+        btnAprobar.classList.remove('opacity-50');
+      }
+      if (btnRechazar) {
+        btnRechazar.disabled = false;
+        btnRechazar.classList.remove('opacity-50');
+      }
+    });
+  }
+
+  // Estas acciones solo muestran el resultado en la interfaz; no procesan pagos.
+  function mostrarResultado(texto, esError) {
+    if (!toast) return;
+
+    toast.classList.remove('hidden', 'text-primary-container', 'bg-primary-container/20');
+    toast.classList.remove('text-error', 'bg-error-container/40');
+    toast.classList.add(
+      esError ? 'text-error' : 'text-primary-container',
+      esError ? 'bg-error-container/40' : 'bg-primary-container/20'
+    );
+
+    const mensaje = document.createElement('span');
+    mensaje.textContent = texto;
+
+    const icono = document.createElement('span');
+    icono.className = 'material-symbols-outlined text-[18px]';
+    icono.textContent = esError ? 'info' : 'celebration';
+
+    toast.replaceChildren(mensaje, icono);
+  }
+
+  if (btnAprobar) {
+    btnAprobar.addEventListener('click', () => {
+      mostrarResultado(
+        'Reclamo marcado como validado en esta interfaz. No se ha procesado ningún pago.',
+        false
+      );
+      btnAprobar.disabled = true;
+      btnAprobar.classList.add('opacity-50');
+      if (btnRechazar) btnRechazar.disabled = true;
+    });
+  }
+
+  if (btnRechazar) {
+    btnRechazar.addEventListener('click', () => {
+      mostrarResultado('Reclamo marcado como rechazado en esta interfaz.', true);
+      btnRechazar.disabled = true;
+      btnRechazar.classList.add('opacity-50');
+      if (btnAprobar) btnAprobar.disabled = true;
+    });
+  }
+
+  // Moderación visual de mensajes: los elimina solamente de esta página.
+  document.addEventListener('click', (evento) => {
+    const botonModerar = evento.target.closest('button[title="Moderar"]');
+    if (!botonModerar) return;
+
+    const mensaje = botonModerar.closest('.flex.items-start.justify-between');
+    if (mensaje) mensaje.remove();
+  });
+
+  // Agrega el anuncio al chat visible, sin enviarlo a un servidor.
+  function enviarAviso() {
+    if (!inputAviso || !inputAviso.value.trim()) return;
+
+    const listaMensajes = document.querySelector('.max-h-36.overflow-y-auto');
+    if (!listaMensajes) {
+      inputAviso.value = '';
+      return;
+    }
+
+    const tarjeta = document.createElement('div');
+    tarjeta.className =
+      'flex items-start justify-between bg-surface-container-lowest/60 p-space-xs rounded-lg text-body-sm font-body-sm';
+
+    const contenido = document.createElement('div');
+    contenido.className = 'flex flex-col';
+
+    const autor = document.createElement('span');
+    autor.className = 'font-bold text-primary-container';
+    autor.textContent = 'Moderación:';
+
+    const texto = document.createElement('span');
+    texto.className = 'text-on-surface';
+    texto.textContent = inputAviso.value.trim();
+
+    contenido.append(autor, texto);
+    tarjeta.appendChild(contenido);
+    listaMensajes.appendChild(tarjeta);
+    listaMensajes.scrollTop = listaMensajes.scrollHeight;
+    inputAviso.value = '';
+  }
+
+  if (btnEnviarAviso) {
+    btnEnviarAviso.addEventListener('click', enviarAviso);
+  }
+
+  if (inputAviso) {
+    inputAviso.addEventListener('keydown', (evento) => {
+      if (evento.key === 'Enter') enviarAviso();
+    });
+  }
+})();
+</script>
