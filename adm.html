@@ -31,29 +31,33 @@
       </button>
     </header>
 
+    <!-- El aviso está fuera de los paneles ocultos para que siempre se vean los errores. -->
+    <div id="notice" class="mb-4 hidden rounded-xl border px-4 py-3 text-sm" role="alert"></div>
+
     <section id="login-panel" class="panel mx-auto max-w-md rounded-2xl border border-teal-500/30 p-6 shadow-2xl">
       <h2 class="text-xl font-black">Acceso de administración</h2>
       <p class="mt-1 text-sm text-slate-400">Inicia sesión con una cuenta autorizada como administrador del bingo.</p>
+
       <form id="login-form" class="mt-5 space-y-3">
         <label class="block text-sm font-semibold">
           Correo
           <input id="email" type="email" autocomplete="username" required
             class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 outline-none focus:border-teal-400" />
         </label>
+
         <label class="block text-sm font-semibold">
           Contraseña
           <input id="password" type="password" autocomplete="current-password" required
             class="mt-1 w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 outline-none focus:border-teal-400" />
         </label>
-        <button class="w-full rounded-xl bg-teal-500 px-4 py-2.5 font-black text-slate-950 hover:bg-teal-400">
+
+        <button id="login-btn" class="w-full rounded-xl bg-teal-500 px-4 py-2.5 font-black text-slate-950 hover:bg-teal-400">
           Entrar
         </button>
       </form>
     </section>
 
     <section id="app-panel" class="hidden">
-      <div id="notice" class="mb-4 hidden rounded-xl border px-4 py-3 text-sm"></div>
-
       <div class="mb-4 grid gap-3 sm:grid-cols-2">
         <label class="panel rounded-xl border border-slate-800 p-3 text-sm font-bold">
           Partida
@@ -61,16 +65,17 @@
             <option value="">Cargando partidas…</option>
           </select>
         </label>
+
         <div class="panel flex items-center justify-between rounded-xl border border-slate-800 p-3">
           <div>
             <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Estado de la partida</p>
             <p id="game-status" class="mt-1 text-lg font-black">—</p>
           </div>
           <div class="flex gap-2">
-            <button id="start-btn" class="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-black text-slate-950 hover:bg-emerald-400">
+            <button id="start-btn" class="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-black text-slate-950 hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40">
               Iniciar
             </button>
-            <button id="finish-btn" class="rounded-lg bg-rose-500 px-3 py-2 text-sm font-black text-white hover:bg-rose-400">
+            <button id="finish-btn" class="rounded-lg bg-rose-500 px-3 py-2 text-sm font-black text-white hover:bg-rose-400 disabled:cursor-not-allowed disabled:opacity-40">
               Finalizar
             </button>
           </div>
@@ -107,11 +112,14 @@
               Cantar siguiente número
             </button>
           </div>
+
           <div id="number-board" class="grid grid-cols-10 gap-1.5 sm:gap-2"></div>
+
           <div class="mt-5 border-t border-slate-800 pt-4">
             <h3 class="mb-2 text-sm font-black uppercase tracking-wider text-slate-300">Historial reciente</h3>
             <div id="draw-history" class="flex min-h-10 flex-wrap gap-2"></div>
           </div>
+
           <p class="mt-4 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3 text-xs leading-relaxed text-amber-100/80">
             Esta versión elige la bolilla en el navegador y luego intenta guardarla. Para un sorteo con premios,
             implementa la extracción en una función segura de base de datos para evitar duplicados o manipulación desde el cliente.
@@ -153,12 +161,12 @@
   </main>
 
   <script>
-    // Sustituye estos valores por la URL del proyecto y la clave publicable.
+    // Usa la URL del proyecto y la clave publicable.
     // Nunca pongas aquí una service_role ni una sb_secret.
-    const SUPABASE_URL = 'https://lzzkgnntpnzwffunemqo.supabase.co/rest/v1/';
+    const SUPABASE_URL = 'https://lzzkgnntpnzwffunemqo.supabase.co';
     const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_gsj1KCUdHSMG0n6DIW2IOg_sP1up-Gv';
 
-    const $ = (id) => document.getElementById(id);
+    const $ = id => document.getElementById(id);
     const supabaseClient = window.supabase.createClient(
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
@@ -170,7 +178,6 @@
     let refreshTimer = null;
     let draws = [];
 
-    const text = (value) => value == null ? '' : String(value);
     const statusLabels = {
       waiting: 'En espera',
       active: 'En curso',
@@ -212,14 +219,15 @@
 
       $('draw-count').textContent = draws.length;
       $('latest-number').textContent = draws.length
-        ? text(draws[draws.length - 1].figure)
+        ? String(draws[draws.length - 1].figure)
         : '—';
 
       const history = $('draw-history');
       history.replaceChildren();
+
       draws.slice(-12).reverse().forEach(d => {
         const ball = document.createElement('span');
-        ball.textContent = text(d.figure);
+        ball.textContent = String(d.figure);
         ball.className = 'flex h-9 w-9 items-center justify-center rounded-full bg-amber-400 font-black text-slate-950';
         history.appendChild(ball);
       });
@@ -245,7 +253,7 @@
 
         const name = document.createElement('span');
         name.className = 'truncate font-bold';
-        name.textContent = text(player.display_name || 'Jugador');
+        name.textContent = String(player.display_name || 'Jugador');
 
         const cards = document.createElement('span');
         cards.className = 'shrink-0 text-xs text-slate-400';
@@ -274,7 +282,7 @@
 
         const user = document.createElement('span');
         user.className = 'truncate font-bold text-cyan-300';
-        user.textContent = text(message.user_id).slice(0, 8) || 'Jugador';
+        user.textContent = String(message.user_id || 'Jugador').slice(0, 8);
 
         const time = document.createElement('time');
         time.textContent = message.created_at
@@ -283,7 +291,7 @@
 
         const body = document.createElement('p');
         body.className = 'break-words text-slate-100';
-        body.textContent = text(message.message);
+        body.textContent = String(message.message || '');
 
         header.append(user, time);
         item.append(header, body);
@@ -303,7 +311,7 @@
       winners.forEach(winner => {
         const row = document.createElement('div');
         row.className = 'rounded-lg border border-amber-500/20 bg-slate-950/60 p-2.5';
-        row.textContent = `${text(winner.user_id).slice(0, 8)} · ${text(winner.winning_line)}`;
+        row.textContent = `${String(winner.user_id).slice(0, 8)} · ${String(winner.winning_line)}`;
         list.appendChild(row);
       });
     }
@@ -321,7 +329,7 @@
       const select = $('game-select');
       select.replaceChildren();
 
-      if (!data?.length) {
+      if (!data || data.length === 0) {
         const option = document.createElement('option');
         option.value = '';
         option.textContent = 'No hay partidas disponibles';
@@ -356,30 +364,36 @@
             .select('id,sequence_no,figure,drawn_at')
             .eq('game_id', currentGame.id)
             .order('sequence_no', { ascending: true }),
+
           supabaseClient.from('bingo_players')
             .select('user_id,display_name,joined_at,cards_allowed')
             .eq('game_id', currentGame.id)
             .order('joined_at', { ascending: true }),
+
           supabaseClient.from('bingo_cards')
             .select('id', { count: 'exact', head: true })
             .eq('game_id', currentGame.id),
+
           supabaseClient.from('bingo_messages')
             .select('id,user_id,message,created_at')
             .eq('game_id', currentGame.id)
             .order('created_at', { ascending: false })
             .limit(30),
+
           supabaseClient.from('bingo_winners')
             .select('user_id,winning_line,claimed_at')
             .eq('game_id', currentGame.id)
             .order('claimed_at', { ascending: false })
         ]);
 
-      if (drawResult.error) showNotice(`No pude cargar las bolillas: ${drawResult.error.message}`, true);
+      if (drawResult.error) {
+        showNotice(`No pude cargar las bolillas: ${drawResult.error.message}`, true);
+      }
       draws = drawResult.data || [];
       renderBoard();
 
       if (playersResult.error) {
-        $('players-list').textContent = `No se pudieron cargar los jugadores: ${playersResult.error.message}`;
+        $('players-list').textContent = `No se pudieron cargar jugadores: ${playersResult.error.message}`;
         $('player-count').textContent = '—';
       } else {
         renderPlayers(playersResult.data || []);
@@ -435,6 +449,7 @@
       if (!currentGame || currentGame.status !== 'active') return;
 
       $('draw-btn').disabled = true;
+
       try {
         const used = new Set(draws.map(d => Number(d.figure)));
         const available = Array.from({ length: 90 }, (_, i) => i + 1)
@@ -491,7 +506,6 @@
       }
       if (!currentGame) return;
 
-      // El servidor debe emitir estos eventos en el mismo topic privado.
       const topic = `game:${currentGame.id}:admin`;
       realtimeChannel = supabaseClient.channel(topic, {
         config: { private: true }
@@ -518,8 +532,14 @@
         .eq('user_id', currentUser.id)
         .maybeSingle();
 
-      if (error || !admin) {
-        showNotice('Esta cuenta no tiene acceso de administrador al bingo.', true);
+      if (error) {
+        showNotice(`Se inició sesión, pero no se pudo verificar el permiso de administrador: ${error.message}`, true);
+        await supabaseClient.auth.signOut();
+        return;
+      }
+
+      if (!admin) {
+        showNotice('Se inició sesión, pero esta cuenta no está autorizada en bingo_admins. Pide a un administrador del proyecto que habilite esta cuenta.', true);
         await supabaseClient.auth.signOut();
         return;
       }
@@ -532,6 +552,7 @@
       try {
         await loadGames();
         await subscribeToGame();
+
         if (refreshTimer) clearInterval(refreshTimer);
         refreshTimer = setInterval(() => loadGameData(), 20000);
       } catch (error) {
@@ -541,20 +562,32 @@
 
     $('login-form').addEventListener('submit', async event => {
       event.preventDefault();
+      hideNotice();
 
       if (SUPABASE_URL.includes('<project-ref>') ||
           SUPABASE_PUBLISHABLE_KEY.includes('<sb_publishable_key>')) {
-        showNotice('Primero configura SUPABASE_URL y SUPABASE_PUBLISHABLE_KEY en el archivo.', true);
+        showNotice('Configura SUPABASE_URL y SUPABASE_PUBLISHABLE_KEY en el archivo antes de iniciar sesión.', true);
         return;
       }
+
+      $('login-btn').disabled = true;
+      $('login-btn').textContent = 'Entrando…';
 
       const { data, error } = await supabaseClient.auth.signInWithPassword({
         email: $('email').value.trim(),
         password: $('password').value
       });
 
+      $('login-btn').disabled = false;
+      $('login-btn').textContent = 'Entrar';
+
       if (error) {
         showNotice(`No se pudo iniciar sesión: ${error.message}`, true);
+        return;
+      }
+
+      if (!data.session) {
+        showNotice('El inicio de sesión no devolvió una sesión. Revisa la configuración de Supabase Auth.', true);
         return;
       }
 
@@ -564,9 +597,11 @@
     $('game-select').addEventListener('change', event => selectGame(event.target.value));
     $('draw-btn').addEventListener('click', drawNextNumber);
     $('start-btn').addEventListener('click', () => setGameStatus('active'));
+
     $('finish-btn').addEventListener('click', () => {
       if (confirm('¿Finalizar esta partida?')) setGameStatus('finished');
     });
+
     $('refresh-btn').addEventListener('click', loadGameData);
 
     $('signout-btn').addEventListener('click', async () => {
@@ -576,7 +611,11 @@
       location.reload();
     });
 
-    supabaseClient.auth.getSession().then(({ data }) => {
+    supabaseClient.auth.getSession().then(({ data, error }) => {
+      if (error) {
+        showNotice(`No se pudo comprobar la sesión: ${error.message}`, true);
+        return;
+      }
       if (data.session) enterApp(data.session);
     });
   </script>
