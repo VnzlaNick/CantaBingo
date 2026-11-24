@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acceso a Bingo</title>
+  <style>
+    body { font: 16px system-ui, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 16px; color: #222; }
+    input, button { box-sizing: border-box; font: inherit; padding: 10px; margin: 6px 0; }
+    input { display: block; width: 100%; }
+    button { cursor: pointer; }
+    .card, .room { border: 1px solid #ddd; border-radius: 8px; padding: 14px; margin: 12px 0; }
+    .message { white-space: pre-wrap; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <h1>Sala de Bingo</h1>
+
+  <section id="login-view">
+    <h2>Iniciar sesión</h2>
+    <form id="login-form">
+      <label for="email">Correo</label>
+      <input id="email" type="email" autocomplete="username" required>
+
+      <label for="password">Contraseña</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+
+      <button id="login-button" type="submit">Ingresar</button>
+    </form>
+    <p id="login-message" class="message" role="status"></p>
+  </section>
+
+  <section id="dashboard" hidden>
+    <h2 id="welcome"></h2>
+    <p id="dashboard-message" class="message" role="status"></p>
+    <div id="rooms"></div>
+    <button id="logout-button" type="button">Cerrar sesión</button>
+  </section>
+
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const SUPABASE_URL = "https://lzzkgnntpnzwffunemqo.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "PEGA_AQUI_TU_CLAVE_sb_publishable";
+
+    const loginView = document.querySelector("#login-view");
+    const dashboard = document.querySelector("#dashboard");
+    const loginMessage = document.querySelector("#login-message");
+    const dashboardMessage = document.querySelector("#dashboard-message");
+    const rooms = document.querySelector("#rooms");
+    const welcome = document.querySelector("#welcome");
+    const loginButton = document.querySelector("#login-button");
+
+    if (SUPABASE_PUBLISHABLE_KEY.includes("PEGA_AQUI")) {
+      loginMessage.textContent =
+        "Configura SUPABASE_PUBLISHABLE_KEY con la clave publishable del proyecto.";
+    }
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    function showDashboard(title, message = "") {
+      loginView.hidden = true;
+      dashboard.hidden = false;
+      welcome.textContent = title;
+      dashboardMessage.textContent = message;
+      rooms.replaceChildren();
+    }
+
+    function showLogin(message = "") {
+      dashboard.hidden = true;
+      loginView.hidden = false;
+      loginMessage.textContent = message;
+    }
+
+    function addText(parent, tag, text) {
+      const element = document.createElement(tag);
+      element.textContent = text;
+      parent.append(element);
+      return element;
+    }
+
+    function showError(error) {
+      console.error(error);
+      dashboardMessage.textContent =
+        "No se pudo cargar el acceso. Revisa la sesión y las políticas RLS.";
+    }
+
+    async function loadAccess() {
+      showDashboard("Comprobando acceso…");
+
+      // Verifica al usuario con Auth; RLS determina qué datos puede consultar.
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError || !userData.user) {
+        showLogin("Inicia sesión para entrar a tu sala.");
+        return;
+      }
+
+      const user = userData.user;
+
+      // Los administradores se registran en bingo_admins.
+      const { data: admin, error: adminError } = await supabase
+        .from("bingo_admins")
+        .select("user_id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      if (adminError) {
+        showError(adminError);
+        return;
+      }
+
+      if (admin) {
+        await loadAdminRoom(user.id);
+        return;
+      }
+
+      await loadPlayerRoom(user.id);
+    }
+
+    async function loadAdminRoom(userId) {
+      showDashboard("Sala administrativa", "Tus salas:");
+
+      const { data, error } = await supabase
+        .from("bingo_games")
+        .select("id, title, status, public_code, created_at")
+        .eq("created_by", userId)
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        showError(error);
+        return;
+      }
+
+      if (!data?.length) {
+        addText(rooms, "p", "Aún no tienes salas creadas.");
+        return;
+      }
+
+      for (const game of data) {
+        const section = document.createElement("section");
+        section.className = "room";
+        addText(section, "h3", game.title);
+        addText(section, "p", `Estado: ${game.status}`);
+        if (game.public_code) addText(section, "p", `Código público: ${game.public_code}`);
+        rooms.append(section);
+      }
+    }
+
+    async function loadPlayerRoom(userId) {
+      const { data: access, error: accessError } = await supabase
+        .from("bingo_user_access")
+        .select("approval_status")
+        .eq("user_id", userId)
+        .maybeSingle();
+
+      if (accessError) {
+        showError(accessError);
+        return;
+      }
+
+      if (access?.approval_status !== "approved") {
+        showDashboard(
+          "Acceso de jugador",
+          "Tu acceso está pendiente de aprobación del administrador."
+        );
+        return;
+      }
+
+      showDashboard("Sala del jugador", "Tus salas y cartones asignados:");
+
+      const { data: memberships, error: membershipsError } = await supabase
+        .from("bingo_players")
+        .select("game_id, display_name")
+        .eq("user_id", userId);
+
+      if (membershipsError) {
+        showError(membershipsError);
+        return;
+      }
+
+      const gameIds = [...new Set((memberships ?? []).map(row => row.game_id))];
+
+      let games = [];
+      if (gameIds.length) {
+        const { data, error } = await supabase
+          .from("bingo_games")
+          .select("id, title, status")
+          .in("id", gameIds);
+
+        if (error) {
+          showError(error);
+          return;
+        }
+        games = data ?? [];
+      }
+
+      const gameById = new Map(games.map(game => [game.id, game]));
+
+      const { data: cards, error: cardsError } = await supabase
+        .from("bingo_cards")
+        .select("id, game_id, cells, watermark_code")
+        .eq("user_id", userId);
+
+      if (cardsError) {
+        showError(cardsError);
+        return;
+      }
+
+      if (!gameIds.length) {
+        addText(rooms, "p", "Todavía no estás inscrito en una sala.");
+        return;
+      }
+
+      for (const gameId of gameIds) {
+        const game = gameById.get(gameId);
+        const section = document.createElement("section");
+        section.className = "room";
+        addText(section, "h3", game?.title ?? "Sala de juego");
+        if (game?.status) addText(section, "p", `Estado: ${game.status}`);
+
+        const gameCards = (cards ?? []).filter(card => card.game_id === gameId);
+        if (!gameCards.length) {
+          addText(section, "p", "El administrador aún no te ha asignado cartones.");
+        }
+
+        for (const card of gameCards) {
+          const cardSection = document.createElement("article");
+          cardSection.className = "card";
+          addText(cardSection, "strong", `Cartón ${card.watermark_code ?? ""}`);
+
+          const values = Array.isArray(card.cells) ? card.cells : [];
+          const list = document.createElement("ol");
+          for (const value of values) {
+            addText(list, "li", String(value));
+          }
+          cardSection.append(list);
+          section.append(cardSection);
+        }
+
+        rooms.append(section);
+      }
+    }
+
+    document.querySelector("#login-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      loginButton.disabled = true;
+      loginMessage.textContent = "Ingresando…";
+
+      const email = document.querySelector("#email").value;
+      const password = document.querySelector("#password").value;
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+      loginButton.disabled = false;
+      if (error) {
+        loginMessage.textContent = "No se pudo iniciar sesión. Revisa tus datos.";
+        return;
+      }
+
+      await loadAccess();
+    });
+
+    document.querySelector("#logout-button").addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      showLogin("Sesión cerrada.");
+    });
+
+    const { data: sessionData } = await supabase.auth.getSession();
+    if (sessionData.session) {
+      await loadAccess();
+    }
+  </script>
+</body>
+</html>
